@@ -6,14 +6,28 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+<<<<<<< HEAD
     "@types/jest": "^29.5.0",
     "@types/node": "^18.15.11",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
+=======
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.23",
+    "@types/react": "^18.0.33",
+    "@types/react-dom": "^18.0.11",
+    "bootstrap": "^5.2.3",
+>>>>>>> e47d29a216a70a7aa95a2ccd87bc7f6e7e2c4948
     "react": "^18.2.0",
+    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
+    "react-router-dom": "^6.10.0",
     "react-scripts": "5.0.1",
+<<<<<<< HEAD
     "typescript": "^5.0.3",
+=======
+    "typescript": "^4.9.5",
+>>>>>>> e47d29a216a70a7aa95a2ccd87bc7f6e7e2c4948
     "web-vitals": "^2.1.4"
   },
   "scripts": {
