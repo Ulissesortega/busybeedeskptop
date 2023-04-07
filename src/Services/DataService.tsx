@@ -1,5 +1,7 @@
-// let userData: object = {};
+import React from 'react'
 
-// async function login (loginUser){
-//     const result = await fetch('');
-// }
+export default function DataService() {
+  return (
+    <div>DataService</div>
+  )
+}
