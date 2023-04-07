@@ -5,8 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
-
-
+  
   return (
     <div className='bgColor'>
       <Container>
@@ -17,7 +16,8 @@ export default function Login() {
             <h1 className='left-title'>Welcome to Busy Bee!</h1>
             <Row>
               <Col className='mt-4'>
-                
+              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" />
+
               </Col>
             </Row>
           </Col>
@@ -44,7 +44,7 @@ export default function Login() {
 
                 {/* Button 1 */}
                 <Link to="/CreateAdminUser">
-                  <button className='btn-format'> Create User</button>
+                  <button className='btn-format rounded-pill'> Create User</button>
                 </Link>
                 
               </Col>
@@ -61,7 +61,7 @@ export default function Login() {
                 </Row>
                 {/* Button 1 */}
                 <Link to="/AdminLogin">
-                  <button className='btn-format'>Admin Login</button>
+                  <button className='btn-format rounded-pill'>Admin Login</button>
                 </Link>
               </Col>
             </Row>
@@ -75,7 +75,7 @@ export default function Login() {
                   </Col>
                 </Row>
                 <Link to="/KidsLogin">
-                <button className='btn-format'>Kid's Login</button>
+                <button className='btn-format rounded-pill'>Kid's Login</button>
                 </Link>
               </Col>
             </Row>

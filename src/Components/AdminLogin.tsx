@@ -15,6 +15,7 @@ export default function AdminLogin() {
             <h1 className='left-title'>Busy Bee!</h1>
             <Row>
               <Col className='mt-3'>
+                <img className='image-radius' src={require('../Assets/Logo.png')} alt="Logo" />
               </Col>
             </Row>
           </Col>
@@ -38,7 +39,7 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center' type="Email" placeholder="Your Email" />
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
@@ -52,14 +53,14 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center' type="Password" placeholder="Your Password" />
+                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
                 </Form.Group>
 
                 <Link to="/CreateAdminUser">
-                  <button className='btn-format'>Login</button>
+                  <button className='btn-format rounded-pill mt-3'>Login</button>
                 </Link>
 
               </Col>
