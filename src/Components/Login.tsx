@@ -15,9 +15,8 @@ export default function Login() {
           <Col sm={12} md={12} xl={5}>
             <h1 className='left-title'>Welcome to Busy Bee!</h1>
             <Row>
-              <Col className='mt-4'>
-              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" />
-
+              <Col className='mt-4 text-center'>
+              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo"/>
               </Col>
             </Row>
           </Col>

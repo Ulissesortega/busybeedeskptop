@@ -15,7 +15,7 @@ export default function AdminLogin() {
             <h1 className='left-title'>Busy Bee!</h1>
             <Row>
               <Col className='mt-3'>
-                <img className='image-radius' src={require('../Assets/Logo.png')} alt="Logo" />
+              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo"/>
               </Col>
             </Row>
           </Col>
