@@ -1,25 +1,21 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AdultUserLogin from './Components/AdultComponents/AdultLogin';
+import CreateAdultAccount from './Components/AdultComponents/CreateAdultAccount';
+import ChildUserLogin from './Components/ChildComponents/ChildLogin';
+import CreateChildAccount from './Components/ChildComponents/CreateChildAccount';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path='/' element={<AdultUserLogin /> } /> */}
+        {/* <Route path='/' element={<CreateAdultAccount /> } /> */}
+        <Route path='/' element={<ChildUserLogin /> } />
+        {/* <Route path='/' element={<CreateChildAccount /> } /> */}
+      </Routes>
+    </BrowserRouter>
   );
 }
 
