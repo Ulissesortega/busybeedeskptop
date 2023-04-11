@@ -35,6 +35,10 @@ async function AdultLogin (loginUser: object){
     return data;
 }
 
+function LoggedInAdultUserData(){
+    return adultUserData;
+}
+
 // Child Account Fetches
 async function CreateChildAccount(createdChildUser: object){
     const result = await fetch('https://busybeeapi.azurewebsites.net/ChildUser/AddChildUser',{
@@ -69,4 +73,40 @@ async function ChildLogin (loginUser: object){
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, CreateChildAccount, ChildLogin }
+// Task Fetches
+async function CreateTask(task: object){
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Task/CreateTask',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(task)
+    });
+    if(!result.ok){
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    console.log(data);
+    return data;
+}
+
+// Reward Fetches
+async function CreateReward(reward: object){
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Reward/CreateReward',{
+        method:"POST",
+        headers:{
+            'Content-Type':"application/json"
+        },
+        body:JSON.stringify(reward)
+    });
+    if(!result.ok){
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    console.log(data);
+    return data;
+}
+
+export { CreateAdultAccount, AdultLogin, LoggedInAdultUserData, CreateChildAccount, ChildLogin, CreateTask, CreateReward }
