@@ -33,10 +33,7 @@ export default function StepOne() {
 
                     {/* Divider in the Middle */}
                     <Col xl={1}>
-                        <div className="divider 
-                        d-none d-sm-block 
-                        d-md-none d-lg-block
-                        d-xl-block"></div>
+                        <div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
                     </Col>
 
 

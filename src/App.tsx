@@ -8,6 +8,7 @@ import AdminInfo from './Components/AdminInfo'
 import KidsLogin from './Components/KidsLogin';
 import StepOne from './Components/StepOne';
 import BeeUser from './Components/BeeUser';
+import TaskAssigner from './Components/TaskAssigner';
 
 
 
@@ -21,7 +22,9 @@ function App() {
         <Route path='/AdminInfo' element={<AdminInfo/>} />
         <Route path='/StepOne' element={<StepOne/>} />            
         <Route path='/KidsLogin' element={<KidsLogin/>} /> 
-        <Route path='/BeeUser' element={<BeeUser/>}/>  
+        <Route path='/BeeUser' element={<BeeUser/>}/>
+        <Route path='/TaskAssigner' element={<TaskAssigner/>}/>  
+  
       </Routes>
     </BrowserRouter>
   );
