@@ -17,8 +17,8 @@ export default function StepOne() {
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title'>Hi Username!</h1>
                         <Row>
+                            <p className='btn-title text-center'><h1>Step 1</h1></p>
                             <p className='btn-title text-center'>Busy Bee works based on a<br /> Star Task Reward System.</p>
-
                             <Col className='d-flex justify-content-center'>
                                 <img className='img-fluid custom-height' src={require('../Assets/Medal.png')} alt="Logo" width={200} />
                             </Col>
@@ -26,19 +26,7 @@ export default function StepOne() {
 
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'><h1>Step 1</h1></p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-                                <p className='btn-title text-center'>We need to Create a User for your Bee(s)</p>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col>
-
+                                <p className='btn-title text-center mt-2'>We need to Create a User for your Bee(s)</p>
                             </Col>
                         </Row>
                     </Col>
@@ -54,30 +42,32 @@ export default function StepOne() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Choose One of the Options Bellow:</h1>
+                        <h1 className='left-title'>Kid(s) User for your Bee</h1>
+                        <p className='btn-title text-center'>Please choose one of the options bellow:</p>
+
 
                         <Row>
-                            <Col className='d-flex justify-content-center mt-3'>
-                                <img className='img-fluid custom-height' src={require('../Assets/BeeBoy.png')} alt="Logo" width={200} />
+                            <Col className='d-flex justify-content-center mt-4'>
+                                <img className='img-fluid custom-height' src={require('../Assets/BeeGirl.png')} alt="Logo" width={225} />
                             </Col>
-                            
+
                             <Col className='d-flex justify-content-center mt-3'>
-                                <img className='img-fluid custom-height' src={require('../Assets/BeeGirl.png')} alt="Logo" width={200} />
+                                <img className='img-fluid custom-height' src={require('../Assets/BeeBoy.png')} alt="Logo" width={225} />
                             </Col>
                         </Row>
 
                         <Row>
-                             <Col className='d-flex justify-content-center'>
-                             <Link to="/StepOne">
-                                    <button className='small-btn-format rounded-pill mt-3'>Let's Start!</button>
+                            <Col className='d-flex justify-content-center'>
+                                <Link to="/BeeUser">
+                                    <button className='small-btn-format rounded-pill mt-3'>Bee Girl!</button>
                                 </Link>
-                             </Col>
+                            </Col>
 
-                             <Col className='d-flex justify-content-center'>
-                             <Link to="/StepOne">
-                                    <button className='small-btn-format rounded-pill mt-3'>Let's Start!</button>
+                            <Col className='d-flex justify-content-center'>
+                                <Link to="/BeeUser">
+                                    <button className='small-btn-format rounded-pill mt-3'>Bee Boy!!</button>
                                 </Link>
-                             </Col>                           
+                            </Col>
                         </Row>
 
                     </Col>

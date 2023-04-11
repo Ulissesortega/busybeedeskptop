@@ -20,7 +20,7 @@ export default function Template() {
                         <h1 className='left-title'>Busy Bee!</h1>
                         <Row>
                             <Col className='mt-3 text-center'>
-                                <p className='btn-title text-center'>You have become a <span className='text-bold'>BeeKeeper.</span></p>
+                                <p className='btn-title text-center'>Bee Awesome<br/>You just become a <span className='text-bold'>BeeKeeper </span></p>
                                 <img className='img-fluid custom-height' src={require('../Assets/Bkeeper.png')} alt="Logo" />
                             </Col>
                         </Row>
@@ -37,7 +37,7 @@ export default function Template() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Step 2 - Kid's User Info</h1>
+                        <h1 className='left-title'>Admin's Info</h1>
                         <Row>
                             <Col className='right-title mt-2'>
                                 <p className='btn-title text-center'>A copy of your Information <br />has been sent to your Email!</p>

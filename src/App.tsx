@@ -7,6 +7,8 @@ import AdminLogin from './Components/AdminLogin';
 import AdminInfo from './Components/AdminInfo'
 import KidsLogin from './Components/KidsLogin';
 import StepOne from './Components/StepOne';
+import BeeUser from './Components/BeeUser';
+
 
 
 function App() {
@@ -18,7 +20,8 @@ function App() {
         <Route path='/AdminLogin' element={<AdminLogin/>} />       
         <Route path='/AdminInfo' element={<AdminInfo/>} />
         <Route path='/StepOne' element={<StepOne/>} />            
-        <Route path='/KidsLogin' element={<KidsLogin/>} />  
+        <Route path='/KidsLogin' element={<KidsLogin/>} /> 
+        <Route path='/BeeUser' element={<BeeUser/>}/>  
       </Routes>
     </BrowserRouter>
   );

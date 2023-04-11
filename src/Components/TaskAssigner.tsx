@@ -5,8 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import leftImage from '../Assets/Logo.png';
 
-
-export default function Template() {
+export default function TaskAssigner() {
   return (
     <div className='bgColor'>
       <Container>
@@ -38,3 +37,4 @@ export default function Template() {
     </div>
   )
 }
+

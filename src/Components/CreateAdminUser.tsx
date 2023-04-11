@@ -15,10 +15,9 @@ export default function () {
             <h1 className='left-title'></h1>
             <Row>
               <Col className='mt-2 text-center'>
-                <p className='btn-title text-center'><h1>Who's Busy Bee for?</h1></p>
-                <p className='btn-title text-center'>For every parent who want's to make to<br/> make sure that you are making the best<br/> out of their availble time</p>
-                <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={200} />
-                <p className='btn-title text-center'>We work based on <br/>Start Task Reward System<br/> every time a task get done!</p>
+                <p className='btn-title text-center'><h1>Welcome to Busy Bee!</h1></p>
+                <p className='btn-title text-center'>Thank you for choosing us,<br/>Together we'll make the best<br /> of your Kid's time.</p>
+                <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
 
               </Col>
             </Row>
@@ -35,7 +34,7 @@ export default function () {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title'>Step 1 - Admin User Info</h1>
+            <h1 className='left-title'>Admin's Info</h1>
             <Row>
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
