@@ -26,7 +26,7 @@ export default function BeeUser() {
 
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>The easier the better<br />so they never forget</p>
+                                <p className='btn-title text-center'>The easier the better<br />So they never forget</p>
                             </Col>
                         </Row>
                     </Col>
@@ -46,7 +46,7 @@ export default function BeeUser() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic BeeName">
                                     <Form.Label className='btn-title'>Bee Name</Form.Label>
-                                    <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" />
+                                    <Form.Control className='text-center rounded-pill' type="text" placeholder="Kid's User Name" />
                                 </Form.Group>
                             </Col>
                         </Row>

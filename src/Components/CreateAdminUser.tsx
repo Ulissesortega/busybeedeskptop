@@ -16,7 +16,7 @@ export default function () {
             <Row>
               <Col className='mt-2 text-center'>
                 <p className='btn-title text-center'><h1>Welcome to Busy Bee!</h1></p>
-                <p className='btn-title text-center'>Thank you for choosing us,<br/>Together we'll make the best<br /> of your Kid's time.</p>
+                <p className='btn-title text-center'>Thank you for choosing us,<br />Together we'll make the best<br /> of your Kid's time.</p>
                 <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
 
               </Col>
@@ -56,7 +56,7 @@ export default function () {
 
             <Row>
               <Col className='text-center'>
-              <Form.Label className='btn-title'>Gender</Form.Label>
+                <Form.Label className='btn-title'>Gender</Form.Label>
                 <Form.Select className='rounded-pill' aria-label="Default select example">
                   <option className='text-center'>Options</option>
                   <option className='text-center' value="1">Male</option>
