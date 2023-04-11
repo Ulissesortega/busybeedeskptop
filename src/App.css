@@ -50,5 +50,9 @@
   padding: 7px;
 }
 
+.custom-height {
+  max-height: 400px;
+}
+
 
 

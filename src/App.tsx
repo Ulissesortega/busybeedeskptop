@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Link } from 'react-router-dom';
 import Login from './Components/Login';
 import CreateAdminUser from './Components/CreateAdminUser';
 import AdminLogin from './Components/AdminLogin';
+import AdminInfo from './Components/AdminInfo'
 import KidsLogin from './Components/KidsLogin';
 
 
@@ -14,10 +15,10 @@ function App() {
         <Route path='/' element={<Login />} />        
         <Route path='/CreateAdminUser' element={<CreateAdminUser/>} />        
         <Route path='/AdminLogin' element={<AdminLogin/>} />       
-        <Route path='/KidsLogin' element={<KidsLogin/>} />       
+        <Route path='/KidsLogin' element={<KidsLogin/>} />  
+        <Route path='/AdminInfo' element={<AdminInfo/>} />       
       </Routes>
     </BrowserRouter>
-    
   );
 }
 
