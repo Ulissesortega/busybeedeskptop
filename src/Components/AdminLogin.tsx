@@ -1,10 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { AdultLogin } from '../Services/DataService';
 
 export default function AdminLogin() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async () => {
+    let userData = {
+        email,
+        password
+    }
+    console.log(userData);
+    let token = await AdultLogin(userData);
+    if(token.token != null){
+        localStorage.setItem("Token", token.token);
+        console.log('Success');
+    }
+}
   return (
     <div className='bgColor'>
       <Container>
@@ -39,7 +55,7 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({target: { value }}) => setEmail(value)} />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
@@ -53,14 +69,14 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
+                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({target: { value }}) => setPassword(value)} />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
                 </Form.Group>
 
                 <Link to="/CreateAdminUser">
-                  <button className='btn-format rounded-pill mt-3'>Login</button>
+                  <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Login</button>
                 </Link>
 
               </Col>
