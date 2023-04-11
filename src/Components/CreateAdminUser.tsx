@@ -16,7 +16,7 @@ export default function () {
             <Row>
               <Col className='mt-2 text-center'>
                 <p className='btn-title text-center'><h1>Who's Busy Bee for?</h1></p>
-                <p className='btn-title text-center'>For every parent who want's to make to<br/> make sure that you are making the best<br/> our of their available time</p>
+                <p className='btn-title text-center'>For every parent who want's to make to<br/> make sure that you are making the best<br/> out of their availble time</p>
                 <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={200} />
                 <p className='btn-title text-center'>We work based on <br/>Start Task Reward System<br/> every time a task get done!</p>
 
@@ -78,8 +78,6 @@ export default function () {
                 </Link>
               </Col>
             </Row>
-
-
 
           </Col>
         </Row>

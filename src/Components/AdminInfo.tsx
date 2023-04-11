@@ -4,6 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import leftImage from '../Assets/Bkeeper.png';
+import RightImage from '../Assets/Emial1.png';
+
+
 
 
 export default function Template() {
@@ -14,10 +17,10 @@ export default function Template() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title'>You're Awesome!</h1>
+                        <h1 className='left-title'>Busy Bee!</h1>
                         <Row>
                             <Col className='mt-3 text-center'>
-                                <p className='btn-title text-center'>You have become a BeeKeeper.</p>
+                                <p className='btn-title text-center'>You have become a <span className='text-bold'>BeeKeeper.</span></p>
                                 <img className='img-fluid custom-height' src={require('../Assets/Bkeeper.png')} alt="Logo" />
                             </Col>
                         </Row>
@@ -34,35 +37,27 @@ export default function Template() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Step 2 - Bee User Info</h1>
+                        <h1 className='left-title'>Step 2 - Kid's User Info</h1>
                         <Row>
-                            <Col className='mt-3 text-center'>
-                                <p className='btn-title text-center'>Let's create your first Bee!</p>
+                            <Col className='right-title mt-2'>
+                                <p className='btn-title text-center'>A copy of your Information <br />has been sent to your Email!</p>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col className='d-flex justify-content-center'>
+                                <img className='img-fluid custom-height' src={require('../Assets/Email1.png')} alt="Logo" width={300} />
                             </Col>
                         </Row>
 
                         <Row>
                             <Col className='right-title mt-2'>
-                                <Form.Group className="mb-2" controlId="formBasic Bee Name">
-                                    <Form.Label className='btn-title'>Your First Bee User Name</Form.Label>
-                                    <Form.Control className='text-center rounded-pill' type="text" placeholder="Bee Name" />
-                                </Form.Group>
-                            </Col>
-                        </Row>
-
-                        <Row>
-                            <Col className='right-title mt-2'>
-                                <Form.Group className="mb-3" controlId="formBasic Bee Password">
-                                    <Form.Label className='btn-title'>Your First Bee Password</Form.Label>
-                                    <Form.Control className='text-center rounded-pill' type="text" placeholder="Bee Password" />
-                                </Form.Group>
-
-                                <Link to="/AdminInfo">
-                                    <button className='btn-format rounded-pill mt-3'>Login</button>
+                                <Link to="/StepOne">
+                                    <button className='btn-format rounded-pill mt-3'>Let's Start!</button>
                                 </Link>
-
                             </Col>
                         </Row>
+
                     </Col>
                 </Row>
             </Container>
