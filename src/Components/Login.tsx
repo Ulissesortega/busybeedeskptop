@@ -32,7 +32,7 @@ export default function Login() {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title'>Welcome Home</h1>
+            <h1 className='left-title'>Home Screen</h1>
             <Row>
               <Col className='right-title mt-4'>
                 <Row>

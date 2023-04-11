@@ -14,10 +14,10 @@ export default function Template() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title'>Bee Awesome!</h1>
+                        <h1 className='left-title'>You're Awesome!</h1>
                         <Row>
                             <Col className='mt-3 text-center'>
-                                <p className='btn-title text-center'>You have become<br />BeeKeeper.</p>
+                                <p className='btn-title text-center'>You have become a BeeKeeper.</p>
                                 <img className='img-fluid custom-height' src={require('../Assets/Bkeeper.png')} alt="Logo" />
                             </Col>
                         </Row>
@@ -34,7 +34,7 @@ export default function Template() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Step 2 </h1>
+                        <h1 className='left-title'>Step 2 - Bee User Info</h1>
                         <Row>
                             <Col className='mt-3 text-center'>
                                 <p className='btn-title text-center'>Let's create your first Bee!</p>
@@ -44,7 +44,7 @@ export default function Template() {
                         <Row>
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Bee Name">
-                                    <Form.Label className='btn-title'>Bee Name</Form.Label>
+                                    <Form.Label className='btn-title'>Your First Bee User Name</Form.Label>
                                     <Form.Control className='text-center rounded-pill' type="text" placeholder="Bee Name" />
                                 </Form.Group>
                             </Col>
@@ -53,7 +53,7 @@ export default function Template() {
                         <Row>
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-3" controlId="formBasic Bee Password">
-                                    <Form.Label className='btn-title'>Bee Password</Form.Label>
+                                    <Form.Label className='btn-title'>Your First Bee Password</Form.Label>
                                     <Form.Control className='text-center rounded-pill' type="text" placeholder="Bee Password" />
                                 </Form.Group>
 
