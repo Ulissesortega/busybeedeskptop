@@ -17,7 +17,7 @@ export default function () {
         fullName,
         email,
         password,
-        avatarLook: "Boy"
+        avatarLook
     }
     console.log(adultUserData);
     CreateAdultAccount(adultUserData);
@@ -33,7 +33,7 @@ export default function () {
             <h1 className='left-title'></h1>
             <Row>
               <Col className='mt-2 text-center'>
-                <p className='btn-title text-center'><h1>Welcome to Busy Bee!</h1></p>
+                <h1 className='btn-title text-center'>Welcome to Busy Bee!</h1>
                 <p className='btn-title text-center'>Thank you for choosing us,<br />Together we'll make the best<br /> of your Kid's time.</p>
                 <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
 
@@ -57,7 +57,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
                   <Form.Label className='btn-title'>Full Name</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" />
+                  <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" onChange={({target: {value}}) => setFullName(value)} />
                 </Form.Group>
               </Col>
             </Row>
@@ -67,7 +67,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email Address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({target: {value}}) => setEmail(value)} />
                 </Form.Group>
               </Col>
             </Row>
@@ -75,10 +75,10 @@ export default function () {
             <Row>
               <Col className='text-center'>
                 <Form.Label className='btn-title'>Gender</Form.Label>
-                <Form.Select className='rounded-pill' aria-label="Default select example">
+                <Form.Select className='rounded-pill' aria-label="Default select example"  onChange={({target: {value}}) => setAvatarLook(value)}>
                   <option className='text-center'>Options</option>
-                  <option className='text-center' value="1">Male</option>
-                  <option className='text-center' value="2">Female</option>
+                  <option className='text-center' value="Male">Male</option>
+                  <option className='text-center' value="Female">Female</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -88,10 +88,10 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
+                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({target: {value}}) => setPassword(value)} />
                 </Form.Group>
                 <Link to="/AdminInfo">
-                  <button className='btn-format rounded-pill mt-3'>Create User</button>
+                  <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Create User</button>
                 </Link>
               </Col>
             </Row>

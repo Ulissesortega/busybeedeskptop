@@ -17,7 +17,7 @@ export default function StepOne() {
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title'>Hi Username!</h1>
                         <Row>
-                            <p className='btn-title text-center'><h1>Step 1</h1></p>
+                            <h1 className='btn-title text-center'>Step 1</h1>
                             <p className='btn-title text-center'>Busy Bee works based on a<br /> Star Task Reward System.</p>
                             <Col className='d-flex justify-content-center'>
                                 <img className='img-fluid custom-height' src={require('../Assets/Medal.png')} alt="Logo" width={200} />

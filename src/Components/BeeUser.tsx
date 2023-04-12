@@ -17,7 +17,7 @@ export default function BeeUser() {
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title'>Bee Awesome!</h1>
                         <Row>
-                            <p className='btn-title text-center'><h1>Step 2</h1></p>
+                            <h1 className='btn-title text-center'>Step 2</h1>
                             <p className='btn-title text-center'>Let's give our Bee<br />A Name and Password</p>
                             <Col className='d-flex justify-content-center'>
                                 <img className='img-fluid custom-height' src={require('../Assets/BeeGirl.png')} alt="Logo" width={200} />

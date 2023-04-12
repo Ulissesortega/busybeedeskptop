@@ -15,7 +15,7 @@ export default function TaskAssigner() {
                         <h1 className='left-title'>Username!</h1>
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'><h1>Step 2</h1></p>
+                                <h1 className='btn-title text-center'>Step 2</h1>
                                 <p className='btn-title text-center'>Now we need to create the task(s)</p>
                             </Col>
                         </Row>
