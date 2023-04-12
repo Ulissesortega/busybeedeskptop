@@ -50,9 +50,6 @@ export default function TaskAssigner() {
                                 </Link>
                             </Col>
                         </Row>
-
-
-
                     </Col>
 
                     {/* Divider in the Middle */}
@@ -64,7 +61,17 @@ export default function TaskAssigner() {
                     {/* Right Side */}
                     <Col xl={5}>
                         <h1 className='left-title'>Username Active Tasks</h1>
-                        <p className='btn-title text-center'>Please choose one of the options bellow:</p>
+                        <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
+
+                        <Row>
+                            <Col>
+                                <p className='btn-title text-center'>Task1</p>
+                                <p className='btn-title text-center'>Task2</p>
+                                <p className='btn-title text-center'>Task3</p>
+                            </Col>
+                        </Row>
+
+
                     </Col>
                 </Row>
             </Container>
