@@ -50,5 +50,23 @@
   padding: 7px;
 }
 
+.custom-height {
+  max-height: 400px;
+}
+
+.small-btn-format{
+  font-size: 35px;
+  font-style: italic;
+  width: 200px;
+  background-color: black;
+  color: white;
+  border-radius: 15px;
+  padding: 7px;
+}
+
+.text-bold{
+  font-weight: Bold;
+  font-style: italic;
+}
 
 
