@@ -11,11 +11,13 @@ async function CreateAdultAccount(createdAdultUser: object){
         body:JSON.stringify(createdAdultUser)
     });
     if(!result.ok){
+        alert("Count not create account");
         const message = `An Error has Occured ${result.status}`;
         throw new Error(message);
     }
     let data = await result.json();
     console.log(data);
+    return data;
 }
 
 async function AdultLogin (loginUser: object){
@@ -27,6 +29,7 @@ async function AdultLogin (loginUser: object){
         body:JSON.stringify(loginUser)
     });
     if(!result.ok){
+        alert('Could Not Log In')
         const message = `An Error has Occured ${result.status}`;
         throw new Error(message);
     }

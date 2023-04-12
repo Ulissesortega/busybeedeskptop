@@ -2,25 +2,30 @@ import React, { useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AdultLogin } from '../Services/DataService';
 
 export default function AdminLogin() {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   const handleSubmit = async () => {
     let userData = {
-        email,
-        password
+      email,
+      password
     }
     console.log(userData);
     let token = await AdultLogin(userData);
-    if(token.token != null){
-        localStorage.setItem("Token", token.token);
-        console.log('Success');
+    if (token.token != null) {
+      localStorage.setItem("Token", token.token);
+      console.log('Success');
+      navigate("/StepOne");
+    } else {
+      alert("Error Could Not Log In");
     }
-}
+  }
   return (
     <div className='bgColor'>
       <Container>
@@ -31,7 +36,7 @@ export default function AdminLogin() {
             <h1 className='left-title'>Busy Bee!</h1>
             <Row>
               <Col className='mt-3'>
-              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo"/>
+                <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" />
               </Col>
             </Row>
           </Col>
@@ -48,14 +53,14 @@ export default function AdminLogin() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='left-title'>Admin Login</h1>
-            
+
             <Row>
               <Col className='right-title mt-2'>
-                <Row>                  
+                <Row>
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({target: { value }}) => setEmail(value)} />
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
@@ -63,24 +68,22 @@ export default function AdminLogin() {
               </Col>
             </Row>
 
-             <Row>
+            <Row>
               <Col className='right-title mt-2'>
-                <Row>                  
+                <Row>
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({target: { value }}) => setPassword(value)} />
+                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                   <Form.Text className="text-muted">
                     We'll never share your email with anyone else.
                   </Form.Text>
                 </Form.Group>
 
-                <Link to="/CreateAdminUser">
-                  <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Login</button>
-                </Link>
+                <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Login</button>
 
               </Col>
-            </Row>                
+            </Row>
           </Col>
         </Row>
       </Container>

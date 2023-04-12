@@ -2,10 +2,12 @@ import React, { useState } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CreateAdultAccount } from '../Services/DataService';
 
 export default function () {
+  let navigate = useNavigate();
+
   const [email, setEmail] = useState('');
   const [fullName, setFullName] = useState('');
   const [password, setPassword] = useState('');
@@ -13,15 +15,22 @@ export default function () {
 
   const handleSubmit = async () => {
     let adultUserData = {
-        id: 0,
-        fullName,
-        email,
-        password,
-        avatarLook
+      id: 0,
+      fullName,
+      email,
+      password,
+      avatarLook
     }
     console.log(adultUserData);
-    CreateAdultAccount(adultUserData);
-}
+    let token = await CreateAdultAccount(adultUserData);
+    if (token.token != null) {
+      localStorage.setItem("Token", token.token);
+      console.log('Success');
+      navigate("/StepOne");
+    } else {
+      alert("Error User Not Created");
+    }
+  }
 
   return (
     <div className='bgColor'>
@@ -57,7 +66,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
                   <Form.Label className='btn-title'>Full Name</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" onChange={({target: {value}}) => setFullName(value)} />
+                  <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" onChange={({ target: { value } }) => setFullName(value)} />
                 </Form.Group>
               </Col>
             </Row>
@@ -67,7 +76,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email Address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({target: {value}}) => setEmail(value)} />
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />
                 </Form.Group>
               </Col>
             </Row>
@@ -75,7 +84,7 @@ export default function () {
             <Row>
               <Col className='text-center'>
                 <Form.Label className='btn-title'>Gender</Form.Label>
-                <Form.Select className='rounded-pill' aria-label="Default select example"  onChange={({target: {value}}) => setAvatarLook(value)}>
+                <Form.Select className='rounded-pill' aria-label="Default select example" onChange={({ target: { value } }) => setAvatarLook(value)}>
                   <option className='text-center'>Options</option>
                   <option className='text-center' value="Male">Male</option>
                   <option className='text-center' value="Female">Female</option>
@@ -88,11 +97,9 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({target: {value}}) => setPassword(value)} />
+                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
-                <Link to="/AdminInfo">
                   <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Create User</button>
-                </Link>
               </Col>
             </Row>
 
