@@ -69,4 +69,36 @@
   font-style: italic;
 }
 
+.border-radius{
+  border-radius: 45px;
+}
 
+@media screen and (max-width: 376PX){
+  
+  .left-title {
+    margin-top: 5%;
+    font-size: 45px;
+    text-align: center;
+    font-style: italic;
+
+  }
+
+  .mobile-image{
+    width: 90%;
+  }
+
+  .hide{
+    display: none;
+  }
+
+  .btn-format{
+    font-size: 30px;
+    font-style: italic;
+    width: 225px;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+    padding: 3px;
+  }
+
+}

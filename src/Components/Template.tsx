@@ -28,7 +28,6 @@ export default function Template() {
           <Col xl={5}>
             <h1 className='left-title'>Kid(s) User for your Bee</h1>
             <p className='btn-title text-center'>Please choose one of the options bellow:</p>
-
           </Col>
         </Row>
       </Container>
