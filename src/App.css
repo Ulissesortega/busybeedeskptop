@@ -80,7 +80,6 @@
     font-size: 45px;
     text-align: center;
     font-style: italic;
-
   }
 
   .mobile-image{
@@ -100,5 +99,7 @@
     border-radius: 15px;
     padding: 3px;
   }
+
+  
 
 }

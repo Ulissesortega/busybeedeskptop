@@ -13,7 +13,7 @@ export default function Login() {
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'><span className='hide'>Welcome to</span> Busy Bee!</h1>
+            <h1 className='left-title btc'><span className='hide'>Welcome to</span> Busy Bee!</h1>
             <Row>
               <Col className='mt-4 text-center'>
               <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo"/>
@@ -27,7 +27,7 @@ export default function Login() {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title hide'>Home Screen</h1>
+            <h1 className='left-title hide btc'>Home Screen</h1>
             <Row>
               <Col className='right-title mt-4'>
                 <Row>

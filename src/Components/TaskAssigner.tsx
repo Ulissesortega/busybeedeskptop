@@ -16,7 +16,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col>
                                 <p className='btn-title text-center'><h1>Step 2</h1></p>
-                                <p className='btn-title text-center'>Now we need to create the task(s)</p>
+                                <p className='btn-title text-center'>Let's create Tasks for our bee!</p>
                             </Col>
                         </Row>
 
@@ -65,9 +65,17 @@ export default function TaskAssigner() {
 
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Task1</p>
-                                <p className='btn-title text-center'>Task2</p>
-                                <p className='btn-title text-center'>Task3</p>
+                                <p className='btn-title text-center'>Task 1</p>
+                                <p className='btn-title text-center'>Task 2</p>
+                                <p className='btn-title text-center'>Task 3</p>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col className='right-title mt-2'>
+                                <Link to="/RewardsCreator">
+                                    <button className='btn-format rounded-pill mt-3'>Add Rewards</button>
+                                </Link>
                             </Col>
                         </Row>
 
