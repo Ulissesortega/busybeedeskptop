@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Medal from '../Assets/Medal.png'
 import leftImage from '../Assets/BeeBoy.png';
 import RightImage from '../Assets/BeeGirl.png';
 
 export default function StepOne() {
+    let navigate = useNavigate(); // /BeeUser
+
+    const setChildBeeGirl = () => {
+    }
+    
     return (
         <div className='bgColor'>
             <Container>
@@ -55,15 +60,11 @@ export default function StepOne() {
 
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                <Link to="/BeeUser">
-                                    <button className='small-btn-format rounded-pill mt-3'>Bee Girl!</button>
-                                </Link>
+                                    <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeGirl}>Bee Girl!</button>
                             </Col>
 
                             <Col className='d-flex justify-content-center'>
-                                <Link to="/BeeUser">
                                     <button className='small-btn-format rounded-pill mt-3'>Bee Boy!!</button>
-                                </Link>
                             </Col>
                         </Row>
 
