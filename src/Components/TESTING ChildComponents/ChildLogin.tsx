@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { ChildLogin } from "../../Services/DataService";
 
 export default function ChildUserLogin(){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const handleSubmit = async () => {
         let userData = {

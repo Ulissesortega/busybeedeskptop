@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { CreateReward } from '../../Services/DataService';
 
 export default function CreatingRewards(){
-    const [reward, setReward] = useState('');
-    const [rewardCost, setRewardCost] = useState(0);
+    const [reward, setReward] = useState<string>('');
+    const [rewardCost, setRewardCost] = useState<number>(0);
 
     const handleSubmit = async () => {
         let rewardObject = {

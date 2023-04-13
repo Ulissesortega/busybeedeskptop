@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { MyContext } from '../Context/UserContext';
 import Medal from '../Assets/Medal.png'
 import leftImage from '../Assets/BeeBoy.png';
 import RightImage from '../Assets/BeeGirl.png';
 
 export default function BeeUser() {
+    const { createBee } = useContext(MyContext);
+    console.log(createBee);
     return (
         <div className='bgColor'>
             <Container>
@@ -20,7 +23,7 @@ export default function BeeUser() {
                             <h1 className='btn-title text-center'>Step 2</h1>
                             <p className='btn-title text-center'>Let's give our Bee<br />A Name and Password</p>
                             <Col className='d-flex justify-content-center'>
-                                <img className='img-fluid custom-height' src={require('../Assets/BeeGirl.png')} alt="Logo" width={200} />
+                                <img className='img-fluid custom-height' src={createBee === 'Girl' ? RightImage : leftImage} alt="Logo" width={200} />
                             </Col>
                         </Row>
 

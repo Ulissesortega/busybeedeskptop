@@ -57,6 +57,7 @@ async function CreateChildAccount(createdChildUser: object){
     }
     let data = await result.json();
     console.log(data);
+    return data;
 }
 
 async function ChildLogin (loginUser: object){

@@ -4,14 +4,14 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { CreateAdultAccount } from '../Services/DataService';
-
+import { MyContext } from '../Context/UserContext';
 export default function () {
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [password, setPassword] = useState('');
-  const [avatarLook, setAvatarLook] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [fullName, setFullName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [avatarLook, setAvatarLook] = useState<string>('');
 
   const handleSubmit = async () => {
     let adultUserData = {

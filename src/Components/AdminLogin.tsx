@@ -8,8 +8,8 @@ import { AdultLogin } from '../Services/DataService';
 export default function AdminLogin() {
   let navigate = useNavigate();
 
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
 
   const handleSubmit = async () => {
     let userData = {
