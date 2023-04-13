@@ -63,6 +63,12 @@ export default function AdminLogin() {
                   <button className='btn-format rounded-pill mt-3'>Login</button>
                 </Link>
 
+                <Row>
+                  <Col>
+                    <p className='btn-title mt-4'><Link to='/PasswordRecovery'>Forgor Your Password?</Link></p>
+                  </Col>
+                </Row>
+
               </Col>
             </Row>                
           </Col>

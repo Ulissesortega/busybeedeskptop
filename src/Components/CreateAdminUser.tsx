@@ -17,7 +17,7 @@ export default function () {
               <Col className='mt-2 text-center'>
                 <h1 className='btn-title text-center'>Welcome to Busy Bee!</h1>
                 <p className='btn-title text-center'>Thank you for choosing us,<br />Together we'll make the best<br /> of your Kid's time.</p>
-                <img className='image-radius img-fluid' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
+                <img className='image-radius img-fluid d-none d-sm-block' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
 
               </Col>
             </Row>
