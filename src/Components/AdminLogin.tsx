@@ -22,8 +22,6 @@ export default function AdminLogin() {
       localStorage.setItem("Token", token.token);
       console.log('Success');
       navigate("/StepOne");
-    } else {
-      alert("Error Could Not Log In");
     }
   }
   return (

@@ -11,9 +11,9 @@ async function CreateAdultAccount(createdAdultUser: object){
         body:JSON.stringify(createdAdultUser)
     });
     if(!result.ok){
-        alert("Count not create account");
         const message = `An Error has Occured ${result.status}`;
         throw new Error(message);
+    }else{
     }
     let data = await result.json();
     console.log(data);

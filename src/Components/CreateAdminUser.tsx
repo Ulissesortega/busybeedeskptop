@@ -22,13 +22,11 @@ export default function () {
       avatarLook
     }
     console.log(adultUserData);
-    let token = await CreateAdultAccount(adultUserData);
-    if (token.token != null) {
-      localStorage.setItem("Token", token.token);
+    if (await CreateAdultAccount(adultUserData)) {
       console.log('Success');
       navigate("/StepOne");
-    } else {
-      alert("Error User Not Created");
+    }else {
+      alert("Count not create account");
     }
   }
 
