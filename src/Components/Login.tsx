@@ -1,28 +1,33 @@
-import React from 'react';
+import React, { useState } from 'react'
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import Logo from '../Assets/Logo.png'
 
-<Container className='bgColor'>
+export default function Login() {
+  
+  return (
+    <div className='bgColor'>
+      <Container>
+
+        {/* Left-Side */}
         <Row>
-          <Col xs={12} xl={5} className='mt-sx-2 mt-sm-3 mt-xl-5'>
-            <h1 className='left-title col-xs-12 d-xs-flex justify-content-xs-center'><span className='d-none d-sm-'>Welcome to</span> Busy Bee!</h1>
+          <Col sm={12} md={12} xl={5}>
+            <h1 className='left-title'><span className='hide'>Welcome to</span> Busy Bee!</h1>
             <Row>
               <Col className='mt-4 text-center'>
-                <img className='image-radius img-fluid mobile-image mx-auto d-block' src={Logo} alt='Logo' />
+              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo"/>
               </Col>
             </Row>
           </Col>
 
-          <Col sm={1}>
-            <div className='divider d-none d-sm-block d-md-none d-lg-block d-xl-block'></div>
-          </Col>
+          {/* Divider in the Middle */}
+          <Col xl={1}> <div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div> </Col>
 
+
+          {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title d-none d-sm-block'>Home Screen</h1>
-
+            <h1 className='left-title hide'>Home Screen</h1>
             <Row>
               <Col className='right-title mt-4'>
                 <Row>
@@ -30,12 +35,17 @@ import Logo from '../Assets/Logo.png'
                     <p className='btn-title'>New to Busy Bee?</p>
                   </Col>
                 </Row>
-                <Link to='/CreateAdminUser'>
-                  <Button className='btn-format rounded-pill btn btn-dark'>Create User</Button>
+
+                {/* Button 1 */}
+                <Link to="/CreateAdminUser">
+                  <button className='btn-format rounded-pill'> Create User</button>
                 </Link>
+                
               </Col>
             </Row>
 
+
+            
             <Row>
               <Col className='right-title mt-3'>
                 <Row>
@@ -43,11 +53,13 @@ import Logo from '../Assets/Logo.png'
                     <p className='btn-title'>I'm a Bee Keeper!</p>
                   </Col>
                 </Row>
-                <Link to='/AdminLogin'>
-                  <Button className='btn-format rounded-pill btn btn-dark'>Admin Login</Button>
+                {/* Button 1 */}
+                <Link to="/AdminLogin">
+                  <button className='btn-format rounded-pill'>Admin Login</button>
                 </Link>
               </Col>
             </Row>
+
 
             <Row>
               <Col className='right-title mt-3'>
@@ -56,11 +68,14 @@ import Logo from '../Assets/Logo.png'
                     <p className='btn-title'>I'm a Busy Bee!</p>
                   </Col>
                 </Row>
-                <Link to='/KidsLogin'>
-                  <Button className='btn-format btn btn-dark rounded-pill'>Kid's Login</Button>
+                <Link to="/KidsLogin">
+                <button className='btn-format rounded-pill'>Kid's Login</button>
                 </Link>
               </Col>
             </Row>
           </Col>
         </Row>
       </Container>
+    </div>
+  );
+}
