@@ -73,13 +73,11 @@
   border-radius: 45px;
 }
 
-.wrapper {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 200px;
-}
-
 .test {
   display: flex;
   justify-content: center;
+}
+
+.border-right {
+  border-right: 1px solid black;
 }

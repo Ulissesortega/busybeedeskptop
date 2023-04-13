@@ -21,11 +21,7 @@ export default function AdminLogin() {
           </Col>
 
           {/* Divider in the Middle */}
-          <Col xl={1}>
-            <div className="divider 
-            d-none d-sm-block 
-            d-md-none d-lg-block
-            d-xl-block"></div>
+          <Col xl={1}><div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
           </Col>
 
 
