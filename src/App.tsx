@@ -11,6 +11,7 @@ import BeeUser from './Components/BeeUser';
 import TaskAssigner from './Components/TaskAssigner';
 import RewardsCreator from './Components/RewardsCreator'
 import UsersDashboard from './Components/UserComponents/UsersDashboard';
+import AddBeeUser from './Components/UserComponents/AddBeeUser';
 
 function App() {
   return (
@@ -25,7 +26,8 @@ function App() {
         <Route path='/BeeUser' element={<BeeUser/>}/>
         <Route path='/TaskAssigner' element={<TaskAssigner/>}/>
         <Route path='/RewardsCreator' element={<RewardsCreator/>}/>  
-        <Route path='/UsersDashboard' element={<UsersDashboard/>}/>  
+        <Route path='/UsersDashboard' element={<UsersDashboard/>}/>
+        <Route path='/AddBeeUser' element={<AddBeeUser/>}/>  
       </Routes>
     </BrowserRouter>
   );
