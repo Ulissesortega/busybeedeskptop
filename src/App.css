@@ -18,7 +18,7 @@
 .divider {
   border-left: 2px solid black;
   height: 550px;
-  margin-top: 175%;
+  margin-top: 100%;
   left: 50%;
   align-items: center;
 }
@@ -42,12 +42,12 @@
 .btn-format {
   font-size: 25px !important;
   font-style: italic;
-  width: 50%;
+  width: 65%;
   height: 65%;
   background-color: black;
   color: white;
   border-radius: 15px;
-  padding: 15PX;
+  
 }
 
 .custom-height {
@@ -73,11 +73,8 @@
   border-radius: 45px;
 }
 
-.test {
-  display: flex;
-  justify-content: center;
+.italic{
+  font-style: italic;
 }
 
-.border-right {
-  border-right: 1px solid black;
-}
+

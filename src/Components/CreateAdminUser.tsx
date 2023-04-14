@@ -11,8 +11,9 @@ export default function () {
 
         {/* Left-Side */}
         <Row>
+          
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'></h1>
+            <h1 className='left-title mt-5'></h1>
             <Row>
               <Col className='mt-2 text-center'>
                 <h1 className='btn-title text-center'>Welcome to Busy Bee!</h1>
@@ -34,7 +35,7 @@ export default function () {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title'>Admin's Info</h1>
+            <h1 className='left-title mt-5'>Admin's Info</h1>
             <Row>
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
