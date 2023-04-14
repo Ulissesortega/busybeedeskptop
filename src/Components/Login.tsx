@@ -9,53 +9,72 @@ export default function Login() {
   return (
     <div className='bgColor'>
       <Container>
-        <Row>
-          {/* Left Column */}
-          <Col xs={12} sm={12} md={5} xl={5} className='text-center'>
-            <h1 className='mt-5'>Welcome to Busy Bee</h1>
-            <Row>
-              <Col>
-              <img className='image-radius img-fluid mt-2' src={require('../Assets/Logo.png')} alt="Logo"/>
 
+        {/* Left-Side */}
+        <Row>
+          <Col sm={12} md={12} xl={5}>
+            <h1 className='left-title'><span className='hide'>Welcome to</span> Busy Bee!</h1>
+            <Row>
+              <Col className=' mt-4 text-center'>
+              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo"/>
               </Col>
             </Row>
           </Col>
 
-
-          {/* Middle Divider */}
+          {/* Divider in the Middle */}
           <Col xl={1}> <div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div> </Col>
 
 
-          {/* Right Column */}
-          <Col xs={12} sm={12} md={5} xl={5} className='text-center mt-5 mt-md-5 mt-xl-5'>
-            <h1 className='d-none d-sm-block'>Welcome to Busy Bee</h1>
-
+          {/* Right Side */}
+          <Col xs={12} xl={5}>
+            <h1 className='left-title d-none d-sm-block'>Home Screen</h1>
             <Row>
-              <Col className='mt-xl-3'>
-                <label className='btn-title'>New to Busy Bee:</label><br />
+              <Col className='right-title mt-4'>
+                <Row>
+                  <Col>
+                    <p className='btn-title'>New to Busy Bee?</p>
+                  </Col>
+                </Row>
+
+                {/* Button 1 */}
                 <Link to="/CreateAdminUser">
                   <button className='btn-format rounded-pill'> Create User</button>
+                </Link>
+                
+              </Col>
+            </Row>
+
+
+            
+            <Row>
+              <Col className='right-title mt-3'>
+                <Row>
+                  <Col>
+                    <p className='btn-title'>I'm a Bee Keeper!</p>
+                  </Col>
+                </Row>
+                {/* Button 1 */}
+                <Link to="/AdminLogin">
+                  <button className='btn-format rounded-pill'>Admin Login</button>
                 </Link>
               </Col>
             </Row>
 
+
             <Row>
-              <Col className='mt-xl-5'>
-                <label className='btn-title mt-3'>Admin User:</label><br />
-                <Link to="/CreateAdminUser">
-                  <button className='btn-format rounded-pill'> Create User</button>
+              <Col className='right-title mt-3'>
+                <Row>
+                  <Col>
+                    <p className='btn-title'>I'm a Busy Bee!</p>
+                  </Col>
+                </Row>
+                <Link to="/KidsLogin">
+                <button className='btn-format rounded-pill'>Kid's Login</button>
                 </Link>
               </Col>
             </Row>
 
-            <Row>
-              <Col className='mt-xl-5'>
-                <label className='btn-title mt-4'>Kids User:</label><br />
-                <Link to="/CreateAdminUser">
-                  <button className='btn-format rounded-pill'> Create User</button>
-                </Link>
-              </Col>
-            </Row>
+
 
           </Col>
         </Row>
