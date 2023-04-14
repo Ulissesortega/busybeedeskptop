@@ -41,14 +41,23 @@
 }
 
 .btn-format {
-  font-size: 25px !important;
+  font-size: 25px;
   font-style: italic;
-  width: 65%;
+  width: 60%;
   height: 65%;
   background-color: black;
   color: white;
-  border-radius: 15px;
-  
+  border-radius: 15px;  
+}
+
+.btn2-format {
+  font-size: 25px;
+  font-style: italic;
+  width: 60%;
+  height: 40%;
+  background-color: black;
+  color: white;
+  border-radius: 15px;  
 }
 
 .custom-height {

@@ -13,10 +13,10 @@ export default function Login() {
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'><span className='hide'>Welcome to</span> Busy Bee!</h1>
+            <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
             <Row>
               <Col className=' mt-4 text-center'>
-              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo"/>
+              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
               </Col>
             </Row>
           </Col>

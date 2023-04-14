@@ -57,7 +57,7 @@ export default function BeeUser() {
                                     <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
                                 </Form.Group>
                                 <Link to="/TaskAssigner">
-                                    <button className='btn-format rounded-pill mt-3'>Create User</button>
+                                    <button className='btn2-format rounded-pill mt-3'>Create User</button>
                                 </Link>
                             </Col>
                         </Row>
