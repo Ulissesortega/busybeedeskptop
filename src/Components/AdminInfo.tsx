@@ -32,8 +32,7 @@ export default function Template() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='right-title d-none d-sm-block'>Admin's Info</h1>
-                        <h1 className='text-center d-block d-sm-none'>Admin's Info</h1>
+                        <h1 className='right-title d-none d-sm-block'>Admin's Info</h1>                        
                         <Row>
                             <Col className='right-title mt-2'>
                                 <p className='btn-title text-center'>A copy of your Information <br />has been sent to your Email!</p>

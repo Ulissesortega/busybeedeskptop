@@ -36,7 +36,7 @@ export default function () {
               <p className='btn-title text-center'>Please enter the information below</p>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
                   <Form.Label className='btn-title'>Full Name</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" />
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Your Name" />
                 </Form.Group>
               </Col>
             </Row>
@@ -46,7 +46,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email Address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" />
                 </Form.Group>
               </Col>
             </Row>
@@ -54,7 +54,7 @@ export default function () {
             <Row>
               <Col className='text-center'>
                 <Form.Label className='btn-title'>Gender</Form.Label>
-                <Form.Select className='rounded-pill' aria-label="Default select example">
+                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example">
                   <option className='text-center'>Options</option>
                   <option className='text-center' value="1">Male</option>
                   <option className='text-center' value="2">Female</option>
@@ -67,7 +67,7 @@ export default function () {
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" />
                 </Form.Group>
                 <Link to="/AdminInfo">
                   <button className='btn2-format rounded-pill mt-3'>Create User</button>

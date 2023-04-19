@@ -12,7 +12,8 @@ export default function UsersDashboard() {
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'>Hi Username!</h1>
+            <h1 className='left-title '>Hi Username!</h1>
+            <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
             <p className='btn-title text-center'>Admin Dashboard<br />From here You'll be able to<br /> manage your Busy Bee(s)</p>
           </Col>
 

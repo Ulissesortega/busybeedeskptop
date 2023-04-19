@@ -25,7 +25,7 @@ export default function TaskAssigner() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Enter a Task</Form.Label>
-                                    <Form.Control className='text-center rounded-pill' type="text" placeholder="Get Ready For School" />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -33,7 +33,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Assign Start Rewards!</Form.Label>
-                                <Form.Select className='rounded-pill' aria-label="Default select example">
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example">
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>

@@ -54,7 +54,7 @@ export default function Login() {
                   </Col>
                 </Row>
                 {/* Button 1 */}
-                <Link to="/AdminLogin">
+                <Link to="/UsersDashboard">
                   <button className='btn-format rounded-pill'>Admin Login</button>
                 </Link>
               </Col>
