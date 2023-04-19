@@ -3,6 +3,8 @@ import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+
+
 function MyComponent() {
   return (
     <div className='bgColor'>
@@ -61,7 +63,7 @@ function MyComponent() {
 
             <Row>
               <Col className='right-title mt-2'>
-                <Link to="/AdminInfo">
+                <Link to="/TempPassword">
                   <button className='btn-format rounded-pill mt-3'>Reset Password</button>
                 </Link>
               </Col>

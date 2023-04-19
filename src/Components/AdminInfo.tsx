@@ -5,9 +5,6 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-
-
-
 export default function Template() {
     return (
         <div className='bgColor'>
@@ -22,18 +19,14 @@ export default function Template() {
                             <Col className='mt-1 mt-sm-1 mt-xl-3 text-center'>
                                 <p className='btn-title text-center '>Awesome!<br/>You have become a <br/><span className='text-bold'>BeeKeeper </span></p>
                                 <img className='img-fluid d-none d-sm-block mx-auto' src={require('../Assets/Bkeeper.png')} alt="Logo" width={200}/>
-                                <img className='img-fluid d-block d-sm-none mx-auto' src={require('../Assets/Bkeeper.png')} alt="Logo" width={125}/>
-                                
+                                <img className='img-fluid d-block d-sm-none mx-auto' src={require('../Assets/Bkeeper.png')} alt="Logo" width={125}/>                                
                             </Col>
                         </Row>
                     </Col>
 
                     {/* Divider in the Middle */}
                     <Col xl={1}>
-                        <div className="divider 
-                        d-none d-sm-block 
-                        d-md-none d-lg-block
-                        d-xl-block"></div>
+                        <div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
                     </Col>
 
 
@@ -61,7 +54,6 @@ export default function Template() {
                                 </Link>
                             </Col>
                         </Row>
-
                     </Col>
                 </Row>
             </Container>

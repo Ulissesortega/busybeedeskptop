@@ -13,7 +13,7 @@ export default function Login() {
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
+            <h1 className='left-title d-none d-sm-block d-md-none d-lg-block'>Busy Bee!</h1>
             <Row>
               <Col className=' mt-4 text-center'>
               <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
@@ -27,7 +27,7 @@ export default function Login() {
 
           {/* Right Side */}
           <Col xs={12} xl={5}>
-            <h1 className='left-title d-none d-sm-block'>Home Screen</h1>
+            <h1 className='left-title d-none d-sm-block d-md-none d-lg-block'>Home Screen</h1>
             <Row>
               <Col className='right-title mt-4'>
                 <Row>

@@ -11,7 +11,6 @@ export default function () {
 
         {/* Left-Side */}
         <Row>
-
           <Col xs={12} sm={12} md={12} xl={5}>
             <h1 className='left-title mt-5 d-none d-sm-block'>Welcome to Busy Bee</h1>
             <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
@@ -19,7 +18,6 @@ export default function () {
               <Col className='mt-2 text-center'>                
                 <p className='btn-title text-center d-none d-sm-block'>Thank you for choosing us!<br />Together we'll make the best<br /> of your Kid's time.</p>                
                 <img className='image-radius img-fluid d-none d-sm-block mx-auto' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
-
               </Col>
             </Row>
           </Col>

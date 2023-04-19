@@ -13,6 +13,8 @@ import RewardsCreator from './Components/RewardsCreator'
 import UsersDashboard from './Components/UserComponents/UsersDashboard';
 import AddBeeUser from './Components/UserComponents/AddBeeUser';
 import PasswordRecovery from './Components/PasswordRecovery/PasswordRecovery';
+import TempPassword from './Components/PasswordRecovery/TempPassword';
+
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
         <Route path='/UsersDashboard' element={<UsersDashboard/>}/>
         <Route path='/AddBeeUser' element={<AddBeeUser/>}/>
         <Route path='/PasswordRecovery' element={<PasswordRecovery/>}/>  
+        <Route path='/TempPassword' element={<TempPassword/>}/>  
       </Routes>
     </BrowserRouter>
   );
