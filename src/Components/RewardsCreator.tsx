@@ -12,7 +12,8 @@ export default function TaskAssigner() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title'>Username!</h1>
+                        <h1 className='left-title d-none d-sm-block'>Username!</h1>
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
                         <Row>
                             <Col>
                                 <p className='btn-title text-center'><h1>Step 3</h1></p>
@@ -60,7 +61,7 @@ export default function TaskAssigner() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Username Available Rewards Rewards</h1>
+                        <h1 className='left-title d-none d-sm-block'>Username Available Rewards Rewards</h1>
                         <p className='btn-title text-center'>This is the reserved spot for the rewards</p>
 
                         <Row>

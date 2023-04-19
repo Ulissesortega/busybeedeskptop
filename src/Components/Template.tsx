@@ -8,6 +8,7 @@ import leftImage from '../Assets/Logo.png';
 
 export default function Template() {
   return (
+    
     <div className='bgColor'>
       <Container>
 
@@ -32,5 +33,6 @@ export default function Template() {
         </Row>
       </Container>
     </div>
+    
   )
 }

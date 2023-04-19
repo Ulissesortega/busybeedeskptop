@@ -16,7 +16,7 @@ export default function Login() {
             <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
             <Row>
               <Col className=' mt-4 text-center'>
-              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
+              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
               </Col>
             </Row>
           </Col>
@@ -32,7 +32,7 @@ export default function Login() {
               <Col className='right-title mt-4'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>New to Busy Bee?</p>
+                    <label className='btn-title'>New to Busy Bee?</label>
                   </Col>
                 </Row>
 
@@ -50,7 +50,7 @@ export default function Login() {
               <Col className='right-title mt-3'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>I'm a Bee Keeper!</p>
+                    <label className='btn-title'>I'm a Bee Keeper!</label>
                   </Col>
                 </Row>
                 {/* Button 1 */}
@@ -65,7 +65,7 @@ export default function Login() {
               <Col className='right-title mt-3'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>I'm a Busy Bee!</p>
+                    <label className='btn-title'>I'm a Busy Bee!</label>
                   </Col>
                 </Row>
                 <Link to="/KidsLogin">

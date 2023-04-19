@@ -43,8 +43,7 @@
 .btn-format {
   font-size: 25px;
   font-style: italic;
-  width: 60%;
-  height: 65%;
+  width: 55%;  
   background-color: black;
   color: white;
   border-radius: 15px;  
@@ -53,8 +52,7 @@
 .btn2-format {
   font-size: 25px;
   font-style: italic;
-  width: 60%;
-  height: 40%;
+  width: 60%;  
   background-color: black;
   color: white;
   border-radius: 15px;  
@@ -65,13 +63,12 @@
 }
 
 .small-btn-format {
-  font-size: 35px;
+  font-size: 25px;
   font-style: italic;
-  width: 200px;
+  width: 135px;
   background-color: black;
   color: white;
-  border-radius: 15px;
-  padding: 7px;
+  border-radius: 15px;  
 }
 
 .text-bold {
@@ -87,4 +84,8 @@
   font-style: italic;
 }
 
-
+.Mobile-Title-format{
+  font-size: 45px;
+  font-style: italic;
+  text-align: center;
+}

@@ -7,18 +7,18 @@ import { Link } from 'react-router-dom';
 export default function AdminLogin() {
   return (
     <div className='bgColor'>
-      <Container>
+    <Container>
 
-        {/* Left-Side */}
-        <Row>
-          <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'>Busy Bee!</h1>
-            <Row>
-              <Col className='mt-3'>
-              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo"/>
-              </Col>
-            </Row>
-          </Col>
+      {/* Left-Side */}
+      <Row>
+        <Col sm={12} md={12} xl={5}>
+          <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
+          <Row>
+            <Col className='mt-4 text-center'>
+            <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
+            </Col>
+          </Row>
+        </Col>
 
           {/* Divider in the Middle */}
           <Col xl={1}><div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
@@ -27,41 +27,36 @@ export default function AdminLogin() {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title'>Admin Login</h1>
+            <h1 className='left-title d-none d-sm-block'>Admin Login</h1>
             
             <Row>
               <Col className='right-title mt-2'>
                 <Row>                  
                 </Row>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-1" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
+                  <Form.Control className='text-center rounded-pill' type="Email" placeholder="Your Email" />                  
                 </Form.Group>
               </Col>
             </Row>
 
              <Row>
-              <Col className='right-title mt-2'>
+              <Col className='right-title mt-1'>
                 <Row>                  
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
                   <Form.Control className='text-center rounded-pill' type="Password" placeholder="Your Password" />
-                  <Form.Text className="text-muted">
-                    We'll never share your email with anyone else.
-                  </Form.Text>
+                  
                 </Form.Group>
 
                 <Link to="/CreateAdminUser">
-                  <button className='btn-format rounded-pill mt-3'>Login</button>
+                  <button className='btn-format rounded-pill mt-2'>Login</button>
                 </Link>
 
                 <Row>
                   <Col>
-                    <p className='btn-title mt-4'><Link to='/PasswordRecovery'>Forgor Your Password?</Link></p>
+                    <p className='btn-title mt-4'><Link to='/PasswordRecovery'>Forgot Your Password?</Link></p>
                   </Col>
                 </Row>
 

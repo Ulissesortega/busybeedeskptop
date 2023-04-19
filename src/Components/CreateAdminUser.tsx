@@ -13,10 +13,11 @@ export default function () {
         <Row>
 
           <Col xs={12} sm={12} md={12} xl={5}>
-            <h1 className='left-title mt-5'>Welcome to Busy Bee</h1>
+            <h1 className='left-title mt-5 d-none d-sm-block'>Welcome to Busy Bee</h1>
+            <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
             <Row>
               <Col className='mt-2 text-center'>                
-                <p className='btn-title text-center'>Thank you for choosing us,<br />Together we'll make the best<br /> of your Kid's time.</p>
+                <p className='btn-title text-center d-none d-sm-block'>Thank you for choosing us!<br />Together we'll make the best<br /> of your Kid's time.</p>                
                 <img className='image-radius img-fluid d-none d-sm-block mx-auto' src={require('../Assets/BEEE.png')} alt="Logo" width={300} />
 
               </Col>
@@ -31,9 +32,10 @@ export default function () {
 
           {/* Right Side */}
           <Col xs={12} sm={12} md={12} xl={5}>
-            <h1 className='left-title mt-5'>Admin's Info</h1>
+            <h1 className='left-title mt-2 mt-xl-5 mt-xs-1'>Admin's Info</h1>
             <Row>
               <Col className='right-title mt-2'>
+              <p className='btn-title text-center'>Please enter the information below</p>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
                   <Form.Label className='btn-title'>Full Name</Form.Label>
                   <Form.Control className='text-center rounded-pill' type="text" placeholder="Your Name" />
