@@ -28,7 +28,7 @@ export default function UsersDashboard() {
             <h1 className='left-title'>Your Busy Bee's</h1>
             <p className='btn-title text-center'>Please choose one of the options bellow:</p>
 
-            <Row>
+            <Row className='mx-auto'>
               <Col><button className='small-btn-format rounded-pill mt-3'>Bee 1</button></Col>
               <Col><button className='small-btn-format rounded-pill mt-3'>Bee 2</button></Col>
               <Col><button className='small-btn-format rounded-pill mt-3'>Bee 3</button></Col>
