@@ -1,20 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { CreateAdultAccount } from '../Services/DataService';
-
+import { CreateAdultAccount, GetAdultUserData } from '../Services/DataService';
+import { MyContext } from '../Context/UserContext';
 export default function () {
   let navigate = useNavigate();
+  const { setAdmin } = useContext(MyContext);
 
-  const [email, setEmail] = useState('');
-  const [fullName, setFullName] = useState('');
-  const [password, setPassword] = useState('');
-  const [avatarLook, setAvatarLook] = useState('');
+  const [email, setEmail] = useState<string>('');
+  const [fullName, setFullName] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const [avatarLook, setAvatarLook] = useState<string>('');
 
   const handleSubmit = async () => {
-    let adultUserData = {
+    let adultUserData:object = {
       id: 0,
       fullName,
       email,
@@ -23,6 +24,7 @@ export default function () {
     }
     console.log(adultUserData);
     if (await CreateAdultAccount(adultUserData)) {
+      setAdmin(await GetAdultUserData(email));
       console.log('Success');
       navigate("/StepOne");
     }else {

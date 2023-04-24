@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import { CreateAdultAccount } from "../../Services/DataService";
 
 export default function AdultCreateAccount(){
-    const [email, setEmail] = useState('');
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [password, setPassword] = useState('');
-    const [avatarLook, setAvatarLook] = useState('');
+    const [email, setEmail] = useState<string>('');
+    const [firstName, setFirstName] = useState<string>('');
+    const [lastName, setLastName] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [avatarLook, setAvatarLook] = useState<string>('');
 
     const handleSubmit = async () => {
         let adultUserData = {
