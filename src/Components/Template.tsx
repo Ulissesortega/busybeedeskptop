@@ -21,13 +21,13 @@ export default function Template() {
 
           {/* Divider in the Middle */}
           <Col xl={1}>
-            <div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
+            <div className="divider d-none d-sm-block d-sm-none d-md-block d-md-none d-lg-block d-lg-none d-xl-block"></div>
           </Col>
 
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title'>Kid(s) User for your Bee</h1>
+            <h1 className='left-title d-none d-sm-block d-sm-none d-md-block d-md-none'>Kid(s) User for your Bee</h1>
             <p className='btn-title text-center'>Please choose one of the options bellow:</p>
           </Col>
         </Row>

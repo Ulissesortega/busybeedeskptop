@@ -54,19 +54,17 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-1" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" />                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email"/>                  
                 </Form.Group>
               </Col>
             </Row>
-
              <Row>
               <Col className='right-title mt-1'>
                 <Row>                  
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
-                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />                  
                 </Form.Group>
 
                 <Link to="/UsersDashboard">

@@ -14,7 +14,8 @@ import RewardsCreator from './Components/RewardsCreator'
 import UsersDashboard from './Components/UserComponents/UsersDashboard';
 import AddBeeUser from './Components/UserComponents/AddBeeUser';
 import PasswordRecovery from './Components/PasswordRecovery/PasswordRecovery';
-import TempPassword from './Components/PasswordRecovery/TempPassword';
+import TempPassword from './Components/PasswordRecovery/TempPassword'
+import KidsTasks from './Components/KidsComponents/KidsTasks';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
         <Route path='/AddBeeUser' element={<AddBeeUser/>}/>
         <Route path='/PasswordRecovery' element={<PasswordRecovery/>}/>  
         <Route path='/TempPassword' element={<TempPassword/>}/>  
+        <Route path='/KidsTasks' element={<KidsTasks/>}/>  
       </Routes>
     </BrowserRouter>
   );

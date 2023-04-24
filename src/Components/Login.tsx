@@ -16,7 +16,7 @@ export default function Login() {
             <h1 className='left-title d-none d-sm-block d-md-none d-lg-block'>Busy Bee!</h1>
             <Row>
               <Col className=' mt-4 text-center'>
-              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
+                <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350} />
               </Col>
             </Row>
           </Col>
@@ -40,12 +40,12 @@ export default function Login() {
                 <Link to="/CreateAdminUser">
                   <button className='btn-format rounded-pill'> Create User</button>
                 </Link>
-                
+
               </Col>
             </Row>
 
 
-            
+
             <Row>
               <Col className='right-title mt-3'>
                 <Row>
@@ -69,7 +69,7 @@ export default function Login() {
                   </Col>
                 </Row>
                 <Link to="/KidsLogin">
-                <button className='btn-format rounded-pill'>Kid's Login</button>
+                  <button className='btn-format rounded-pill'>Kid's Login</button>
                 </Link>
               </Col>
             </Row>
