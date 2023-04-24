@@ -3,19 +3,20 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import leftImage from '../Assets/Logo.png';
+
 
 
 export default function Template() {
   return (
+    
     <div className='bgColor'>
       <Container>
 
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'>Hi Username!</h1>
-
+            <h1 className='left-title d-none d-sm-block'>Welcome to Busy Bee</h1>
+            <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
           </Col>
 
           {/* Divider in the Middle */}
@@ -32,5 +33,6 @@ export default function Template() {
         </Row>
       </Container>
     </div>
+    
   )
 }

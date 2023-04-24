@@ -20,12 +20,13 @@ export default function StepOne() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title'>Hi Username!</h1>
+                        <h1 className='left-title d-none d-sm-block'>Hi Username!</h1>
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <h1 className='btn-title text-center'>Step 1</h1>
                             <p className='btn-title text-center'>Busy Bee works based on a<br /> Star Task Reward System.</p>
                             <Col className='d-flex justify-content-center'>
-                                <img className='img-fluid custom-height' src={require('../Assets/Medal.png')} alt="Logo" width={200} />
+                                <img className='img-fluid d-none d-sm-block' src={require('../Assets/Medal.png')} alt="Logo" width={200} />
                             </Col>
                         </Row>
 
@@ -44,17 +45,17 @@ export default function StepOne() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title'>Kid(s) User for your Bee!</h1>
+                        <h1 className='left-title d-none d-sm-block'>Kid(s) User for your Bee!</h1>
                         <p className='btn-title text-center'>Please choose one of the options bellow:</p>
 
 
                         <Row>
-                            <Col className='d-flex justify-content-center mt-4'>
-                                <img className='img-fluid custom-height' src={require('../Assets/BeeGirl.png')} alt="Logo" width={225} />
+                            <Col className='d-flex justify-content-center mt-xl-44'>
+                                <img className='img-fluid' src={require('../Assets/BeeGirl.png')} alt="Logo" width={200} />
                             </Col>
 
-                            <Col className='d-flex justify-content-center mt-3'>
-                                <img className='img-fluid custom-height' src={require('../Assets/BeeBoy.png')} alt="Logo" width={225} />
+                            <Col className='d-flex justify-content-center mt-xl-3'>
+                                <img className='img-fluid' src={require('../Assets/BeeBoy.png')} alt="Logo" width={200} />
                             </Col>
                         </Row>
 

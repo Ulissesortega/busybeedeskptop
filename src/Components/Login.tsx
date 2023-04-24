@@ -5,7 +5,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
-  
+
   return (
     <div className='bgColor'>
       <Container>
@@ -13,10 +13,10 @@ export default function Login() {
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
-            <h1 className='left-title'><span className='hide'>Welcome to</span> Busy Bee!</h1>
+            <h1 className='left-title d-none d-sm-block d-md-none d-lg-block'>Busy Bee!</h1>
             <Row>
-              <Col className='mt-4 text-center'>
-              <img className='image-radius img-fluid mobile-image' src={require('../Assets/Logo.png')} alt="Logo"/>
+              <Col className=' mt-4 text-center'>
+              <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
               </Col>
             </Row>
           </Col>
@@ -26,13 +26,13 @@ export default function Login() {
 
 
           {/* Right Side */}
-          <Col xl={5}>
-            <h1 className='left-title hide'>Home Screen</h1>
+          <Col xs={12} xl={5}>
+            <h1 className='left-title d-none d-sm-block d-md-none d-lg-block'>Home Screen</h1>
             <Row>
               <Col className='right-title mt-4'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>New to Busy Bee?</p>
+                    <label className='btn-title'>New to Busy Bee?</label>
                   </Col>
                 </Row>
 
@@ -50,11 +50,11 @@ export default function Login() {
               <Col className='right-title mt-3'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>I'm a Bee Keeper!</p>
+                    <label className='btn-title'>I'm a Bee Keeper!</label>
                   </Col>
                 </Row>
                 {/* Button 1 */}
-                <Link to="/AdminLogin">
+                <Link to="/UsersDashboard">
                   <button className='btn-format rounded-pill'>Admin Login</button>
                 </Link>
               </Col>
@@ -65,7 +65,7 @@ export default function Login() {
               <Col className='right-title mt-3'>
                 <Row>
                   <Col>
-                    <p className='btn-title'>I'm a Busy Bee!</p>
+                    <label className='btn-title'>I'm a Busy Bee!</label>
                   </Col>
                 </Row>
                 <Link to="/KidsLogin">
@@ -73,6 +73,9 @@ export default function Login() {
                 </Link>
               </Col>
             </Row>
+
+
+
           </Col>
         </Row>
       </Container>
