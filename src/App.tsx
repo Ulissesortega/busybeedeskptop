@@ -6,7 +6,7 @@ import Login from './Components/Login';
 import CreateAdminUser from './Components/CreateAdminUser';
 import AdminLogin from './Components/AdminLogin';
 import AdminInfo from './Components/AdminInfo'
-import KidsLogin from './Components/KidsLogin';
+import KidsLogin from './Components/KidsComponents/KidsLogin';
 import StepOne from './Components/StepOne';
 import BeeUser from './Components/BeeUser';
 import TaskAssigner from './Components/TaskAssigner';
