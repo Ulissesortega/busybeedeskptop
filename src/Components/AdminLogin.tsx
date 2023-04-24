@@ -72,9 +72,7 @@ export default function AdminLogin() {
                   
                 </Form.Group>
 
-                <Link to="/UsersDashboard">
-                  <button className='btn-format rounded-pill mt-2'>Login</button>
-                </Link>
+                <button className='btn-format rounded-pill mt-2' onClick={handleSubmit}>Login</button>
 
                 <Row>
                   <Col>
