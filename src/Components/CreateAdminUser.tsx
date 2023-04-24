@@ -14,7 +14,7 @@ export default function () {
   const [avatarLook, setAvatarLook] = useState<string>('');
 
   const handleSubmit = async () => {
-    let adultUserData = {
+    let adultUserData:object = {
       id: 0,
       fullName,
       email,

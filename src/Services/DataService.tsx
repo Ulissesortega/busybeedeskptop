@@ -38,6 +38,14 @@ async function AdultLogin (loginUser: object){
     return data;
 }
 
+async function GetAdultUserData (email: string){
+    const result = await fetch(`https://busybeeapi.azurewebsites.net/AdultUser/AdultUserByEmail/${email}`);
+    let data = await result.json();
+    adultUserData = data;
+    console.log(adultUserData);
+    return adultUserData;
+}
+
 function LoggedInAdultUserData(){
     return adultUserData;
 }
@@ -113,4 +121,4 @@ async function CreateReward(reward: object){
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, LoggedInAdultUserData, CreateChildAccount, ChildLogin, CreateTask, CreateReward }
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, CreateTask, CreateReward }

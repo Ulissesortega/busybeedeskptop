@@ -1,18 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { AdultLogin } from '../Services/DataService';
+import { AdultLogin, GetAdultUserData } from '../Services/DataService';
+import { MyContext } from '../Context/UserContext';
 
 export default function AdminLogin() {
   let navigate = useNavigate();
+  const { setAdmin } = useContext(MyContext);
 
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const handleSubmit = async () => {
-    let userData = {
+    setAdmin(await GetAdultUserData(email));
+    let userData:object = {
       email,
       password
     }

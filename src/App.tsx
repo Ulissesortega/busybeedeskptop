@@ -17,8 +17,8 @@ function App() {
   const [adminData, setAdminData] = useState<object>({});
   const [createBee, setcreateBee] = useState<string>('');
 
-  const setAdmin = (admin: object) => {
-    setAdminData(admin);
+  const setAdmin = (adminData: object) => {
+    setAdminData(adminData);
   }
   const setCreationBee = (bee: string) => {
     setcreateBee(bee);
