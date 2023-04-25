@@ -61,15 +61,13 @@ export default function AdminLogin() {
                 </Form.Group>
               </Col>
             </Row>
-
              <Row>
               <Col className='right-title mt-1'>
                 <Row>                  
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
-                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />                  
                 </Form.Group>
 
                 <button className='btn-format rounded-pill mt-2' onClick={handleSubmit}>Login</button>
