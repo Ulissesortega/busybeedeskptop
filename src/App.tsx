@@ -19,16 +19,20 @@ import TempPassword from './Components/PasswordRecovery/TempPassword';
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});
+  const [userData, setUserData] = useState<object>({});
   const [createBee, setcreateBee] = useState<string>('');
 
   const setAdmin = (adminData: object) => {
     setAdminData(adminData);
   }
+  const setUser = (userData: object) => {
+    setUserData(userData);
+  }
   const setCreationBee = (bee: string) => {
     setcreateBee(bee);
   }
   return (
-    <MyContext.Provider value={{adminData, setAdmin, createBee, setCreationBee }} >
+    <MyContext.Provider value={{adminData, setAdmin, userData, setUser, createBee, setCreationBee }} >
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Login />} />

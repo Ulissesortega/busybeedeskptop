@@ -1,5 +1,5 @@
 let adultUserData: object = {};
-let childUserserData: object = {};
+let childUserData: object = {};
 
 // Adult Account Fetches
 async function CreateAdultAccount(createdAdultUser: object){
@@ -85,6 +85,14 @@ async function ChildLogin (loginUser: object){
     return data;
 }
 
+async function GetChildUserData (username: string){
+    const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/ChildUserByUsername/${username}`);
+    let data = await result.json();
+    childUserData = data;
+    console.log(childUserData);
+    return childUserData;
+}
+
 // Task Fetches
 async function CreateTask(task: object){
     const result = await fetch('https://busybeeapi.azurewebsites.net/Task/CreateTask',{
@@ -121,4 +129,4 @@ async function CreateReward(reward: object){
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, CreateTask, CreateReward }
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, CreateReward }
