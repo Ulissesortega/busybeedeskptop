@@ -57,7 +57,7 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-1" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" />                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />                  
                 </Form.Group>
               </Col>
             </Row>
