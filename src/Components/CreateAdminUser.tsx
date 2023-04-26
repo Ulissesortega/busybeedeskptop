@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { Container, Row, Col, Form } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 import { CreateAdultAccount, GetAdultUserData } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
-export default function () {
+
+export default function CreateAdminUser () {
   let navigate = useNavigate();
   const { setAdmin } = useContext(MyContext);
 
