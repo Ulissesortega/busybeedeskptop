@@ -43,19 +43,19 @@
 .btn-format {
   font-size: 25px;
   font-style: italic;
-  width: 50%;  
+  width: 50%;
   background-color: black;
   color: white;
-  border-radius: 15px;  
+  border-radius: 15px;
 }
 
 .btn2-format {
   font-size: 25px;
   font-style: italic;
-  width: 50%;  
+  width: 50%;
   background-color: black;
   color: white;
-  border-radius: 15px;  
+  border-radius: 15px;
 }
 
 .custom-height {
@@ -68,7 +68,7 @@
   width: 135px;
   background-color: black;
   color: white;
-  border-radius: 15px;  
+  border-radius: 15px;
 }
 
 .text-bold {
@@ -80,12 +80,21 @@
   border-radius: 45px;
 }
 
-.italic{
+.italic {
   font-style: italic;
 }
 
-.Mobile-Title-format{
+.Mobile-Title-format {
   font-size: 45px;
   font-style: italic;
   text-align: center;
 }
+
+a:hover,
+a:visited,
+a:link,
+a:active {
+  text-decoration: none;
+  color: black;
+}
+
