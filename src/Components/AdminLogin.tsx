@@ -24,21 +24,21 @@ export default function AdminLogin() {
       navigate("/StepOne");
     }
   }
-  
+
   return (
     <div className='bgColor'>
-    <Container>
+      <Container>
 
-      {/* Left-Side */}
-      <Row>
-        <Col sm={12} md={12} xl={5}>
-          <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
-          <Row>
-            <Col className='mt-4 text-center'>
-            <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350}/>
-            </Col>
-          </Row>
-        </Col>
+        {/* Left-Side */}
+        <Row>
+          <Col sm={12} md={12} xl={5}>
+            <h1 className='left-title d-none d-sm-block'>Busy Bee!</h1>
+            <Row>
+              <Col className='mt-4 text-center'>
+                <img className='image-radius img-fluid' src={require('../Assets/Logo.png')} alt="Logo" width={350} />
+              </Col>
+            </Row>
+          </Col>
 
           {/* Divider in the Middle */}
           <Col xl={1}><div className="divider d-none d-sm-block d-md-none d-lg-block d-xl-block"></div>
@@ -48,24 +48,24 @@ export default function AdminLogin() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='left-title d-none d-sm-block'>Admin Login</h1>
-            
+
             <Row>
               <Col className='right-title mt-2'>
                 <Row>
                 </Row>
                 <Form.Group className="mb-1" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email"/>                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" />
                 </Form.Group>
               </Col>
             </Row>
-             <Row>
+            <Row>
               <Col className='right-title mt-1'>
-                <Row>                  
+                <Row>
                 </Row>
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label className='btn-title'>Password</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
 
                 <Link to="/UsersDashboard">
