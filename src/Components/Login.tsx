@@ -4,6 +4,10 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
+
+  const testSessionStorage = () => {
+    sessionStorage.setItem("Test", "Testing");
+  }
   return (
     <div className='bgColor'>
       <Container>

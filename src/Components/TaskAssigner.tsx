@@ -5,6 +5,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
+import { parse } from 'path';
 
 export default function TaskAssigner() {
     const { adminData } = useContext(MyContext);
@@ -20,10 +21,11 @@ export default function TaskAssigner() {
             alert('Could Not Create Task');
         } else {
             let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-            parentData = adminData;
-            console.log(userData);
+            // parentData = adminData;
+            parentData = JSON.parse(sessionStorage.AdminData);
             let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-            childData = userData;
+            // childData = userData;
+            childData = JSON.parse(sessionStorage.UserData);
             let task = {
                 id: 0,
                 parentId: parentData.adultUserId,
@@ -42,10 +44,14 @@ export default function TaskAssigner() {
 
     const reloadTasks = async () => {
         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-        parentData = adminData;
+        // parentData = adminData;
+        parentData = JSON.parse(sessionStorage.AdminData);
         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-        childData = userData;
-        setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
+        // childData = userData;
+        childData = JSON.parse(sessionStorage.UserData);
+        //setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
+        sessionStorage.setItem("Tasks", JSON.stringify(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId)));
+        setTasks(JSON.parse(sessionStorage.Tasks));
         console.log(tasks);
     }
 
