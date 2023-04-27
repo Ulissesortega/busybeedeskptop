@@ -15,6 +15,7 @@ export default function AdminLogin() {
 
   const handleSubmit = async () => {
     setAdmin(await GetAdultUserData(email));
+    sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
     let userData:object = {
       email,
       password
