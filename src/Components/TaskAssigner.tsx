@@ -116,18 +116,14 @@ export default function TaskAssigner() {
                             <Col>
                                 {
                                     tasks.map((task: object, idx: number) => {
-                                        let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean,  parentId?: number, taskInstructions?: string, taskReward?: number } = {}; 
+                                        let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                         mappedTask = task;
                                         return (
                                             <div key={idx}>
                                                 {
                                                     (<Row>
-                                                        <Col md={6}>
-                                                            <Row>
-                                                                <Col md={12} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                                <Col md={12} className='d-flex justify-content-center'>{mappedTask.taskReward}</Col>
-                                                            </Row>
-                                                        </Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskReward}</Col>
                                                     </Row>)
                                                 }
                                             </div>
