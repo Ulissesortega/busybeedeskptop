@@ -3,10 +3,11 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateReward } from '../Services/DataService';
+import { CreateReward, GetRewardsByParentAndChildId } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
+import { parse } from 'path';
 
-export default function TaskAssigner() {
+export default function RewardCreator() {
     const { adminData } = useContext(MyContext);
     const { userData } = useContext(MyContext);
     
@@ -15,30 +16,49 @@ export default function TaskAssigner() {
     const [rewards, setRewards] = useState<object[]>([]);
     const [updateRewards, setUpdateRewards] = useState<number>(0);
 
-    // const handleSubmit = async () => {
-    //     if (!taskInstructions || !taskReward) {
-    //         alert('Could Not Create Task');
-    //     } else {
-    //         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-    //         parentData = adminData;
-    //         console.log(userData);
-    //         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-    //         childData = userData;
-    //         let task = {
-    //             id: 0,
-    //             parentId: parentData.adultUserId,
-    //             childId: childData.userId,
-    //             taskInstructions,
-    //             taskReward,
-    //             isCompleted: false,
-    //             isDeleted: false
-    //         }
-    //         console.log(task);
-    //         CreateTask(task);
-    //         reloadTasks();
-    //     }
-    //     setUpdateTasks(updateTasks + 1);
-    // }
+    const handleSubmit = async () => {
+        if (!rewardText || !rewardCost) {
+            alert('Could Not Create Reward');
+        } else {
+            let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+            // parentData = adminData;
+            parentData = JSON.parse(sessionStorage.AdminData);
+            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
+            // childData = userData;
+            childData = JSON.parse(sessionStorage.UserData);
+            let reward = {
+                id: 0,
+                parentId: parentData.adultUserId,
+                childId: childData.userId,
+                Reward: rewardText,
+                RewardCost: rewardCost,
+                isCompleted: false,
+                isDeleted: false
+            }
+            console.log(reward);
+            CreateReward(reward);
+            reloadRewards();
+        }
+        setUpdateRewards(updateRewards + 1);
+    }
+
+    const reloadRewards = async () => {
+        let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+        // parentData = adminData;
+        parentData = JSON.parse(sessionStorage.AdminData);
+        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
+        // childData = userData;
+        childData = JSON.parse(sessionStorage.UserData);
+        //setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
+        sessionStorage.setItem("Rewards", JSON.stringify(await GetRewardsByParentAndChildId(parentData.adultUserId, childData.userId)));
+        setRewards(JSON.parse(sessionStorage.Rewards));
+        console.log(rewards);
+    }
+
+    useEffect(() => {
+        reloadRewards();
+        console.log("refreash");
+    }, [updateRewards])
 
     return (
         <div className='bgColor'>
@@ -82,7 +102,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='right-title mt-2'>
                                 {/* <Link to="/AdminInfo"> */}
-                                    <button className='btn-format rounded-pill mt-3'>Add Reward</button>
+                                    <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Add Reward</button>
                                 {/* </Link> */}
                             </Col>
                         </Row>
@@ -101,9 +121,22 @@ export default function TaskAssigner() {
 
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Reward 1</p>
-                                <p className='btn-title text-center'>Reward 2</p>
-                                <p className='btn-title text-center'>Reward 3</p>
+                                {
+                                    rewards.map((reward: object, idx: number) => {
+                                        let mappedReward: { id?: number, parentId?: number, childId?: number, Reward?: string, RewardCost?: number, isDeleted?: boolean } = {};
+                                        mappedReward = reward;
+                                        return (
+                                            <div key={idx}>
+                                                {
+                                                    (<Row>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.Reward}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.RewardCost}</Col>
+                                                    </Row>)
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Col>
                         </Row>
 

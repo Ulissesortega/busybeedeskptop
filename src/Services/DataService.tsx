@@ -135,4 +135,10 @@ async function CreateReward(reward: object) {
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, GetTasksByParentAndChildId, CreateReward }
+async function GetRewardsByParentAndChildId(parentId?: number, childId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardsByParentAndChildId/${parentId}/${childId}`)
+    let data = await res.json();
+    return data;
+}
+
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, GetTasksByParentAndChildId, CreateReward, GetRewardsByParentAndChildId }
