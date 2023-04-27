@@ -126,6 +126,7 @@ export default function TaskAssigner() {
                                                         <div className='border-box'>
                                                         <Col md={6} className='d-flex justify-content-center  '>{mappedTask.taskInstructions}</Col>
                                                         <Col md={6} className='d-flex justify-content-center border-right'>{mappedTask.taskReward}</Col>
+                                                        <i className="fas fa-check"></i>
                                                         </div>
                                                     </Row>)
                                                 }
