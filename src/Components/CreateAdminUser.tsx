@@ -29,6 +29,7 @@ export default function CreateAdminUser () {
       console.log(adultUserData);
       if (await CreateAdultAccount(adultUserData)) {
         setAdmin(await GetAdultUserData(email));
+        sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
         console.log('Success');
         navigate("/StepOne");
       } else {
