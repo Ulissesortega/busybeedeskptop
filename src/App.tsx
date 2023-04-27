@@ -20,33 +20,39 @@ import KidsTasks from './Components/KidsComponents/KidsTasks';
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});
+  const [userData, setUserData] = useState<object>({});
   const [createBee, setcreateBee] = useState<string>('');
 
   const setAdmin = (adminData: object) => {
     setAdminData(adminData);
   }
+  const setUser = (userData: object) => {
+    setUserData(userData);
+  }
   const setCreationBee = (bee: string) => {
     setcreateBee(bee);
   }
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route path='/' element={<Login />} />
-        <Route path='/CreateAdminUser' element={<CreateAdminUser/>} />        
-        <Route path='/AdminLogin' element={<AdminLogin/>} />       
-        <Route path='/AdminInfo' element={<AdminInfo/>} />
-        <Route path='/StepOne' element={<StepOne/>} />            
-        <Route path='/KidsLogin' element={<KidsLogin/>} /> 
-        <Route path='/BeeUser' element={<BeeUser/>}/>
-        <Route path='/TaskAssigner' element={<TaskAssigner/>}/>
-        <Route path='/RewardsCreator' element={<RewardsCreator/>}/>  
-        <Route path='/UsersDashboard' element={<UsersDashboard/>}/>
-        <Route path='/AddBeeUser' element={<AddBeeUser/>}/>
-        <Route path='/PasswordRecovery' element={<PasswordRecovery/>}/>  
-        <Route path='/TempPassword' element={<TempPassword/>}/>  
-        <Route path='/KidsTasks' element={<KidsTasks/>}/>  
-      </Routes>
-    </BrowserRouter>
+    <MyContext.Provider value={{adminData, setAdmin, userData, setUser, createBee, setCreationBee }} >
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={<Login />} />
+          <Route path='/CreateAdminUser' element={<CreateAdminUser />} />
+          <Route path='/AdminLogin' element={<AdminLogin />} />
+          <Route path='/AdminInfo' element={<AdminInfo />} />
+          <Route path='/StepOne' element={<StepOne />} />
+          <Route path='/KidsLogin' element={<KidsLogin />} />
+          <Route path='/BeeUser' element={<BeeUser />} />
+          <Route path='/TaskAssigner' element={<TaskAssigner />} />
+          <Route path='/RewardsCreator' element={<RewardsCreator/>}/>  
+          <Route path='/UsersDashboard' element={<UsersDashboard/>}/>
+          <Route path='/AddBeeUser' element={<AddBeeUser/>}/>
+          <Route path='/PasswordRecovery' element={<PasswordRecovery/>}/>  
+          <Route path='/TempPassword' element={<TempPassword/>}/>   
+          <Route path='/KidsTasks' element={<KidsTasks/>}/>  
+        </Routes>
+      </BrowserRouter>
+    </MyContext.Provider>
   );
 }
 

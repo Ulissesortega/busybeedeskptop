@@ -2,11 +2,9 @@ import React, { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { MyContext } from '../Context/UserContext';
-import { CreateChildAccount } from '../Services/DataService';
+import { CreateChildAccount, GetChildUserData } from '../Services/DataService';
 import { useNavigate } from 'react-router-dom';
-import Medal from '../Assets/Medal.png'
 import leftImage from '../Assets/BeeBoy.png';
 import RightImage from '../Assets/BeeGirl.png';
 
@@ -14,31 +12,38 @@ export default function BeeUser() {
     let navigate = useNavigate();
     const { createBee } = useContext(MyContext);
     const { adminData } = useContext(MyContext);
+    const { setUser } = useContext(MyContext);
 
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
 
     const handleCreateBee = async () => {
-        let parentData: {adultUserId?: number, adultUserEmail?: string} = {};
-        parentData = adminData;
-        console.log(adminData);
-        console.log(parentData);
-        let beeData:object = {
-            id: 0,
-            parentId: parentData.adultUserId,
-            username,
-            password,
-            CurrentStarCount: 0,
-            TotalStarCount: 0,
-            createBee
-        }
-        console.log(beeData);
-
-        if(await CreateChildAccount(beeData)){
-            navigate("/TaskAssigner")
-        }else{
+        if (!username || !password) {
             alert("Account Not Created");
+        } else {
+            let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+            parentData = adminData;
+            console.log(adminData);
+            console.log(parentData);
+            let beeData: object = {
+                id: 0,
+                parentId: parentData.adultUserId,
+                username,
+                password,
+                CurrentStarCount: 0,
+                TotalStarCount: 0,
+                createBee
+            }
+            console.log(beeData);
+            if (await CreateChildAccount(beeData)) {
+                setUser(await GetChildUserData(username));
+                console.log('Success');
+                navigate("/TaskAssigner")
+            } else {
+                alert("Account Not Created");
+            }
         }
+
     }
 
     return (
@@ -80,7 +85,7 @@ export default function BeeUser() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic BeeName">
                                     <Form.Label className='btn-title'>Bee Name</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Kid's User Name" onChange={({target: {value}}) => setUsername(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Kid's User Name" onChange={({ target: { value } }) => setUsername(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -89,9 +94,9 @@ export default function BeeUser() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic BeePassword">
                                     <Form.Label className='btn-title'>Password</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({target: {value}}) => setPassword(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                                 </Form.Group>
-                                    <button className='btn2-format rounded-pill mt-3' onClick={handleCreateBee}>Create User</button>
+                                <button className='btn2-format rounded-pill mt-3' onClick={handleCreateBee}>Create User</button>
                             </Col>
                         </Row>
                     </Col>
