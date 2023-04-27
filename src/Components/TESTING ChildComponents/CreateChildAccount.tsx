@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { CreateChildAccount } from "../../Services/DataService";
 
 export default function AdultCreateAccount(){
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
+    const [username, setUsername] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
 
     const handleSubmit = async () => {
         let childUserData = {

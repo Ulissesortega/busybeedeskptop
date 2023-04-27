@@ -1,10 +1,45 @@
-import React from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { CreateReward } from '../Services/DataService';
+import { MyContext } from '../Context/UserContext';
 
 export default function TaskAssigner() {
+    const { adminData } = useContext(MyContext);
+    const { userData } = useContext(MyContext);
+    
+    const [rewardText, setRewardText] = useState<string>('');
+    const [rewardCost, setRewardCost] = useState<number>(0);
+    const [rewards, setRewards] = useState<object[]>([]);
+    const [updateRewards, setUpdateRewards] = useState<number>(0);
+
+    // const handleSubmit = async () => {
+    //     if (!taskInstructions || !taskReward) {
+    //         alert('Could Not Create Task');
+    //     } else {
+    //         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+    //         parentData = adminData;
+    //         console.log(userData);
+    //         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
+    //         childData = userData;
+    //         let task = {
+    //             id: 0,
+    //             parentId: parentData.adultUserId,
+    //             childId: childData.userId,
+    //             taskInstructions,
+    //             taskReward,
+    //             isCompleted: false,
+    //             isDeleted: false
+    //         }
+    //         console.log(task);
+    //         CreateTask(task);
+    //         reloadTasks();
+    //     }
+    //     setUpdateTasks(updateTasks + 1);
+    // }
+
     return (
         <div className='bgColor'>
             <Container>
@@ -16,7 +51,7 @@ export default function TaskAssigner() {
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'><h1>Step 3</h1></p>
+                                <h1 className='btn-title text-center'>Step 3</h1>
                                 <p className='btn-title text-center'></p>
                             </Col>
                         </Row>
@@ -25,7 +60,7 @@ export default function TaskAssigner() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Create A Rewards</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" onChange={({ target: { value } }) => setRewardText(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -33,7 +68,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Start Reward Price</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example">
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCost(Number(value))}>
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>
@@ -46,9 +81,9 @@ export default function TaskAssigner() {
 
                         <Row>
                             <Col className='right-title mt-2'>
-                                <Link to="/AdminInfo">
+                                {/* <Link to="/AdminInfo"> */}
                                     <button className='btn-format rounded-pill mt-3'>Add Reward</button>
-                                </Link>
+                                {/* </Link> */}
                             </Col>
                         </Row>
                     </Col>

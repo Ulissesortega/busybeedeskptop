@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { CreateTask } from '../../Services/DataService';
 
 export default function CreatingTasks(){
-    const [taskIntructions, setTaskIntructions] = useState('');
-    const [taskReward, setTaskReward] = useState(0);
+    const [taskIntructions, setTaskIntructions] = useState<string>('');
+    const [taskReward, setTaskReward] = useState<number>(0);
 
     const handleSubmit = async () => {
         let task = {

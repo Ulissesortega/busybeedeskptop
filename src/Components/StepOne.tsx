@@ -3,14 +3,23 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { MyContext } from '../Context/UserContext';
 import Medal from '../Assets/Medal.png'
 import leftImage from '../Assets/BeeBoy.png';
 import RightImage from '../Assets/BeeGirl.png';
 
 export default function StepOne() {
-    let navigate = useNavigate(); // /BeeUser
+    let navigate = useNavigate();
+    const { setCreationBee } = useContext(MyContext);
 
     const setChildBeeGirl = () => {
+        setCreationBee('Girl');
+        navigate("/BeeUser");
+    }
+
+    const setChildBeeBoy = () => {
+        setCreationBee('Boy');
+        navigate("/BeeUser");
     }
     
     return (
@@ -65,7 +74,7 @@ export default function StepOne() {
                             </Col>
 
                             <Col className='d-flex justify-content-center'>
-                                    <button className='small-btn-format rounded-pill mt-3'>Bee Boy!!</button>
+                                    <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeBoy}>Bee Boy!!</button>
                             </Col>
                         </Row>
 
