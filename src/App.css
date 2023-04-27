@@ -98,3 +98,14 @@ a:active {
   color: black;
 }
 
+.border-box {
+  border-top: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+  border-bottom: 2px solid black;
+  display: flex;
+  justify-content: space-around;
+  font-size: 18px;
+}
+
+

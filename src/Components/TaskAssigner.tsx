@@ -121,9 +121,12 @@ export default function TaskAssigner() {
                                         return (
                                             <div key={idx}>
                                                 {
+                                                    
                                                     (<Row>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskReward}</Col>
+                                                        <div className='border-box'>
+                                                        <Col md={6} className='d-flex justify-content-center  '>{mappedTask.taskInstructions}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center border-right'>{mappedTask.taskReward}</Col>
+                                                        </div>
                                                     </Row>)
                                                 }
                                             </div>
