@@ -12,11 +12,14 @@ export default function TaskAssigner() {
     const [tasks, setTasks] = useState<object[]>([]);
     const [updateTasks, setUpdateTasks] = useState<number>(0);
 
+    let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+    childData = JSON.parse(sessionStorage.UserData);
+
     const handleSubmit = async () => {
         if (!taskInstructions || !taskReward) {
             alert('Could Not Create Task');
         } else {
-            let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+            let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
             let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
             childData = JSON.parse(sessionStorage.UserData);
@@ -36,7 +39,7 @@ export default function TaskAssigner() {
     }
 
     const reloadTasks = async () => {
-        let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+        let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
         parentData = JSON.parse(sessionStorage.AdminData);
         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
         childData = JSON.parse(sessionStorage.UserData);
@@ -55,7 +58,7 @@ export default function TaskAssigner() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>Username!</h1>
+                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername}!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>

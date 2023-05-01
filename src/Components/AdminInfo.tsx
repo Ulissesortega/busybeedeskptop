@@ -8,7 +8,7 @@ import beeKeeperMImg from '../Assets/Bkeeper.png';
 
 
 export default function Template() {
-    let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+    let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
     parentData = JSON.parse(sessionStorage.AdminData);
 
     return (
