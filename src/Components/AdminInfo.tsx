@@ -1,10 +1,16 @@
+import { useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import beeKeeperFImg from '../Assets/BKeeperMom.png';
+import beeKeeperMImg from '../Assets/Bkeeper.png';
 
 
 export default function Template() {
+    let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+    parentData = JSON.parse(sessionStorage.AdminData);
+
     return (
         <div className='bgColor'>
             <Container>
@@ -16,9 +22,9 @@ export default function Template() {
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col className='mt-1 mt-sm-1 mt-xl-3 text-center'>
-                                <p className='btn-title text-center '>Awesome!<br/>You have become a <br/><span className='text-bold'>BeeKeeper </span></p>
-                                <img className='img-fluid d-none d-sm-block mx-auto' src={require('../Assets/Bkeeper.png')} alt="Logo" width={200}/>
-                                <img className='img-fluid d-block d-sm-none mx-auto' src={require('../Assets/Bkeeper.png')} alt="Logo" width={125}/>                                
+                                <p className='btn-title text-center '>Awesome!<br />You have become a <br /><span className='text-bold'>BeeKeeper </span></p>
+                                <img className='img-fluid d-none d-sm-block mx-auto' src={ parentData.avatarLook === 'Male' ? beeKeeperMImg : beeKeeperFImg } alt="Logo" width={200} />
+                                <img className='img-fluid d-block d-sm-none mx-auto' src={ parentData.avatarLook === 'Male' ? beeKeeperMImg : beeKeeperFImg } alt="Logo" width={125} />
                             </Col>
                         </Row>
                     </Col>
@@ -31,7 +37,7 @@ export default function Template() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='right-title d-none d-sm-block'>Admin's Info</h1>                        
+                        <h1 className='right-title d-none d-sm-block'>Admin's Info</h1>
                         <Row>
                             <Col className='right-title mt-2'>
                                 <p className='btn-title text-center'>A copy of your Information <br />has been sent to your Email!</p>
@@ -40,8 +46,8 @@ export default function Template() {
 
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                <img className='img-fluid d-none d-sm-block' src={require('../Assets/Email1.png')} alt="Logo" width={275} />                                
-                                <img className='img-fluid d-sm-none mx-auto' src={require('../Assets/Email1.png')} alt="Logo" width={125} /> 
+                                <img className='img-fluid d-none d-sm-block' src={require('../Assets/Email1.png')} alt="Logo" width={275} />
+                                <img className='img-fluid d-sm-none mx-auto' src={require('../Assets/Email1.png')} alt="Logo" width={125} />
                             </Col>
                         </Row>
 

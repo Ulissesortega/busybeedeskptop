@@ -16,9 +16,9 @@ export default function RewardCreator() {
         if (!rewardText || !rewardCost) {
             alert('Could Not Create Reward');
         } else {
-            let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+            let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
-            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
+            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
             childData = JSON.parse(sessionStorage.UserData);
             let reward = {
                 id: 0,
@@ -35,9 +35,9 @@ export default function RewardCreator() {
     }
 
     const reloadRewards = async () => {
-        let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+        let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
         parentData = JSON.parse(sessionStorage.AdminData);
-        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
+        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
         childData = JSON.parse(sessionStorage.UserData);
         sessionStorage.setItem("Rewards", JSON.stringify(await GetRewardsByParentAndChildId(parentData.adultUserId, childData.userId)));
         setRewards(JSON.parse(sessionStorage.Rewards));

@@ -21,7 +21,7 @@ export default function BeeUser() {
         if (!username || !password) {
             alert("Account Not Created");
         } else {
-            let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
+            let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = adminData;
             let beeData: object = {
                 id: 0,
