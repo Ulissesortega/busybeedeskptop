@@ -131,17 +131,17 @@ export default function TaskAssigner() {
                                         return (
                                             <div key={idx}>
                                                 {
-                                                    
+
                                                     (<Row>
                                                         <div className='border-box text-task'>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                        <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
-                                                        <Col md={2}>
-                                                        <Row>
-                                                            <Col md={6}><FontAwesomeIcon icon={faEdit} /></Col>
-                                                            <Col md={6}><FontAwesomeIcon icon={faTrash} /></Col>
-                                                        </Row>
-                                                        </Col>
+                                                            <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
+                                                            <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
+                                                            <Col md={2}>
+                                                                <Row>
+                                                                    <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={() => alert('button click catched')} /></Col>
+                                                                    <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={() => alert('button click catched')}/></Col>
+                                                                </Row>
+                                                            </Col>
                                                         </div>
                                                     </Row>)
                                                 }
