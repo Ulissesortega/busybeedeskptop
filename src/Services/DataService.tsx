@@ -1,6 +1,3 @@
-let adultUserData: object = {};
-let childUserData: object = {};
-
 // Adult Account Fetches
 async function CreateAdultAccount(createdAdultUser: object) {
     const result = await fetch('https://busybeeapi.azurewebsites.net/AdultUser/AddAdultUser', {
@@ -16,7 +13,6 @@ async function CreateAdultAccount(createdAdultUser: object) {
     } else {
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
@@ -34,20 +30,13 @@ async function AdultLogin(loginUser: object) {
         throw new Error(message);
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
 async function GetAdultUserData(email: string) {
     const result = await fetch(`https://busybeeapi.azurewebsites.net/AdultUser/AdultUserByEmail/${email}`);
     let data = await result.json();
-    adultUserData = data;
-    console.log(adultUserData);
-    return adultUserData;
-}
-
-function LoggedInAdultUserData() {
-    return adultUserData;
+    return data;
 }
 
 // Child Account Fetches
@@ -64,7 +53,6 @@ async function CreateChildAccount(createdChildUser: object) {
         throw new Error(message);
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
@@ -81,16 +69,13 @@ async function ChildLogin(loginUser: object) {
         throw new Error(message);
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
 async function GetChildUserData(username: string) {
     const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/ChildUserByUsername/${username}`);
     let data = await result.json();
-    childUserData = data;
-    console.log(childUserData);
-    return childUserData;
+    return data;
 }
 
 // Task Fetches
@@ -107,7 +92,6 @@ async function CreateTask(task: object) {
         throw new Error(message);
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
@@ -131,8 +115,13 @@ async function CreateReward(reward: object) {
         throw new Error(message);
     }
     let data = await result.json();
-    console.log(data);
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, LoggedInAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, GetTasksByParentAndChildId, CreateReward }
+async function GetRewardsByParentAndChildId(parentId?: number, childId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardsByParentAndChildId/${parentId}/${childId}`)
+    let data = await res.json();
+    return data;
+}
+
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, GetTasksByParentAndChildId, CreateReward, GetRewardsByParentAndChildId }

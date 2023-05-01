@@ -1,15 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
-import { MyContext } from '../Context/UserContext';
-import { parse } from 'path';
 
 export default function TaskAssigner() {
-    const { adminData } = useContext(MyContext);
-    const { userData } = useContext(MyContext);
 
     const [taskInstructions, setTaskInstructions] = useState<string>('');
     const [taskReward, setTaskReward] = useState<number>(0);
@@ -21,10 +17,8 @@ export default function TaskAssigner() {
             alert('Could Not Create Task');
         } else {
             let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-            // parentData = adminData;
             parentData = JSON.parse(sessionStorage.AdminData);
             let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-            // childData = userData;
             childData = JSON.parse(sessionStorage.UserData);
             let task = {
                 id: 0,
@@ -35,7 +29,6 @@ export default function TaskAssigner() {
                 isCompleted: false,
                 isDeleted: false
             }
-            console.log(task);
             CreateTask(task);
             reloadTasks();
         }
@@ -44,15 +37,11 @@ export default function TaskAssigner() {
 
     const reloadTasks = async () => {
         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-        // parentData = adminData;
         parentData = JSON.parse(sessionStorage.AdminData);
         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-        // childData = userData;
         childData = JSON.parse(sessionStorage.UserData);
-        //setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
         sessionStorage.setItem("Tasks", JSON.stringify(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId)));
         setTasks(JSON.parse(sessionStorage.Tasks));
-        console.log(tasks);
     }
 
     useEffect(() => {
