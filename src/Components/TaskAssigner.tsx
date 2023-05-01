@@ -6,6 +6,10 @@ import { Link } from 'react-router-dom';
 import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 import { parse } from 'path';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function TaskAssigner() {
     const { adminData } = useContext(MyContext);
@@ -129,10 +133,15 @@ export default function TaskAssigner() {
                                                 {
                                                     
                                                     (<Row>
-                                                        <div className='border-box'>
-                                                        <Col md={6} className='d-flex justify-content-center  '>{mappedTask.taskInstructions}</Col>
-                                                        <Col md={6} className='d-flex justify-content-center border-right'>{mappedTask.taskReward}</Col>
-                                                        <i className="fas fa-check"></i>
+                                                        <div className='border-box text-task'>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
+                                                        <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
+                                                        <Col md={2}>
+                                                        <Row>
+                                                            <Col md={6}><FontAwesomeIcon icon={faEdit} /></Col>
+                                                            <Col md={6}><FontAwesomeIcon icon={faTrash} /></Col>
+                                                        </Row>
+                                                        </Col>
                                                         </div>
                                                     </Row>)
                                                 }

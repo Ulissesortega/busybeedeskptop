@@ -108,8 +108,11 @@ a:active {
 }
 
 .text-task{
-  font-size: 18px;
+  font-size: 22px;
+  font-weight: bold;
   font-style: italic;
+  color: #901d1c;
+  
 } 
 
 
