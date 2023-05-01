@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
@@ -23,8 +23,6 @@ export default function BeeUser() {
         } else {
             let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
             parentData = adminData;
-            console.log(adminData);
-            console.log(parentData);
             let beeData: object = {
                 id: 0,
                 parentId: parentData.adultUserId,
@@ -34,7 +32,6 @@ export default function BeeUser() {
                 TotalStarCount: 0,
                 createBee
             }
-            console.log(beeData);
             if (await CreateChildAccount(beeData)) {
                 setUser(await GetChildUserData(username));
                 sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(username)));
