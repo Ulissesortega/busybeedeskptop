@@ -1,16 +1,12 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CreateReward, GetRewardsByParentAndChildId } from '../Services/DataService';
-import { MyContext } from '../Context/UserContext';
-import { parse } from 'path';
 
 export default function RewardCreator() {
-    const { adminData } = useContext(MyContext);
-    const { userData } = useContext(MyContext);
-    
+
     const [rewardText, setRewardText] = useState<string>('');
     const [rewardCost, setRewardCost] = useState<number>(0);
     const [rewards, setRewards] = useState<object[]>([]);
@@ -21,10 +17,8 @@ export default function RewardCreator() {
             alert('Could Not Create Reward');
         } else {
             let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-            // parentData = adminData;
             parentData = JSON.parse(sessionStorage.AdminData);
             let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-            // childData = userData;
             childData = JSON.parse(sessionStorage.UserData);
             let reward = {
                 id: 0,
@@ -32,10 +26,8 @@ export default function RewardCreator() {
                 childId: childData.userId,
                 Reward: rewardText,
                 RewardCost: rewardCost,
-                isCompleted: false,
                 isDeleted: false
             }
-            console.log(reward);
             CreateReward(reward);
             reloadRewards();
         }
@@ -44,20 +36,15 @@ export default function RewardCreator() {
 
     const reloadRewards = async () => {
         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-        // parentData = adminData;
         parentData = JSON.parse(sessionStorage.AdminData);
         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-        // childData = userData;
         childData = JSON.parse(sessionStorage.UserData);
-        //setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
         sessionStorage.setItem("Rewards", JSON.stringify(await GetRewardsByParentAndChildId(parentData.adultUserId, childData.userId)));
         setRewards(JSON.parse(sessionStorage.Rewards));
-        console.log(rewards);
     }
 
     useEffect(() => {
         reloadRewards();
-        console.log("refreash");
     }, [updateRewards])
 
     return (
@@ -68,7 +55,7 @@ export default function RewardCreator() {
                 <Row>
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title d-none d-sm-block'>Username!</h1>
-                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
                                 <h1 className='btn-title text-center'>Step 3</h1>
@@ -102,7 +89,7 @@ export default function RewardCreator() {
                         <Row>
                             <Col className='right-title mt-2'>
                                 {/* <Link to="/AdminInfo"> */}
-                                    <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Add Reward</button>
+                                <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Add Reward</button>
                                 {/* </Link> */}
                             </Col>
                         </Row>
@@ -123,14 +110,14 @@ export default function RewardCreator() {
                             <Col>
                                 {
                                     rewards.map((reward: object, idx: number) => {
-                                        let mappedReward: { id?: number, parentId?: number, childId?: number, Reward?: string, RewardCost?: number, isDeleted?: boolean } = {};
+                                        let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
                                         mappedReward = reward;
                                         return (
                                             <div key={idx}>
                                                 {
                                                     (<Row>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.Reward}</Col>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.RewardCost}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.reward}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.rewardCost}</Col>
                                                     </Row>)
                                                 }
                                             </div>
