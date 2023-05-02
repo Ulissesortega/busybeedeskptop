@@ -3,7 +3,7 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
-import { AdultLogin, GetAdultUserData } from '../Services/DataService';
+import { AdultLogin, GetAdultUserData, GetChildrenUsersByParentId } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 
 export default function AdminLogin() {
@@ -25,7 +25,7 @@ export default function AdminLogin() {
     if (token.token != null) {
       localStorage.setItem("Token", token.token);
       console.log('Success');
-      navigate("/StepOne");
+      await GetChildrenUsersByParentId(sessionStorage.AdminData.parentId) != null ? navigate("/UsersDashboard") : navigate("/StepOne");
     }
   }
   

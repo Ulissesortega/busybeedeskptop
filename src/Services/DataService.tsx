@@ -78,6 +78,12 @@ async function GetChildUserData(username: string) {
     return data;
 }
 
+async function GetChildrenUsersByParentId(parentId: number) {
+    const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/ChildUserByParentId/${parentId}`);
+    let data = await result.json();
+    return data;
+}
+
 // Task Fetches
 async function CreateTask(task: object) {
     const result = await fetch('https://busybeeapi.azurewebsites.net/Task/CreateTask', {
@@ -124,4 +130,4 @@ async function GetRewardsByParentAndChildId(parentId?: number, childId?: number)
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, CreateTask, GetTasksByParentAndChildId, CreateReward, GetRewardsByParentAndChildId }
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, CreateTask, GetTasksByParentAndChildId, CreateReward, GetRewardsByParentAndChildId }
