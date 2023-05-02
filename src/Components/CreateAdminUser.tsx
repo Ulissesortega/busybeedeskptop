@@ -26,12 +26,11 @@ export default function CreateAdminUser () {
         password,
         avatarLook
       }
-      console.log(adultUserData);
       if (await CreateAdultAccount(adultUserData)) {
         setAdmin(await GetAdultUserData(email));
         sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
         console.log('Success');
-        navigate("/StepOne");
+        navigate("/AdminInfo");
       } else {
         alert("Count not create account");
       }

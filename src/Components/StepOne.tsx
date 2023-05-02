@@ -1,12 +1,9 @@
-import React, { useState, useContext } from 'react';
+import { useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../Context/UserContext';
-import Medal from '../Assets/Medal.png'
-import leftImage from '../Assets/BeeBoy.png';
-import RightImage from '../Assets/BeeGirl.png';
 
 export default function StepOne() {
     let navigate = useNavigate();

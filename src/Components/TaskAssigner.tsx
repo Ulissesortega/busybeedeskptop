@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
@@ -12,8 +12,6 @@ import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 
 export default function TaskAssigner() {
-    const { adminData } = useContext(MyContext);
-    const { userData } = useContext(MyContext);
 
     const [taskInstructions, setTaskInstructions] = useState<string>('');
     const [taskReward, setTaskReward] = useState<number>(0);
@@ -24,11 +22,9 @@ export default function TaskAssigner() {
         if (!taskInstructions || !taskReward) {
             alert('Could Not Create Task');
         } else {
-            let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-            // parentData = adminData;
+            let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
-            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-            // childData = userData;
+            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
             childData = JSON.parse(sessionStorage.UserData);
             let task = {
                 id: 0,
@@ -39,7 +35,6 @@ export default function TaskAssigner() {
                 isCompleted: false,
                 isDeleted: false
             }
-            console.log(task);
             CreateTask(task);
             reloadTasks();
         }
@@ -47,16 +42,12 @@ export default function TaskAssigner() {
     }
 
     const reloadTasks = async () => {
-        let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-        // parentData = adminData;
+        let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
         parentData = JSON.parse(sessionStorage.AdminData);
-        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-        // childData = userData;
+        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
         childData = JSON.parse(sessionStorage.UserData);
-        //setTasks(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId))
         sessionStorage.setItem("Tasks", JSON.stringify(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId)));
         setTasks(JSON.parse(sessionStorage.Tasks));
-        console.log(tasks);
     }
 
     useEffect(() => {

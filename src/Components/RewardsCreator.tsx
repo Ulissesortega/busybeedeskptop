@@ -1,44 +1,51 @@
-import React, { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateReward } from '../Services/DataService';
-import { MyContext } from '../Context/UserContext';
+import { CreateReward, GetRewardsByParentAndChildId } from '../Services/DataService';
 
-export default function TaskAssigner() {
-    const { adminData } = useContext(MyContext);
-    const { userData } = useContext(MyContext);
-    
+export default function RewardCreator() {
+
     const [rewardText, setRewardText] = useState<string>('');
     const [rewardCost, setRewardCost] = useState<number>(0);
     const [rewards, setRewards] = useState<object[]>([]);
     const [updateRewards, setUpdateRewards] = useState<number>(0);
 
-    // const handleSubmit = async () => {
-    //     if (!taskInstructions || !taskReward) {
-    //         alert('Could Not Create Task');
-    //     } else {
-    //         let parentData: { adultUserId?: number, adultUserEmail?: string } = {};
-    //         parentData = adminData;
-    //         console.log(userData);
-    //         let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number } = {};
-    //         childData = userData;
-    //         let task = {
-    //             id: 0,
-    //             parentId: parentData.adultUserId,
-    //             childId: childData.userId,
-    //             taskInstructions,
-    //             taskReward,
-    //             isCompleted: false,
-    //             isDeleted: false
-    //         }
-    //         console.log(task);
-    //         CreateTask(task);
-    //         reloadTasks();
-    //     }
-    //     setUpdateTasks(updateTasks + 1);
-    // }
+    const handleSubmit = async () => {
+        if (!rewardText || !rewardCost) {
+            alert('Could Not Create Reward');
+        } else {
+            let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+            parentData = JSON.parse(sessionStorage.AdminData);
+            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+            childData = JSON.parse(sessionStorage.UserData);
+            let reward = {
+                id: 0,
+                parentId: parentData.adultUserId,
+                childId: childData.userId,
+                Reward: rewardText,
+                RewardCost: rewardCost,
+                isDeleted: false
+            }
+            CreateReward(reward);
+            reloadRewards();
+        }
+        setUpdateRewards(updateRewards + 1);
+    }
+
+    const reloadRewards = async () => {
+        let parentData: { adultUserId?: number, adultUserEmail?: string, avatarLook?: string } = {};
+        parentData = JSON.parse(sessionStorage.AdminData);
+        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+        childData = JSON.parse(sessionStorage.UserData);
+        sessionStorage.setItem("Rewards", JSON.stringify(await GetRewardsByParentAndChildId(parentData.adultUserId, childData.userId)));
+        setRewards(JSON.parse(sessionStorage.Rewards));
+    }
+
+    useEffect(() => {
+        reloadRewards();
+    }, [updateRewards])
 
     return (
         <div className='bgColor'>
@@ -48,7 +55,7 @@ export default function TaskAssigner() {
                 <Row>
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title d-none d-sm-block'>Username!</h1>
-                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
                                 <h1 className='btn-title text-center'>Step 3</h1>
@@ -82,7 +89,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='right-title mt-2'>
                                 {/* <Link to="/AdminInfo"> */}
-                                    <button className='btn-format rounded-pill mt-3'>Add Reward</button>
+                                <button className='btn-format rounded-pill mt-3' onClick={handleSubmit}>Add Reward</button>
                                 {/* </Link> */}
                             </Col>
                         </Row>
@@ -101,9 +108,22 @@ export default function TaskAssigner() {
 
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Reward 1</p>
-                                <p className='btn-title text-center'>Reward 2</p>
-                                <p className='btn-title text-center'>Reward 3</p>
+                                {
+                                    rewards.map((reward: object, idx: number) => {
+                                        let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
+                                        mappedReward = reward;
+                                        return (
+                                            <div key={idx}>
+                                                {
+                                                    (<Row>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.reward}</Col>
+                                                        <Col md={6} className='d-flex justify-content-center'>{mappedReward.rewardCost}</Col>
+                                                    </Row>)
+                                                }
+                                            </div>
+                                        )
+                                    })
+                                }
                             </Col>
                         </Row>
 
