@@ -25,7 +25,7 @@ export default function AdminLogin() {
     if (token.token != null) {
       localStorage.setItem("Token", token.token);
       console.log('Success');
-      navigate("/StepOne");
+      navigate("/UsersDashboard");
     }
   }
 

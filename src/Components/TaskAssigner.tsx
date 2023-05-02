@@ -122,7 +122,6 @@ export default function TaskAssigner() {
                                         return (
                                             <div key={idx}>
                                                 {
-
                                                     (<Row>
                                                         <div className='border-box text-task'>
                                                             <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
