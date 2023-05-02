@@ -1,12 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { GetChildrenUsersByParentId } from '../../Services/DataService';
 
 export default function UsersDashboard() {
   let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
   parentData = JSON.parse(sessionStorage.AdminData);
+
+  const [childrenUsers, setChildrenUsers] = useState<object[]>([]);
+
+  const reloadChildUsers = async () => {
+    sessionStorage.setItem("ChildUsers", JSON.stringify(await GetChildrenUsersByParentId(Number(parentData.adultUserId))));
+    setChildrenUsers(JSON.parse(sessionStorage.ChildUsers));
+  }
+
+  useEffect(() => {
+    reloadChildUsers();
+  }, [])
 
   return (
     <div className='bgColor'>
@@ -31,11 +43,25 @@ export default function UsersDashboard() {
             <h1 className='left-title'>Your Busy Bee's</h1>
             <p className='btn-title text-center'>Please choose one of the options bellow:</p>
 
-            <Row className='mx-auto'>
-              <Col><button className='small-btn-format rounded-pill mt-3'>Bee 1</button></Col>
-              <Col><button className='small-btn-format rounded-pill mt-3'>Bee 2</button></Col>
-              <Col><button className='small-btn-format rounded-pill mt-3'>Bee 3</button></Col>
-              <Col><button className='small-btn-format rounded-pill mt-3'>Bee 4</button></Col>
+            <Row>
+              <Col>
+                {
+                  childrenUsers.map((user: object, idx: number) => {
+                    let childUser: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+                    childUser = user;
+                    return (
+                      <div key={idx}>
+                        {
+                          (<Row>
+                            <Col md={6} className='d-flex justify-content-center'>{childUser.username}</Col>
+                            <Col md={6} className='d-flex justify-content-center'>{childUser.currentStarCount}</Col>
+                          </Row>)
+                        }
+                      </div>
+                    )
+                  })
+                }
+              </Col>
             </Row>
 
             <Row>
