@@ -29,7 +29,10 @@ export default function UsersDashboard() {
           <Col sm={12} md={12} xl={5}>
             <h1 className='left-title '>Hi {parentData.fullName}!</h1>
             <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
-            <p className='btn-title text-center'>Admin Dashboard<br />From here You'll be able to<br /> manage your Busy Bee(s)</p>
+            <p className='btn-title text-center'>From here You'll be able to<br /> manage your Busy Bee(s)</p>            
+            <Col className='text-center'>
+            <img className='image-radius img-fluid' src={require('../../Assets/bees.png')} alt="Logo" width={350}/>
+            </Col>          
           </Col>
 
           {/* Divider in the Middle */}

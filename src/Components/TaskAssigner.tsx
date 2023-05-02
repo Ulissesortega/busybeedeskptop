@@ -4,6 +4,12 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
+import { MyContext } from '../Context/UserContext';
+import { parse } from 'path';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+
 
 export default function TaskAssigner() {
 
@@ -120,8 +126,16 @@ export default function TaskAssigner() {
                                             <div key={idx}>
                                                 {
                                                     (<Row>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                        <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskReward}</Col>
+                                                        <div className='border-box text-task'>
+                                                            <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
+                                                            <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
+                                                            <Col md={2}>
+                                                                <Row>
+                                                                    <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={() => alert('button click catched')} /></Col>
+                                                                    <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={() => alert('button click catched')}/></Col>
+                                                                </Row>
+                                                            </Col>
+                                                        </div>
                                                     </Row>)
                                                 }
                                             </div>
