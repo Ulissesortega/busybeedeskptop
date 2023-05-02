@@ -6,6 +6,9 @@ import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../Context/UserContext';
 
 export default function StepOne() {
+    let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
+    parentData = JSON.parse(sessionStorage.AdminData);
+
     let navigate = useNavigate();
     const { setCreationBee } = useContext(MyContext);
 
@@ -18,7 +21,7 @@ export default function StepOne() {
         setCreationBee('Boy');
         navigate("/BeeUser");
     }
-    
+
     return (
         <div className='bgColor'>
             <Container>
@@ -26,7 +29,7 @@ export default function StepOne() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>Hi Username!</h1>
+                        <h1 className='left-title d-none d-sm-block'>Hi {parentData.fullName}!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <h1 className='btn-title text-center'>Step 1</h1>
@@ -67,11 +70,11 @@ export default function StepOne() {
 
                         <Row>
                             <Col className='d-flex justify-content-center'>
-                                    <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeGirl}>Bee Girl!</button>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeGirl}>Bee Girl!</button>
                             </Col>
 
                             <Col className='d-flex justify-content-center'>
-                                    <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeBoy}>Bee Boy!!</button>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildBeeBoy}>Bee Boy!!</button>
                             </Col>
                         </Row>
 

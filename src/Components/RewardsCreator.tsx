@@ -107,7 +107,7 @@ export default function RewardCreator() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>Username Available Rewards Rewards</h1>
+                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Available Rewards Rewards</h1>
                         <p className='btn-title text-center'>This is the reserved spot for the rewards</p>
 
                         <Row>
