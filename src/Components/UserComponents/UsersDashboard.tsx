@@ -56,8 +56,10 @@ export default function UsersDashboard() {
                       <div key={idx}>
                         {
                           (<Row>
+                            <div>
                             <Col md={6} className='d-flex justify-content-center'>{childUser.username}</Col>
                             <Col md={6} className='d-flex justify-content-center'>{childUser.currentStarCount}</Col>
+                            </div>
                           </Row>)
                         }
                       </div>
