@@ -5,8 +5,8 @@ import { Container, Row, Col, Form } from 'react-bootstrap';
 import { MyContext } from '../Context/UserContext';
 import { CreateChildAccount, GetChildUserData } from '../Services/DataService';
 import { useNavigate } from 'react-router-dom';
-import leftImage from '../Assets/BeeBoy.png';
-import RightImage from '../Assets/BeeGirl.png';
+import BoyBeeImg from '../Assets/BeeBoy.png';
+import GirlBeeImg from '../Assets/BeeGirl.png';
 
 export default function BeeUser() {
     let navigate = useNavigate();
@@ -30,7 +30,7 @@ export default function BeeUser() {
                 password,
                 CurrentStarCount: 0,
                 TotalStarCount: 0,
-                createBee
+                AvatarLook: createBee
             }
             if (await CreateChildAccount(beeData)) {
                 setUser(await GetChildUserData(username));
@@ -56,8 +56,8 @@ export default function BeeUser() {
                         <Row>
                             <p className='btn-title text-center'>Let's give our Bee<br />A Name and Password</p>
                             <Col className='d-flex justify-content-center'>
-                                <img className='img-fluid d-none d-sm-block' src={createBee === 'Girl' ? RightImage : leftImage} alt="Logo" width={200} />
-                                <img className='img-fluid d-block d-sm-none' src={createBee === 'Girl' ? RightImage : leftImage} alt="Logo" width={150} />
+                                <img className='img-fluid d-none d-sm-block' src={createBee === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={200} />
+                                <img className='img-fluid d-block d-sm-none' src={createBee === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
                             </Col>
                         </Row>
 
