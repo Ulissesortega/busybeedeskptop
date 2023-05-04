@@ -14,7 +14,6 @@ export default function RewardCreator() {
     const [rewardCost, setRewardCost] = useState<number>(0);
     const [rewards, setRewards] = useState<object[]>([]);
     const [updateRewards, setUpdateRewards] = useState<number>(0);
-
     
     let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
     childData = JSON.parse(sessionStorage.UserData);
@@ -88,7 +87,7 @@ export default function RewardCreator() {
                                     <option className='text-center' value="2">2 Stars</option>
                                     <option className='text-center' value="3">3 Stars</option>
                                     <option className='text-center' value="4">4 Stars</option>
-                                    <option className='text-center' value="4">5 Stars</option>
+                                    <option className='text-center' value="5">5 Stars</option>
                                 </Form.Select>
                             </Col>
                         </Row>

@@ -4,12 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
-import { MyContext } from '../Context/UserContext';
-import { parse } from 'path';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
-
 
 export default function TaskAssigner() {
 
