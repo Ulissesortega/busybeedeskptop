@@ -58,41 +58,36 @@ export default function UsersDashboard() {
             <p className='btn-title text-center'>Please choose one of the options bellow:</p>
 
             <Row>
-              <Col>
-                {
-                  childrenUsers.map((user: object, idx: number) => {
-                    let childUser: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-                    childUser = user;
-                    let beeUsername = childUser.username;
-                    return (
-                      <div key={idx}>
-                        {
-                          (<>
-                            <Row>
-                              <Col md={6}>
-                                <Row>
-                                  <Col className='d-flex justify-content-center'>
-                                    <img className='img-fluid d-none d-sm-block' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={200} />
-                                    <img className='img-fluid d-block d-sm-none' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
-                                  </Col>
-                                </Row>
-                                <Row>
-                                  <Col className='d-flex justify-content-center'>
-                                    <button className='btn-format rounded-pill mt-3' onClick={async () => {
-                                      handleClick(beeUsername);
-                                      console.log(beeUsername);
-                                    }}>{beeUsername}</button>
-                                  </Col>
-                                </Row>
-                              </Col>
-                            </Row>
-                          </>)
-                        }
-                      </div>
-                    )
-                  })
-                }
-              </Col>
+              {childrenUsers.map((user: object, idx: number) => {
+                let childUser: {
+                  id?: number,
+                  parentId?: number,
+                  username?: string,
+                  currentStarCount?: number,
+                  totalStarCount?: number,
+                  avatarLook?: string
+                } = {};
+                childUser = user;
+                let beeUsername = childUser.username;
+                return (
+                  <div key={idx} className="col-md-6">
+                    <Row style={{ display: 'flex', flexDirection: 'column' }}>
+                      <Col className='d-flex justify-content-center'>
+                        <div>
+                          <img className='img-fluid d-none d-sm-block' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
+                          <img className='img-fluid d-block d-sm-none' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
+                        </div>
+                      </Col>
+                      <Col className='d-flex justify-content-center'>
+                        <button className='btn-format rounded-pill mt-3' onClick={async () => {
+                          handleClick(beeUsername);
+                          console.log(beeUsername);
+                        }}>{beeUsername}</button>
+                      </Col>
+                    </Row>
+                  </div>
+                )
+              })}
             </Row>
 
             <Row>
