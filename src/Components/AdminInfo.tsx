@@ -5,6 +5,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import beeKeeperFImg from '../Assets/BKeeperMom.png';
 import beeKeeperMImg from '../Assets/Bkeeper.png';
+import honeyComb from '../Assets/CartoonHoneyComb.png';
 
 
 export default function Template() {
@@ -23,8 +24,8 @@ export default function Template() {
                         <Row>
                             <Col className='mt-1 mt-sm-1 mt-xl-3 text-center'>
                                 <p className='btn-title text-center '>Awesome!<br />You have become a <br /><span className='text-bold'>BeeKeeper </span></p>
-                                <img className='img-fluid d-none d-sm-block mx-auto' src={ parentData.avatarLook === 'Male' ? beeKeeperMImg : beeKeeperFImg } alt="Logo" width={200} />
-                                <img className='img-fluid d-block d-sm-none mx-auto' src={ parentData.avatarLook === 'Male' ? beeKeeperMImg : beeKeeperFImg } alt="Logo" width={125} />
+                                <img className='img-fluid d-none d-sm-block mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={200} />
+                                <img className='img-fluid d-block d-sm-none mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={125} />
                             </Col>
                         </Row>
                     </Col>

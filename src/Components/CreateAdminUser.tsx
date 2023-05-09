@@ -16,7 +16,7 @@ export default function CreateAdminUser () {
   const [avatarLook, setAvatarLook] = useState<string>('');
 
   const handleSubmit = async () => {
-    if (!email || !fullName || !password || !avatarLook) {
+    if (!email || !fullName || !password) {
       alert("Count not create account");
     } else {
       let adultUserData: object = {
@@ -85,11 +85,12 @@ export default function CreateAdminUser () {
 
             <Row>
               <Col className='text-center'>
-                <Form.Label className='btn-title'>Gender</Form.Label>
+                <Form.Label className='btn-title'>Avatar Look (Optional)</Form.Label>
                 <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setAvatarLook(value)}>
                   <option className='text-center'>Options</option>
-                  <option className='text-center' value="Male">Male</option>
-                  <option className='text-center' value="Female">Female</option>
+                  <option className='text-center' value="Masc">Masculine</option>
+                  <option className='text-center' value="Fem">Feminine</option>
+                  <option className='text-center' value="Other">Other</option>
                 </Form.Select>
               </Col>
             </Row>
