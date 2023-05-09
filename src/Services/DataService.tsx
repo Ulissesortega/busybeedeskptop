@@ -107,6 +107,44 @@ async function GetTasksByParentAndChildId(parentId?: number, childId?: number) {
     return data;
 }
 
+async function UpdateTask(task: object) {
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Task/UpdateTask', {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(task)
+    });
+    if (!result.ok) {
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    return data;
+}
+
+async function GetTaskById(taskId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Task/GetTaskById/${taskId}`)
+    let data = await res.json();
+    return data;
+}
+
+async function DeleteTask(task: object) {
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Task/DeleteTask', {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(task)
+    });
+    if (!result.ok) {
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    return data;
+}
+
 // Reward Fetches
 async function CreateReward(reward: object) {
     const result = await fetch('https://busybeeapi.azurewebsites.net/Reward/CreateReward', {
@@ -130,4 +168,42 @@ async function GetRewardsByParentAndChildId(parentId?: number, childId?: number)
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, CreateTask, GetTasksByParentAndChildId, CreateReward, GetRewardsByParentAndChildId }
+async function UpdateReward(reward: object) {
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Reward/UpdateReward', {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(reward)
+    });
+    if (!result.ok) {
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    return data;
+}
+
+async function GetRewardById(rewardId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardById/${rewardId}`)
+    let data = await res.json();
+    return data;
+}
+
+async function DeleteReward(reward: object) {
+    const result = await fetch('https://busybeeapi.azurewebsites.net/Reward/DeleteReward', {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        body: JSON.stringify(reward)
+    });
+    if (!result.ok) {
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    }
+    let data = await result.json();
+    return data;
+}
+
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward }

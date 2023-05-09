@@ -1,28 +1,32 @@
 import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateTask, GetTasksByParentAndChildId } from '../Services/DataService';
-import { MyContext } from '../Context/UserContext';
-import { parse } from 'path';
+import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask } from '../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
-
 export default function TaskAssigner() {
+    const [showEdit, setShowEdit] = useState(false);
+    const handleClose = () => setShowEdit(false);
+    const handleShow = () => setShowEdit(true);
 
-    const [taskInstructions, setTaskInstructions] = useState<string>('');
-    const [taskReward, setTaskReward] = useState<number>(0);
+    const [taskInstructionsCreate, setTaskInstructionsCreate] = useState<string>('');
+    const [taskRewardCreate, setTaskRewardCreate] = useState<number>(0);
     const [tasks, setTasks] = useState<object[]>([]);
-    const [updateTasks, setUpdateTasks] = useState<number>(0);
+
+    const [taskInstructionsEdit, setTaskInstructionsEdit] = useState<string>('');
+    const [taskRewardEdit, setTaskRewardEdit] = useState<number>(0);
+
+    const [updateTaskList, setUpdateTaskList] = useState<number>(0);
 
     let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
     childData = JSON.parse(sessionStorage.UserData);
 
     const handleSubmit = async () => {
-        if (!taskInstructions || !taskReward) {
+        if (!taskInstructionsCreate || !taskRewardCreate) {
             alert('Could Not Create Task');
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
@@ -33,15 +37,68 @@ export default function TaskAssigner() {
                 id: 0,
                 parentId: parentData.adultUserId,
                 childId: childData.userId,
-                taskInstructions,
-                taskReward,
+                taskInstructions: taskInstructionsCreate,
+                taskReward: taskRewardCreate,
                 isCompleted: false,
                 isDeleted: false
             }
-            CreateTask(task);
+            await CreateTask(task);
+            handleClose();
             reloadTasks();
         }
-        setUpdateTasks(updateTasks + 1);
+        setUpdateTaskList(updateTaskList + 1);
+    }
+
+    const handleShowEdit = async (taskId: number) => {
+        sessionStorage.setItem("TaskToEdit", JSON.stringify(await GetTaskById(taskId)));
+        let editTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+        editTask = JSON.parse(sessionStorage.TaskToEdit)
+        setTaskInstructionsEdit(String(editTask.taskInstructions));
+        setTaskRewardEdit(Number(editTask.taskReward));
+        handleShow();
+    }
+
+    const handleEdit = async () => {
+        if (!taskInstructionsEdit || !taskRewardEdit) {
+            alert('Could Not Update Task');
+        } else {
+            let editTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+            editTask = JSON.parse(sessionStorage.TaskToEdit)
+            let task = {
+                id: editTask.id,
+                parentId: editTask.parentId,
+                childId: editTask.childId,
+                taskInstructions: taskInstructionsEdit,
+                taskReward: taskRewardEdit,
+                isCompleted: false,
+                isDeleted: false
+            }
+            await UpdateTask(task);
+            reloadTasks();
+            sessionStorage.removeItem("TaskToEdit");
+            handleClose();
+        }
+        setUpdateTaskList(updateTaskList + 1);
+    }
+
+    const handleDelete = async (taskId: number) => {
+        sessionStorage.setItem("TaskToDelete", JSON.stringify(await GetTaskById(taskId)));
+        let deleteTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+        deleteTask = JSON.parse(sessionStorage.TaskToDelete)
+        let task = {
+            id: deleteTask.id,
+            parentId: deleteTask.parentId,
+            childId: deleteTask.childId,
+            taskInstructions: deleteTask.taskInstructions,
+            taskReward: deleteTask.taskReward,
+            isCompleted: false,
+            isDeleted: false
+        }
+        await DeleteTask(task);
+        reloadTasks();
+        sessionStorage.removeItem("TaskToDelete");
+        handleClose();
+        setUpdateTaskList(updateTaskList + 1);
     }
 
     const reloadTasks = async () => {
@@ -55,7 +112,7 @@ export default function TaskAssigner() {
 
     useEffect(() => {
         reloadTasks();
-    }, [updateTasks])
+    }, [updateTaskList])
 
     return (
         <div className='bgColor'>
@@ -77,7 +134,7 @@ export default function TaskAssigner() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Enter a Task</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" onChange={({ target: { value } }) => setTaskInstructions(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" onChange={({ target: { value } }) => setTaskInstructionsCreate(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -85,7 +142,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Assign Start Rewards!</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setTaskReward(Number(value))} >
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardCreate(Number(value))} >
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>
@@ -122,24 +179,27 @@ export default function TaskAssigner() {
                                     tasks.map((task: object, idx: number) => {
                                         let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                         mappedTask = task;
-                                        return (
-                                            <div key={idx}>
-                                                {
-                                                    (<Row>
-                                                        <div className='border-box text-task'>
-                                                            <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                            <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
-                                                            <Col md={2}>
-                                                                <Row>
-                                                                    <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={() => alert('button click catched')} /></Col>
-                                                                    <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={() => alert('button click catched')}/></Col>
-                                                                </Row>
-                                                            </Col>
-                                                        </div>
-                                                    </Row>)
-                                                }
-                                            </div>
-                                        )
+                                        if (!mappedTask.isDeleted) {
+                                            let taskId = mappedTask.id;
+                                            return (
+                                                <div key={idx}>
+                                                    {
+                                                        (<Row>
+                                                            <div className='border-box text-task'>
+                                                                <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
+                                                                <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
+                                                                <Col md={2}>
+                                                                    <Row>
+                                                                        <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(taskId))} /></Col>
+                                                                        <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(taskId))} /></Col>
+                                                                    </Row>
+                                                                </Col>
+                                                            </div>
+                                                        </Row>)
+                                                    }
+                                                </div>
+                                            )
+                                        }
                                     })
                                 }
                             </Col>
@@ -157,6 +217,30 @@ export default function TaskAssigner() {
                     </Col>
                 </Row>
             </Container>
+            <Modal show={showEdit} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Task</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={taskInstructionsEdit} onChange={({ target: { value } }) => setTaskInstructionsEdit(value)} />
+                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardEdit(Number(value))} >
+                        <option className='text-center' defaultValue={taskRewardEdit}>{taskRewardEdit} Star(s)</option>
+                        <option className='text-center' value="1">1 Star</option>
+                        <option className='text-center' value="2">2 Stars</option>
+                        <option className='text-center' value="3">3 Stars</option>
+                        <option className='text-center' value="4">4 Stars</option>
+                        <option className='text-center' value="5">5 Stars</option>
+                    </Form.Select>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleEdit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

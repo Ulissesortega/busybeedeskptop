@@ -16,16 +16,18 @@ export default function AdminLogin() {
   const handleSubmit = async () => {
     setAdmin(await GetAdultUserData(email));
     sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
-    let userData:object = {
+    let userData: object = {
       email,
       password
     }
     console.log(userData);
     let token = await AdultLogin(userData);
     if (token.token != null) {
+      let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
+      parentData = JSON.parse(sessionStorage.AdminData);
       localStorage.setItem("Token", token.token);
       console.log('Success');
-      await GetChildrenUsersByParentId(sessionStorage.AdminData.parentId) != null ? navigate("/UsersDashboard") : navigate("/StepOne");
+      await GetChildrenUsersByParentId(Number(parentData.adultUserId)) != null ? navigate("/UsersDashboard") : navigate("/StepOne");
     }
   }
 
@@ -59,7 +61,7 @@ export default function AdminLogin() {
                 </Row>
                 <Form.Group className="mb-1" controlId="formBasicEmail">
                   <Form.Label className='btn-title'>Email address</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />                  
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />
                 </Form.Group>
               </Col>
             </Row>
