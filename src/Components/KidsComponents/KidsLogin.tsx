@@ -2,7 +2,7 @@ import { useState } from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form } from 'react-bootstrap';
-import { ChildLogin } from '../../Services/DataService';
+import { ChildLogin, GetChildUserData } from '../../Services/DataService';
 import { useNavigate } from 'react-router-dom';
 
 export default function KidsLogin() {
@@ -19,6 +19,7 @@ export default function KidsLogin() {
     let token = await ChildLogin(userData);
     if (token.token != null) {
       localStorage.setItem("Token", token.token);
+      sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(username)));
       navigate('/KidsTasks');
     }
   }
