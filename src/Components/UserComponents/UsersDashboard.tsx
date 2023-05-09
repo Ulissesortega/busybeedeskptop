@@ -4,8 +4,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { GetChildrenUsersByParentId, GetChildUserData } from '../../Services/DataService';
-import BoyBeeImg from '../../Assets/BeeBoy.png';
-import GirlBeeImg from '../../Assets/BeeGirl.png';
+import BowTieBee from '../../Assets/BeeBoy.png';
+import BowBee from '../../Assets/BeeGirl.png';
+import HoneyComb from '../../Assets/CartoonHoneyComb.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
@@ -74,8 +75,8 @@ export default function UsersDashboard() {
                     <Row style={{ display: 'flex', flexDirection: 'column' }}>
                       <Col className='d-flex justify-content-center'>
                         <div>
-                          <img className='img-fluid d-none d-sm-block' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
-                          <img className='img-fluid d-block d-sm-none' src={childUser.avatarLook === 'Girl' ? GirlBeeImg : BoyBeeImg} alt="Logo" width={150} />
+                          <img className='img-fluid d-none d-sm-block' src={childUser.avatarLook === 'BowBee' ? BowBee : childUser.avatarLook === 'BowTieBee' ? BowTieBee : HoneyComb} alt="Logo" width={150} />
+                          <img className='img-fluid d-block d-sm-none' src={childUser.avatarLook === 'BowBee' ? BowBee : childUser.avatarLook === 'BowTieBee' ? BowTieBee : HoneyComb} alt="Logo" width={150} />
                         </div>
                       </Col>
                       <Col className='d-flex justify-content-center'>
