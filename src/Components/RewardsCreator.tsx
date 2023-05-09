@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateReward, GetRewardsByParentAndChildId } from '../Services/DataService';
+import { CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward } from '../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export default function RewardCreator() {
+    const [showEdit, setShowEdit] = useState(false);
+    const handleClose = () => setShowEdit(false);
+    const handleShow = () => setShowEdit(true);
 
-    const [rewardText, setRewardText] = useState<string>('');
-    const [rewardCost, setRewardCost] = useState<number>(0);
+    const [rewardTextCreate, setRewardTextCreate] = useState<string>('');
+    const [rewardCostCreate, setRewardCostCreate] = useState<number>(0);
     const [rewards, setRewards] = useState<object[]>([]);
-    const [updateRewards, setUpdateRewards] = useState<number>(0);
-    
+
+    const [rewardTextEdit, setRewardTextEdit] = useState<string>('');
+    const [rewardCostEdit, setRewardCostEdit] = useState<number>(0);
+
+    const [updateRewardList, setUpdateRewardList] = useState<number>(0);
+
     let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
     childData = JSON.parse(sessionStorage.UserData);
 
     const handleSubmit = async () => {
-        if (!rewardText || !rewardCost) {
+        if (!rewardTextCreate || !rewardCostCreate) {
             alert('Could Not Create Reward');
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
@@ -30,14 +37,66 @@ export default function RewardCreator() {
                 id: 0,
                 parentId: parentData.adultUserId,
                 childId: childData.userId,
-                Reward: rewardText,
-                RewardCost: rewardCost,
+                Reward: rewardTextCreate,
+                RewardCost: rewardCostCreate,
                 isDeleted: false
             }
-            CreateReward(reward);
+            await CreateReward(reward);
             reloadRewards();
         }
-        setUpdateRewards(updateRewards + 1);
+        setUpdateRewardList(updateRewardList + 1);
+    }
+
+    const handleShowEdit = async (rewardId: number) => {
+        sessionStorage.setItem("RewardToEdit", JSON.stringify(await GetRewardById(rewardId)));
+        let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
+        editReward = JSON.parse(sessionStorage.RewardToEdit)
+        setRewardTextEdit(String(editReward.reward));
+        setRewardCostEdit(Number(editReward.rewardCost));
+        handleShow();
+    }
+
+    const handleEdit = async () => {
+        if (!rewardTextEdit || !rewardCostEdit) {
+            alert('Could Not Update Reward');
+        } else {
+            let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
+            editReward = JSON.parse(sessionStorage.RewardToEdit)
+            let reward = {
+                id: editReward.id,
+                parentId: editReward.parentId,
+                childId: editReward.childId,
+                taskInstructions: rewardTextEdit,
+                taskReward: rewardCostEdit,
+                isCompleted: false,
+                isDeleted: false
+            }
+            await UpdateReward(reward);
+            reloadRewards();
+            sessionStorage.removeItem("RewardToEdit");
+            handleClose();
+        }
+        setUpdateRewardList(updateRewardList + 1);
+    }
+
+    const handleDelete = async (rewardId: number) => {
+        sessionStorage.setItem("RewardToDelete", JSON.stringify(await GetRewardById(rewardId)));
+        let deleteReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
+        deleteReward = JSON.parse(sessionStorage.RewardToDelete)
+        let reward = {
+            id: deleteReward.id,
+            parentId: deleteReward.parentId,
+            childId: deleteReward.childId,
+            taskInstructions: deleteReward.reward,
+            taskReward: deleteReward.rewardCost,
+            isCompleted: false,
+            isDeleted: false
+        }
+        await DeleteReward(reward);
+        reloadRewards();
+        sessionStorage.removeItem("RewardToDelete");
+        handleClose();
+        setUpdateRewardList(updateRewardList + 1);
     }
 
     const reloadRewards = async () => {
@@ -51,7 +110,7 @@ export default function RewardCreator() {
 
     useEffect(() => {
         reloadRewards();
-    }, [updateRewards])
+    }, [updateRewardList])
 
     return (
         <div className='bgColor'>
@@ -73,7 +132,7 @@ export default function RewardCreator() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Create A Rewards</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" onChange={({ target: { value } }) => setRewardText(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" onChange={({ target: { value } }) => setRewardTextCreate(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -81,7 +140,7 @@ export default function RewardCreator() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Start Reward Price</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCost(Number(value))}>
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostCreate(Number(value))}>
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>
@@ -117,25 +176,28 @@ export default function RewardCreator() {
                                     rewards.map((reward: object, idx: number) => {
                                         let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
                                         mappedReward = reward;
-                                        return (
-                                            <div key={idx}>
-                                                {
-                                                    (<Row>
-                                                        <div  className='border-box text-task'>
-                                                        <Col md={6} className='d-flex justify-content-center '>{mappedReward.reward}</Col>
-                                                        <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedReward.rewardCost} <FontAwesomeIcon icon={faStar} />
-                                                        </Col>
-                                                        <Col md={2}>
-                                                            <Row>
-                                                                <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={() => alert('button click catched')} /></Col>
-                                                                <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={() => alert('button click catched')} /></Col>
-                                                            </Row>
-                                                        </Col>
-                                                        </div>
-                                                    </Row>)
-                                                }
-                                            </div>
-                                        )
+                                        if (!mappedReward.isDeleted) {
+                                            let rewardId = mappedReward.id;
+                                            return (
+                                                <div key={idx}>
+                                                    {
+                                                        (<Row>
+                                                            <div className='border-box text-task'>
+                                                                <Col md={6} className='d-flex justify-content-center '>{mappedReward.reward}</Col>
+                                                                <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedReward.rewardCost} <FontAwesomeIcon icon={faStar} />
+                                                                </Col>
+                                                                <Col md={2}>
+                                                                    <Row>
+                                                                        <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(rewardId))} /></Col>
+                                                                        <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(rewardId))} /></Col>
+                                                                    </Row>
+                                                                </Col>
+                                                            </div>
+                                                        </Row>)
+                                                    }
+                                                </div>
+                                            )
+                                        }
                                     })
                                 }
                             </Col>
@@ -153,6 +215,30 @@ export default function RewardCreator() {
                     </Col>
                 </Row>
             </Container>
+            <Modal show={showEdit} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Edit Task</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={rewardTextEdit} onChange={({ target: { value } }) => setRewardTextEdit(value)} />
+                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostEdit(Number(value))} >
+                        <option className='text-center' defaultValue={rewardCostEdit}>{rewardCostEdit} Star(s)</option>
+                        <option className='text-center' value="1">1 Star</option>
+                        <option className='text-center' value="2">2 Stars</option>
+                        <option className='text-center' value="3">3 Stars</option>
+                        <option className='text-center' value="4">4 Stars</option>
+                        <option className='text-center' value="5">5 Stars</option>
+                    </Form.Select>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleClose}>
+                        Close
+                    </Button>
+                    <Button variant="primary" onClick={handleEdit}>
+                        Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
