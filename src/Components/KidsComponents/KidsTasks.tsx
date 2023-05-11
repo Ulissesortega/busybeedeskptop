@@ -1,14 +1,32 @@
 import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { GetTasksByParentAndChildId, UpdateReward, GetTaskById } from '../../Services/DataService';
+import { GetTasksByParentAndChildId, UpdateTask, GetTaskById } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function KidsTasks() {
+  let childDataa: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+  childDataa = JSON.parse(sessionStorage.UserData);
+
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
   const [tasks, setTasks] = useState<object[]>([]);
+  const [completeTask, setCompleteTask] = useState<{childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number}>({});
   const [updateTaskList, setUpdateTaskList] = useState<number>(0);
+
+  const handleShowComplete = async (task: object) => {
+    setCompleteTask(task);
+    handleShow();
+  }
+
+  const handleComplete = async (task: object) => {
+    let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
+    completeTask.isCompleted = true;
+  }
 
   const reloadTasks = async () => {
     let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -46,13 +64,13 @@ export default function KidsTasks() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>
+            <h1 className='text-task d-sm-block'>Total Stars: {childDataa.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
             <p className='btn-title text-center d-none d-sm-block'>Looking forward to complete these tasks:</p>
             {
               tasks.map((task: object, idx: number) => {
                 let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                 mappedTask = task;
-                if (!mappedTask.isDeleted) {
-                  let taskId = mappedTask.id;
+                if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
                   return (
                     <div key={idx}>
                       {
@@ -61,10 +79,11 @@ export default function KidsTasks() {
                             <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
                             <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
                             <Col md={2}>
-                              {/* <Row>
-                                  <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(taskId))} /></Col>
-                                  <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(taskId))} /></Col>
-                              </Row> */}
+                              <Row>
+                                <Col md={6}>
+                                  <FontAwesomeIcon icon={faCheck} onClick={handleShowComplete} />
+                                </Col>
+                              </Row>
                             </Col>
                           </div>
                         </Row>)
@@ -77,6 +96,19 @@ export default function KidsTasks() {
           </Col>
         </Row>
       </Container>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Complete Task?</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            No
+          </Button>
+          <Button variant="primary" onClick={() => handleComplete(completeTask)}>
+            Yes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
