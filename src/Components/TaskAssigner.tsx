@@ -218,12 +218,12 @@ export default function TaskAssigner() {
                 </Row>
             </Container>
             <Modal show={showEdit} onHide={handleClose}>
-                <Modal.Header closeButton>
+                <Modal.Header closeButton className='bgColormodal'>
                     <Modal.Title>Edit Task</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={taskInstructionsEdit} onChange={({ target: { value } }) => setTaskInstructionsEdit(value)} />
-                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardEdit(Number(value))} >
+                    <Form.Select aria-label="Default select example " onChange={({ target: { value } }) => setTaskRewardEdit(Number(value))} >
                         <option className='text-center' defaultValue={taskRewardEdit}>{taskRewardEdit} Star(s)</option>
                         <option className='text-center' value="1">1 Star</option>
                         <option className='text-center' value="2">2 Stars</option>
@@ -232,7 +232,7 @@ export default function TaskAssigner() {
                         <option className='text-center' value="5">5 Stars</option>
                     </Form.Select>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className='bgColormodal'>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
