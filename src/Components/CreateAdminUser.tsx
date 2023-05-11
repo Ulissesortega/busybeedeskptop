@@ -90,7 +90,8 @@ export default function CreateAdminUser () {
                   <option className='text-center'>Options</option>
                   <option className='text-center' value="Masc">Masculine</option>
                   <option className='text-center' value="Fem">Feminine</option>
-                  <option className='text-center' value="Other">Other</option>
+                  <option className='text-center' value="Other">Non Binary</option>
+                  <option className='text-center' value="Other">I Rather Not Say!</option>
                 </Form.Select>
               </Col>
             </Row>

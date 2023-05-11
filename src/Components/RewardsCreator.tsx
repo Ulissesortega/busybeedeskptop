@@ -216,12 +216,12 @@ export default function RewardCreator() {
                 </Row>
             </Container>
             <Modal show={showEdit} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Task</Modal.Title>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Edit Reward</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={rewardTextEdit} onChange={({ target: { value } }) => setRewardTextEdit(value)} />
-                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostEdit(Number(value))} >
+                    <Form.Select className='rounded-pill w-75 mx-auto mt-2' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostEdit(Number(value))} >
                         <option className='text-center' defaultValue={rewardCostEdit}>{rewardCostEdit} Star(s)</option>
                         <option className='text-center' value="1">1 Star</option>
                         <option className='text-center' value="2">2 Stars</option>
@@ -230,7 +230,7 @@ export default function RewardCreator() {
                         <option className='text-center' value="5">5 Stars</option>
                     </Form.Select>
                 </Modal.Body>
-                <Modal.Footer>
+                <Modal.Footer className='bgColormodal'>
                     <Button variant="secondary" onClick={handleClose}>
                         Close
                     </Button>
