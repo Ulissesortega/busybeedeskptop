@@ -231,10 +231,10 @@ export default function RewardCreator() {
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer className='bgColormodal'>
-                    <Button variant="secondary" onClick={handleClose}>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleEdit}>
+                    <Button variant="dark rounded-pill" onClick={handleEdit}>
                         Save Changes
                     </Button>
                 </Modal.Footer>
