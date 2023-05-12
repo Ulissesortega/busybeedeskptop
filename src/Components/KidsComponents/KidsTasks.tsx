@@ -2,13 +2,13 @@ import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { GetTasksByParentAndChildId, UpdateTask, GetTaskById } from '../../Services/DataService';
+import { GetTasksByParentAndChildId, UpdateTask, UpdateChildUserStarCount, GetChildUserData } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 export default function KidsTasks() {
-  let childDataa: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-  childDataa = JSON.parse(sessionStorage.UserData);
+  let userData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+  userData = JSON.parse(sessionStorage.UserData);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -26,6 +26,17 @@ export default function KidsTasks() {
   const handleComplete = async (task: object) => {
     let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
     completeTask.isCompleted = true;
+    await UpdateTask(completeTask);
+    let childUserData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+    childUserData = JSON.parse(sessionStorage.UserData);
+    childUserData.currentStarCount = Number(childUserData.currentStarCount) + Number(completeTask.taskReward);
+    childUserData.totalStarCount = Number(childUserData.totalStarCount) + Number(completeTask.taskReward);
+    await UpdateChildUserStarCount(Number(childUserData.userId), true, Number(completeTask.taskReward));
+    sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(String(userData.userUsername))));
+    await GetChildUserData(String(userData.userUsername));
+    await reloadTasks();
+    setUpdateTaskList(updateTaskList + 1);
+    handleClose();
   }
 
   const reloadTasks = async () => {
@@ -64,7 +75,7 @@ export default function KidsTasks() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>
-            <h1 className='text-task d-sm-block'>Total Stars: {childDataa.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
+            <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
             <p className='btn-title text-center d-none d-sm-block'>Looking forward to complete these tasks:</p>
             {
               tasks.map((task: object, idx: number) => {
@@ -81,7 +92,7 @@ export default function KidsTasks() {
                             <Col md={2}>
                               <Row>
                                 <Col md={6}>
-                                  <FontAwesomeIcon icon={faCheck} onClick={handleShowComplete} />
+                                  <FontAwesomeIcon icon={faCheck} onClick={() => handleShowComplete(mappedTask)} />
                                 </Col>
                               </Row>
                             </Col>
