@@ -15,7 +15,7 @@ export default function KidsTasks() {
   const handleShow = () => setShow(true);
 
   const [tasks, setTasks] = useState<object[]>([]);
-  const [completeTask, setCompleteTask] = useState<{childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number}>({});
+  const [completeTask, setCompleteTask] = useState<{ childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number }>({});
   const [updateTaskList, setUpdateTaskList] = useState<number>(0);
 
   const handleShowComplete = async (task: object) => {
@@ -104,6 +104,13 @@ export default function KidsTasks() {
                 }
               })
             }
+          </Col>
+        </Row>
+        <Row>
+          <Col className='right-title mt-2'>
+            <Link to="/KidsRewards">
+              <button className='btn-format rounded-pill mt-3'>Check Rewards</button>
+            </Link>
           </Col>
         </Row>
       </Container>
