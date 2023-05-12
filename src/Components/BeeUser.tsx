@@ -37,7 +37,7 @@ export default function BeeUser() {
                 setUser(await GetChildUserData(username));
                 sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(username)));
                 console.log('Success');
-                navigate("/TaskAssigner")
+                navigate("/BeeInfo")
             } else {
                 alert("Account Not Created");
             }
