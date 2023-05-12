@@ -36,6 +36,7 @@ function App() {
   return (
     <MyContext.Provider value={{adminData, setAdmin, userData, setUser, createBee, setCreationBee }} >
       <BrowserRouter>
+        
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/CreateAdminUser' element={<CreateAdminUser />} />
