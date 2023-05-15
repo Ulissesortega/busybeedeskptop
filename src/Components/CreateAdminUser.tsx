@@ -1,12 +1,16 @@
 import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { CreateAdultAccount, GetAdultUserData } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 
-export default function CreateAdminUser () {
+export default function CreateAdminUser() {
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   let navigate = useNavigate();
   const { setAdmin } = useContext(MyContext);
 
@@ -17,7 +21,7 @@ export default function CreateAdminUser () {
 
   const handleSubmit = async () => {
     if (!email || !fullName || !password) {
-      alert("Count not create account");
+      handleShow();
     } else {
       let adultUserData: object = {
         id: 0,
@@ -32,7 +36,7 @@ export default function CreateAdminUser () {
         console.log('Success');
         navigate("/AdminInfo");
       } else {
-        alert("Count not create account");
+        handleShow();
       }
     }
   }
@@ -110,6 +114,16 @@ export default function CreateAdminUser () {
           </Col>
         </Row>
       </Container>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton className='bgColormodal'>
+          <Modal.Title>Could Not Create Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
