@@ -25,7 +25,6 @@ async function AdultLogin(loginUser: object) {
         body: JSON.stringify(loginUser)
     });
     if (!result.ok) {
-        alert('Could Not Log In')
         const message = `An Error has Occured ${result.status}`;
         throw new Error(message);
     }
@@ -80,6 +79,23 @@ async function GetChildUserData(username: string) {
 
 async function GetChildrenUsersByParentId(parentId: number) {
     const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/ChildUserByParentId/${parentId}`);
+    let data = await result.json();
+    return data;
+}
+
+async function UpdateChildUserStarCount(userId: number, task: boolean, stars: number) {
+    const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/UpdateChildUserStarCount/${userId}/${task}/${stars}`, {
+        method: "POST",
+        headers: {
+            'Content-Type': "application/json"
+        },
+        // body: JSON.stringify(userData)
+    });
+    if (!result.ok) {
+        const message = `An Error has Occured ${result.status}`;
+        throw new Error(message);
+    } else {
+    }
     let data = await result.json();
     return data;
 }
@@ -206,4 +222,4 @@ async function DeleteReward(reward: object) {
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward }
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, UpdateChildUserStarCount, CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward }

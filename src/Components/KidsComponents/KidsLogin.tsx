@@ -1,11 +1,15 @@
 import { useState } from 'react';
 import '../../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { ChildLogin, GetChildUserData } from '../../Services/DataService';
 import { useNavigate } from 'react-router-dom';
 
 export default function KidsLogin() {
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   let navigate = useNavigate();
 
   const [username, setUsername] = useState<string>('');
@@ -16,11 +20,13 @@ export default function KidsLogin() {
       username,
       password
     }
-    let token = await ChildLogin(userData);
-    if (token.token != null) {
+    try {
+      let token = await ChildLogin(userData);
       localStorage.setItem("Token", token.token);
       sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(username)));
       navigate('/KidsTasks');
+    } catch (err) {
+      handleShow();
     }
   }
 
@@ -52,7 +58,7 @@ export default function KidsLogin() {
               <Col className='text-center mt-1'>
                 <Form.Group className="mb-1" controlId="formBeeName">
                   <Form.Label className='btn-title'>Kid's Name:</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Text" placeholder="Your Bee Name" onChange={({target: { value }}) => setUsername(value)} />
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Text" placeholder="Your Bee Name" onChange={({ target: { value } }) => setUsername(value)} />
                 </Form.Group>
               </Col>
             </Row>
@@ -61,20 +67,30 @@ export default function KidsLogin() {
               <Col className='text-center mt-2'>
                 <Form.Group className="mb-1" controlId="formBeePassword">
                   <Form.Label className='btn-title'>Password:</Form.Label>
-                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({target: { value }}) => setPassword(value)} />
+                  <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
               </Col>
             </Row>
 
             <Row className='text-center mt-4'>
               <Col>
-                  <button className='btn-format rounded-pill' onClick={handleSubmit}>Login</button>
+                <button className='btn-format rounded-pill' onClick={handleSubmit}>Login</button>
               </Col>
             </Row>
 
           </Col>
         </Row>
       </Container>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton className='bgColormodal'>
+          <Modal.Title>Could Not Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }
