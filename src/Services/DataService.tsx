@@ -25,7 +25,6 @@ async function AdultLogin(loginUser: object) {
         body: JSON.stringify(loginUser)
     });
     if (!result.ok) {
-        alert('Could Not Log In')
         const message = `An Error has Occured ${result.status}`;
         throw new Error(message);
     }

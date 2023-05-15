@@ -1,12 +1,16 @@
 import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { AdultLogin, GetAdultUserData, GetChildrenUsersByParentId } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 
 export default function AdminLogin() {
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   let navigate = useNavigate();
   const { setAdmin } = useContext(MyContext);
 
@@ -15,19 +19,20 @@ export default function AdminLogin() {
 
   const handleSubmit = async () => {
     setAdmin(await GetAdultUserData(email));
-    sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
     let userData: object = {
       email,
       password
     }
-    console.log(userData);
-    let token = await AdultLogin(userData);
-    if (token.token != null) {
+    try {
+      let token = await AdultLogin(userData);
+      sessionStorage.setItem("AdminData", JSON.stringify(await GetAdultUserData(email)));
       let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
       parentData = JSON.parse(sessionStorage.AdminData);
       localStorage.setItem("Token", token.token);
       console.log('Success');
       await GetChildrenUsersByParentId(Number(parentData.adultUserId)) != null ? navigate("/UsersDashboard") : navigate("/StepOne");
+    } catch (err) {
+      handleShow();
     }
   }
 
@@ -87,6 +92,16 @@ export default function AdminLogin() {
           </Col>
         </Row>
       </Container>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton className='bgColormodal'>
+          <Modal.Title>Could Not Login</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

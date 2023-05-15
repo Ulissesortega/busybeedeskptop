@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { MyContext } from '../Context/UserContext';
 import { CreateChildAccount, GetChildUserData } from '../Services/DataService';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,10 @@ import BowBee from '../Assets/BeeGirl.png';
 import HoneyComb from '../Assets/CartoonHoneyComb.png';
 
 export default function BeeUser() {
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     let navigate = useNavigate();
     const { createBee } = useContext(MyContext);
     const { adminData } = useContext(MyContext);
@@ -20,7 +24,7 @@ export default function BeeUser() {
 
     const handleCreateBee = async () => {
         if (!username || !password) {
-            alert("Account Not Created");
+            handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = adminData;
@@ -39,7 +43,7 @@ export default function BeeUser() {
                 console.log('Success');
                 navigate("/BeeInfo")
             } else {
-                alert("Account Not Created");
+                handleShow();
             }
         }
 
@@ -101,6 +105,16 @@ export default function BeeUser() {
                     </Col>
                 </Row>
             </Container>
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Account</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }
