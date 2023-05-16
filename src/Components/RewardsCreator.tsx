@@ -7,6 +7,7 @@ import { CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import MyNavBar from './MyNavBar';
 
 export default function RewardCreator() {
     const [showEdit, setShowEdit] = useState(false);
@@ -114,6 +115,7 @@ export default function RewardCreator() {
 
     return (
         <div className='bgColor'>
+            <MyNavBar/>
             <Container>
 
                 {/* Left-Side */}
