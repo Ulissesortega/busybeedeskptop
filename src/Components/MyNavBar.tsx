@@ -14,11 +14,10 @@ export default function MyNavBar() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mx-auto">
-                            <Nav.Link className='text-white' as={Link} to='/'>HOME</Nav.Link>
                             <Nav.Link className='text-white' as={Link} to='/UsersDashboard'>DASHBOARD</Nav.Link>
-                            <Nav.Link className='text-white' as={Link} to='/TaskAssigner'>TAKS</Nav.Link>
+                            <Nav.Link className='text-white' as={Link} to='/TaskAssigner'>TASKS</Nav.Link>
                             <Nav.Link className='text-white' as={Link} to='/RewardsCreator'>REWARDS</Nav.Link>
-
+                            <Nav.Link className='text-white' as={Link} to='/'>LOGOUT</Nav.Link>
                             <NavDropdown title="Dropdown" id="collasible-nav-dropdown">
                                 <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
                                 <NavDropdown.Item href="#action/3.2">
