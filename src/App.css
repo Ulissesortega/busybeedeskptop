@@ -143,6 +143,9 @@ a:active {
   margin-left: 12px;
 }
 
+.ty{
+  color: #FFC300 !important;
+}
 
 @keyframes shake {
   0% {
