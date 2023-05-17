@@ -147,6 +147,17 @@ a:active {
   color: #FFC300 !important;
 }
 
+.navbar-toggler{
+  border: 1px solid #FFC300 !important;
+}
+
+.navbar-toggler-icon{
+  color: #FFC300 !important;
+}
+
+
+
+
 @keyframes shake {
   0% {
       transform: translateX(2px);
