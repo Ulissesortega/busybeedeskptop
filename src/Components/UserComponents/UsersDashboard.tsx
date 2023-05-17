@@ -9,6 +9,7 @@ import BowBee from '../../Assets/BeeGirl.png';
 import HoneyComb from '../../Assets/CartoonHoneyComb.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import MyNavBar from '../MyNavBar';
 
 export default function UsersDashboard() {
   let navigate = useNavigate();
@@ -34,6 +35,7 @@ export default function UsersDashboard() {
 
   return (
     <div className='bgColor'>
+      <MyNavBar/>
       <Container>
 
         {/* Left-Side */}
