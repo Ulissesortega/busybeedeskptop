@@ -218,7 +218,6 @@ export default function RewardCreator() {
                             </Col>
                         </Row>
 
-
                     </Col>
                 </Row>
             </Container>

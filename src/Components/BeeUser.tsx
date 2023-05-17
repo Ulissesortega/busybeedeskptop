@@ -10,6 +10,8 @@ import BowBee from '../Assets/BeeGirl.png';
 import HoneyComb from '../Assets/CartoonHoneyComb.png';
 
 export default function BeeUser() {
+    const [disabled, setDisabled] = useState(false);
+
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -25,6 +27,7 @@ export default function BeeUser() {
     const handleCreateBee = async () => {
         if (!username || !password) {
             handleShow();
+            setDisabled(false);
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = adminData;
@@ -44,6 +47,7 @@ export default function BeeUser() {
                 navigate("/BeeInfo")
             } else {
                 handleShow();
+                setDisabled(false);
             }
         }
 
@@ -99,7 +103,7 @@ export default function BeeUser() {
                                     <Form.Label className='btn-title'>Password</Form.Label>
                                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                                 </Form.Group>
-                                <button className='btn2-format rounded-pill mt-3' onClick={handleCreateBee}>Create User</button>
+                                <button className='btn2-format rounded-pill mt-3' disabled={disabled} onClick={() => {handleCreateBee(); setDisabled(true);}}>Create User</button>
                             </Col>
                         </Row>
                     </Col>

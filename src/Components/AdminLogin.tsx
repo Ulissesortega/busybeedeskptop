@@ -7,6 +7,8 @@ import { AdultLogin, GetAdultUserData, GetChildrenUsersByParentId } from '../Ser
 import { MyContext } from '../Context/UserContext';
 
 export default function AdminLogin() {
+  const [disabled, setDisabled] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -79,7 +81,8 @@ export default function AdminLogin() {
                   <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
 
-                <button className='btn-format rounded-pill mt-2' onClick={handleSubmit}>Login</button>
+                <button className='btn-format rounded-pill mt-2' disabled={disabled} onClick={() => {
+                  handleSubmit(); setDisabled(true); }}>Login</button>
 
                 <Row>
                   <Col>

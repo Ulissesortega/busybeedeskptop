@@ -7,6 +7,8 @@ import { CreateAdultAccount, GetAdultUserData } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 
 export default function CreateAdminUser() {
+  const [disabled, setDisabled] = useState(false);
+
   const [showModal, setShowModal] = useState(false);
   const handleClose = () => setShowModal(false);
   const handleShow = () => setShowModal(true);
@@ -22,6 +24,7 @@ export default function CreateAdminUser() {
   const handleSubmit = async () => {
     if (!email || !fullName || !password) {
       handleShow();
+      setDisabled(false);
     } else {
       let adultUserData: object = {
         id: 0,
@@ -37,6 +40,7 @@ export default function CreateAdminUser() {
         navigate("/AdminInfo");
       } else {
         handleShow();
+        setDisabled(false);
       }
     }
   }
@@ -107,7 +111,7 @@ export default function CreateAdminUser() {
                   <Form.Label className='btn-title'>Password</Form.Label>
                   <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
-                <button className='btn2-format rounded-pill mt-3' onClick={handleSubmit}>Create User</button>
+                <button className='btn2-format rounded-pill mt-3' disabled={disabled} onClick={() => { handleSubmit(); setDisabled(true); }}>Create User</button>
               </Col>
             </Row>
 

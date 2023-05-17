@@ -7,8 +7,7 @@ import beeKeeperFImg from '../Assets/BKeeperMom.png';
 import beeKeeperMImg from '../Assets/Bkeeper.png';
 import honeyComb from '../Assets/CartoonHoneyComb.png';
 
-
-export default function Template() {
+export default function AdminInfo() {
     let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
     parentData = JSON.parse(sessionStorage.AdminData);
 

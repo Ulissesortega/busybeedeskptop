@@ -220,7 +220,6 @@ export default function TaskAssigner() {
                             </Col>
                         </Row>
 
-
                     </Col>
                 </Row>
             </Container>
