@@ -19,7 +19,6 @@ import TempPassword from './Components/PasswordRecovery/TempPassword'
 import KidsTasks from './Components/KidsComponents/KidsTasks';
 import KidsRewards from './Components/KidsComponents/KidsRewards';
 import BeeInfo from './Components/UserComponents/BeeInfo'
-import MyNavBar from './Components/MyNavBar';
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});

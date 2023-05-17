@@ -128,6 +128,41 @@ a:active {
   animation-timing-function: ease
 }
 
+.text-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-task span {
+  margin-right: 5px;
+}
+
+.edit-icon,
+.trash-icon {
+  margin-left: 12px;
+}
+
+.ty{
+  color: #FFC300 !important;
+  stroke: #FFC300 !important;
+}
+
+.navbar-toggler{
+  border: 1px solid #FFC300 !important;
+}
+
+navbar-toggler-icon{
+  stroke: #FFC300 !important;
+  color: #FFC300 !important;
+  background-color: red !important;
+}
+
+
+
+
+
+
 @keyframes shake {
   0% {
       transform: translateX(2px);

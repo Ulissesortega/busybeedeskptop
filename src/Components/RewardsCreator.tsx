@@ -122,7 +122,7 @@ export default function RewardCreator() {
 
     return (
         <div className='bgColor'>
-            <MyNavBar/>
+            <MyNavBar />
             <Container>
 
                 {/* Left-Side */}
@@ -181,34 +181,33 @@ export default function RewardCreator() {
 
                         <Row>
                             <Col>
-                                {
-                                    rewards.map((reward: object, idx: number) => {
-                                        let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
-                                        mappedReward = reward;
-                                        if (!mappedReward.isDeleted) {
-                                            let rewardId = mappedReward.id;
-                                            return (
-                                                <div key={idx}>
-                                                    {
-                                                        (<Row>
-                                                            <div className='border-box text-task'>
-                                                                <Col md={6} className='d-flex justify-content-center '>{mappedReward.reward}</Col>
-                                                                <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedReward.rewardCost} <FontAwesomeIcon icon={faStar} />
-                                                                </Col>
-                                                                <Col md={2}>
-                                                                    <Row>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(rewardId))} /></Col>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(rewardId))} /></Col>
-                                                                    </Row>
-                                                                </Col>
-                                                            </div>
-                                                        </Row>)
-                                                    }
+                                {rewards.map((reward: object, idx: number) => {
+                                    let mappedReward: {
+                                        id?: number,
+                                        parentId?: number,
+                                        childId?: number,
+                                        reward?: string,
+                                        rewardCost?: number,
+                                        isDeleted?: boolean
+                                    } = {};
+                                    mappedReward = reward;
+                                    if (!mappedReward.isDeleted) {
+                                        let rewardId = mappedReward.id;
+                                        return (
+                                            <div key={idx} className='border-box text-task'>
+                                                <div className='d-flex justify-content-start'>
+                                                    <div>{mappedReward.reward}</div>
                                                 </div>
-                                            )
-                                        }
-                                    })
-                                }
+                                                <div className='d-flex justify-content-end align-items-center'>
+                                                    <span>{mappedReward.rewardCost}</span>
+                                                    <FontAwesomeIcon icon={faStar} />
+                                                    <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={async () => handleShowEdit(Number(rewardId))} />
+                                                    <FontAwesomeIcon icon={faTrash} className='trash-icon' onClick={async () => handleDelete(Number(rewardId))} />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </Col>
                         </Row>
 
@@ -223,9 +222,9 @@ export default function RewardCreator() {
                     </Col>
                 </Row>
             </Container>
-            <Modal className={ failedEdit ? 'failedEdit' : '' } show={showEdit} onHide={handleEditClose}>
+            <Modal className={failedEdit ? 'failedEdit' : ''} show={showEdit} onHide={handleEditClose}>
                 <Modal.Header closeButton className='bgColormodal'>
-                    <Modal.Title>{ failedEdit ? 'Could Not Edit Reward' : 'Edit Reward' }</Modal.Title>
+                    <Modal.Title>{failedEdit ? 'Could Not Edit Reward' : 'Edit Reward'}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={rewardTextEdit} onChange={({ target: { value } }) => setRewardTextEdit(value)} />
