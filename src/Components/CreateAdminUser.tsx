@@ -75,7 +75,7 @@ export default function CreateAdminUser() {
               <Col className='right-title mt-2'>
                 <p className='btn-title text-center'>Please enter the information below</p>
                 <Form.Group className="mb-2" controlId="formBasic Full Name">
-                  <Form.Label className='btn-title'>Full Name</Form.Label>
+                  <Form.Label className='btn-title' autocomplete="off">Full Name</Form.Label>
                   <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Your Name" onChange={({ target: { value } }) => setFullName(value)} />
                 </Form.Group>
               </Col>
@@ -85,7 +85,7 @@ export default function CreateAdminUser() {
             <Row>
               <Col className='right-title mt-2'>
                 <Form.Group className="mb-2" controlId="formBasicEmail">
-                  <Form.Label className='btn-title'>Email Address</Form.Label>
+                  <Form.Label className='btn-title' autocomplete="off">Email Address</Form.Label>
                   <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Email" placeholder="Your Email" onChange={({ target: { value } }) => setEmail(value)} />
                 </Form.Group>
               </Col>

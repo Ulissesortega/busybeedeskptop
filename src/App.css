@@ -146,21 +146,19 @@ a:active {
 .ty{
   color: #FFC300 !important;
   stroke: #FFC300 !important;
+  border: 0.5px !important;
 }
 
-.navbar-toggler{
-  border: 1px solid #FFC300 !important;
+
+
+.navbar-toggler-icon {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='%23FFD700' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
 }
 
-navbar-toggler-icon{
-  stroke: #FFC300 !important;
-  color: #FFC300 !important;
-  background-color: red !important;
+.navbar-toggler:focus {
+  outline-width: 1px;
 }
 
-:root {
-  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='yellow ' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
-}
 
 
 
