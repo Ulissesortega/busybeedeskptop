@@ -9,9 +9,17 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export default function TaskAssigner() {
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     const [showEdit, setShowEdit] = useState(false);
-    const handleClose = () => setShowEdit(false);
-    const handleShow = () => setShowEdit(true);
+    const [failedEdit, setFailedEdit] = useState(false);
+    const handleEditShow = () => setShowEdit(true);
+    const handleEditClose = () => {
+        setShowEdit(false)
+        setFailedEdit(false);
+    };
 
     const [taskInstructionsCreate, setTaskInstructionsCreate] = useState<string>('');
     const [taskRewardCreate, setTaskRewardCreate] = useState<number>(0);
@@ -27,7 +35,7 @@ export default function TaskAssigner() {
 
     const handleSubmit = async () => {
         if (!taskInstructionsCreate || !taskRewardCreate) {
-            alert('Could Not Create Task');
+            handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
@@ -54,12 +62,12 @@ export default function TaskAssigner() {
         editTask = JSON.parse(sessionStorage.TaskToEdit)
         setTaskInstructionsEdit(String(editTask.taskInstructions));
         setTaskRewardEdit(Number(editTask.taskReward));
-        handleShow();
+        handleEditShow();
     }
 
     const handleEdit = async () => {
         if (!taskInstructionsEdit || !taskRewardEdit) {
-            alert('Could Not Update Task');
+            setFailedEdit(true);
         } else {
             let editTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
             editTask = JSON.parse(sessionStorage.TaskToEdit)
@@ -75,7 +83,7 @@ export default function TaskAssigner() {
             await UpdateTask(task);
             reloadTasks();
             sessionStorage.removeItem("TaskToEdit");
-            handleClose();
+            handleEditClose();
         }
         setUpdateTaskList(updateTaskList + 1);
     }
@@ -96,7 +104,7 @@ export default function TaskAssigner() {
         await DeleteTask(task);
         reloadTasks();
         sessionStorage.removeItem("TaskToDelete");
-        handleClose();
+        handleEditClose();
         setUpdateTaskList(updateTaskList + 1);
     }
 
@@ -216,9 +224,9 @@ export default function TaskAssigner() {
                     </Col>
                 </Row>
             </Container>
-            <Modal show={showEdit} onHide={handleClose}>
+            <Modal className={ failedEdit ? 'failedEdit' : '' } show={showEdit} onHide={handleEditClose}>
                 <Modal.Header closeButton className='bgColormodal'>
-                    <Modal.Title>Edit Task</Modal.Title>
+                    <Modal.Title>{ failedEdit ? 'Could Not Edit Task' : 'Edit Task' }</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={taskInstructionsEdit} onChange={({ target: { value } }) => setTaskInstructionsEdit(value)} />
@@ -232,11 +240,22 @@ export default function TaskAssigner() {
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer className='bgColormodal'>
-                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                    <Button variant="dark rounded-pill" onClick={handleEditClose}>
                         Close
                     </Button>
                     <Button variant="dark rounded-pill" onClick={handleEdit}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Task</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
                     </Button>
                 </Modal.Footer>
             </Modal>

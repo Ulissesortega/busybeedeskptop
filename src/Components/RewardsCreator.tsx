@@ -9,9 +9,17 @@ import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
 
 export default function RewardCreator() {
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     const [showEdit, setShowEdit] = useState(false);
-    const handleClose = () => setShowEdit(false);
-    const handleShow = () => setShowEdit(true);
+    const [failedEdit, setFailedEdit] = useState(false);
+    const handleEditShow = () => setShowEdit(true);
+    const handleEditClose = () => {
+        setShowEdit(false)
+        setFailedEdit(false);
+    };
 
     const [rewardTextCreate, setRewardTextCreate] = useState<string>('');
     const [rewardCostCreate, setRewardCostCreate] = useState<number>(0);
@@ -27,7 +35,7 @@ export default function RewardCreator() {
 
     const handleSubmit = async () => {
         if (!rewardTextCreate || !rewardCostCreate) {
-            alert('Could Not Create Reward');
+            handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
@@ -53,13 +61,13 @@ export default function RewardCreator() {
         editReward = JSON.parse(sessionStorage.RewardToEdit)
         setRewardTextEdit(String(editReward.reward));
         setRewardCostEdit(Number(editReward.rewardCost));
-        handleShow();
+        handleEditShow();
         console.log(editReward);
     }
 
     const handleEdit = async () => {
         if (!rewardTextEdit || !rewardCostEdit) {
-            alert('Could Not Update Reward');
+            setFailedEdit(true);
         } else {
             let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
             editReward = JSON.parse(sessionStorage.RewardToEdit)
@@ -74,7 +82,7 @@ export default function RewardCreator() {
             await UpdateReward(reward);
             reloadRewards();
             sessionStorage.removeItem("RewardToEdit");
-            handleClose();
+            handleEditClose();
         }
         setUpdateRewardList(updateRewardList + 1);
     }
@@ -94,7 +102,7 @@ export default function RewardCreator() {
         await DeleteReward(reward);
         reloadRewards();
         sessionStorage.removeItem("RewardToDelete");
-        handleClose();
+        handleEditClose();
         setUpdateRewardList(updateRewardList + 1);
     }
 
@@ -214,9 +222,9 @@ export default function RewardCreator() {
                     </Col>
                 </Row>
             </Container>
-            <Modal show={showEdit} onHide={handleClose}>
+            <Modal className={ failedEdit ? 'failedEdit' : '' } show={showEdit} onHide={handleEditClose}>
                 <Modal.Header closeButton className='bgColormodal'>
-                    <Modal.Title>Edit Reward</Modal.Title>
+                    <Modal.Title>{ failedEdit ? 'Could Not Edit Reward' : 'Edit Reward' }</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={rewardTextEdit} onChange={({ target: { value } }) => setRewardTextEdit(value)} />
@@ -230,11 +238,22 @@ export default function RewardCreator() {
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer className='bgColormodal'>
-                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                    <Button variant="dark rounded-pill" onClick={handleEditClose}>
                         Close
                     </Button>
                     <Button variant="dark rounded-pill" onClick={handleEdit}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Reward</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
                     </Button>
                 </Modal.Footer>
             </Modal>
