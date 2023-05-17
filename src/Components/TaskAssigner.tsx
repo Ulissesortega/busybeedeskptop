@@ -7,6 +7,7 @@ import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, Delete
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import MyNavBar from './MyNavBar';
 
 export default function TaskAssigner() {
     const [showModal, setShowModal] = useState(false);
@@ -123,6 +124,7 @@ export default function TaskAssigner() {
 
     return (
         <div className='bgColor'>
+            <MyNavBar/>
             <Container>
 
                 {/* Left-Side */}

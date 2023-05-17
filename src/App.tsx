@@ -19,6 +19,7 @@ import TempPassword from './Components/PasswordRecovery/TempPassword'
 import KidsTasks from './Components/KidsComponents/KidsTasks';
 import KidsRewards from './Components/KidsComponents/KidsRewards';
 import BeeInfo from './Components/UserComponents/BeeInfo'
+import MyNavBar from './Components/MyNavBar';
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});
@@ -37,7 +38,6 @@ function App() {
   return (
     <MyContext.Provider value={{adminData, setAdmin, userData, setUser, createBee, setCreationBee }} >
       <BrowserRouter>
-        
         <Routes>
           <Route path='/' element={<Login />} />
           <Route path='/CreateAdminUser' element={<CreateAdminUser />} />
