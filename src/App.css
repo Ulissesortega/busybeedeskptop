@@ -10,6 +10,10 @@
   min-height: 100vh;
 }
 
+.bgColormodal {
+  background-color: #FFC300 !important; 
+}
+
 .image-radius {
   border-radius: 45px;
   height: 10%;
@@ -74,6 +78,7 @@
 .text-bold {
   font-weight: Bold;
   font-style: italic;
+  color:#901d1c
 }
 
 .border-radius {
@@ -115,4 +120,59 @@ a:active {
   
 } 
 
+.failedEdit {
+  animation-name: shake;
+  animation-duration: 0.2s;
+  animation-iteration-count: 2;
+  animation-direction: alternate-reverse;
+  animation-timing-function: ease
+}
 
+.text-task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.text-task span {
+  margin-right: 5px;
+}
+
+.edit-icon,
+.trash-icon {
+  margin-left: 12px;
+}
+
+.ty{
+  color: #FFC300 !important;
+  stroke: #FFC300 !important;
+}
+
+.navbar-toggler{
+  border: 1px solid #FFC300 !important;
+}
+
+navbar-toggler-icon{
+  stroke: #FFC300 !important;
+  color: #FFC300 !important;
+  background-color: red !important;
+}
+
+
+
+
+
+
+@keyframes shake {
+  0% {
+      transform: translateX(2px);
+  } 25% {
+      transform: translateX(-4px);
+  } 50% {
+    transform: translateX(4px);
+  } 75% {
+  transform: translateX(-4px);
+  } 100% {
+    transform: translateX(2px);
+  }
+}

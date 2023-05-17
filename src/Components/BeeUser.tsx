@@ -1,7 +1,7 @@
 import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { MyContext } from '../Context/UserContext';
 import { CreateChildAccount, GetChildUserData } from '../Services/DataService';
 import { useNavigate } from 'react-router-dom';
@@ -10,6 +10,12 @@ import BowBee from '../Assets/BeeGirl.png';
 import HoneyComb from '../Assets/CartoonHoneyComb.png';
 
 export default function BeeUser() {
+    const [disabled, setDisabled] = useState(false);
+
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     let navigate = useNavigate();
     const { createBee } = useContext(MyContext);
     const { adminData } = useContext(MyContext);
@@ -20,7 +26,8 @@ export default function BeeUser() {
 
     const handleCreateBee = async () => {
         if (!username || !password) {
-            alert("Account Not Created");
+            handleShow();
+            setDisabled(false);
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = adminData;
@@ -37,9 +44,10 @@ export default function BeeUser() {
                 setUser(await GetChildUserData(username));
                 sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(username)));
                 console.log('Success');
-                navigate("/TaskAssigner")
+                navigate("/BeeInfo")
             } else {
-                alert("Account Not Created");
+                handleShow();
+                setDisabled(false);
             }
         }
 
@@ -95,12 +103,22 @@ export default function BeeUser() {
                                     <Form.Label className='btn-title'>Password</Form.Label>
                                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                                 </Form.Group>
-                                <button className='btn2-format rounded-pill mt-3' onClick={handleCreateBee}>Create User</button>
+                                <button className='btn2-format rounded-pill mt-3' disabled={disabled} onClick={() => {handleCreateBee(); setDisabled(true);}}>Create User</button>
                             </Col>
                         </Row>
                     </Col>
                 </Row>
             </Container>
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Account</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
+                    </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     )
 }

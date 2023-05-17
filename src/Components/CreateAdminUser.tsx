@@ -1,12 +1,18 @@
 import { useState, useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { CreateAdultAccount, GetAdultUserData } from '../Services/DataService';
 import { MyContext } from '../Context/UserContext';
 
-export default function CreateAdminUser () {
+export default function CreateAdminUser() {
+  const [disabled, setDisabled] = useState(false);
+
+  const [showModal, setShowModal] = useState(false);
+  const handleClose = () => setShowModal(false);
+  const handleShow = () => setShowModal(true);
+
   let navigate = useNavigate();
   const { setAdmin } = useContext(MyContext);
 
@@ -17,7 +23,8 @@ export default function CreateAdminUser () {
 
   const handleSubmit = async () => {
     if (!email || !fullName || !password) {
-      alert("Count not create account");
+      handleShow();
+      setDisabled(false);
     } else {
       let adultUserData: object = {
         id: 0,
@@ -32,7 +39,8 @@ export default function CreateAdminUser () {
         console.log('Success');
         navigate("/AdminInfo");
       } else {
-        alert("Count not create account");
+        handleShow();
+        setDisabled(false);
       }
     }
   }
@@ -90,7 +98,8 @@ export default function CreateAdminUser () {
                   <option className='text-center'>Options</option>
                   <option className='text-center' value="Masc">Masculine</option>
                   <option className='text-center' value="Fem">Feminine</option>
-                  <option className='text-center' value="Other">Other</option>
+                  <option className='text-center' value="Other">Non Binary</option>
+                  <option className='text-center' value="Other">I Rather Not Say!</option>
                 </Form.Select>
               </Col>
             </Row>
@@ -102,13 +111,23 @@ export default function CreateAdminUser () {
                   <Form.Label className='btn-title'>Password</Form.Label>
                   <Form.Control className='text-center rounded-pill w-75 mx-auto' type="Password" placeholder="Your Password" onChange={({ target: { value } }) => setPassword(value)} />
                 </Form.Group>
-                <button className='btn2-format rounded-pill mt-3' onClick={handleSubmit}>Create User</button>
+                <button className='btn2-format rounded-pill mt-3' disabled={disabled} onClick={() => { handleSubmit(); setDisabled(true); }}>Create User</button>
               </Col>
             </Row>
 
           </Col>
         </Row>
       </Container>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton className='bgColormodal'>
+          <Modal.Title>Could Not Create Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
+            Okay
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   )
 }

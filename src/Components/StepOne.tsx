@@ -65,14 +65,14 @@ export default function StepOne() {
 
                         <Row>
                             <Col className='d-flex justify-content-center mt-xl-44'>
-                                <img className='img-fluid' src={require('../Assets/BeeGirl.png')} alt="Logo" width={200} />
+                                <img className='img-fluid' src={require('../Assets/BeeGirl.png')} alt="Logo" width={175} />
                             </Col>
 
                             <Col className='d-flex justify-content-center mt-xl-3'>
-                                <img className='img-fluid' src={require('../Assets/BeeBoy.png')} alt="Logo" width={200} />
+                                <img className='img-fluid' src={require('../Assets/BeeBoy.png')} alt="Logo" width={175} />
                             </Col>
                             <Col className='d-flex justify-content-center mt-xl-3'>
-                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} alt="Logo" width={200} />
+                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} alt="Logo" width={175} />
                             </Col>
                         </Row>
 
@@ -82,7 +82,7 @@ export default function StepOne() {
                             </Col>
 
                             <Col className='d-flex justify-content-center'>
-                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowTieBee}>Bow Tie Bee!</button>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowTieBee}>Tie Bee!</button>
                             </Col>
                             <Col className='d-flex justify-content-center'>
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Honey Comb!</button>

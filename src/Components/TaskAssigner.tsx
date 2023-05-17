@@ -7,11 +7,20 @@ import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, Delete
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import MyNavBar from './MyNavBar';
 
 export default function TaskAssigner() {
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     const [showEdit, setShowEdit] = useState(false);
-    const handleClose = () => setShowEdit(false);
-    const handleShow = () => setShowEdit(true);
+    const [failedEdit, setFailedEdit] = useState(false);
+    const handleEditShow = () => setShowEdit(true);
+    const handleEditClose = () => {
+        setShowEdit(false)
+        setFailedEdit(false);
+    };
 
     const [taskInstructionsCreate, setTaskInstructionsCreate] = useState<string>('');
     const [taskRewardCreate, setTaskRewardCreate] = useState<number>(0);
@@ -27,7 +36,7 @@ export default function TaskAssigner() {
 
     const handleSubmit = async () => {
         if (!taskInstructionsCreate || !taskRewardCreate) {
-            alert('Could Not Create Task');
+            handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
@@ -43,7 +52,6 @@ export default function TaskAssigner() {
                 isDeleted: false
             }
             await CreateTask(task);
-            handleClose();
             reloadTasks();
         }
         setUpdateTaskList(updateTaskList + 1);
@@ -55,12 +63,12 @@ export default function TaskAssigner() {
         editTask = JSON.parse(sessionStorage.TaskToEdit)
         setTaskInstructionsEdit(String(editTask.taskInstructions));
         setTaskRewardEdit(Number(editTask.taskReward));
-        handleShow();
+        handleEditShow();
     }
 
     const handleEdit = async () => {
         if (!taskInstructionsEdit || !taskRewardEdit) {
-            alert('Could Not Update Task');
+            setFailedEdit(true);
         } else {
             let editTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
             editTask = JSON.parse(sessionStorage.TaskToEdit)
@@ -76,7 +84,7 @@ export default function TaskAssigner() {
             await UpdateTask(task);
             reloadTasks();
             sessionStorage.removeItem("TaskToEdit");
-            handleClose();
+            handleEditClose();
         }
         setUpdateTaskList(updateTaskList + 1);
     }
@@ -97,7 +105,7 @@ export default function TaskAssigner() {
         await DeleteTask(task);
         reloadTasks();
         sessionStorage.removeItem("TaskToDelete");
-        handleClose();
+        handleEditClose();
         setUpdateTaskList(updateTaskList + 1);
     }
 
@@ -116,6 +124,7 @@ export default function TaskAssigner() {
 
     return (
         <div className='bgColor'>
+            <MyNavBar />
             <Container>
 
                 {/* Left-Side */}
@@ -172,36 +181,36 @@ export default function TaskAssigner() {
                     <Col xl={5}>
                         <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>
                         <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
-
                         <Row>
                             <Col>
-                                {
-                                    tasks.map((task: object, idx: number) => {
-                                        let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
-                                        mappedTask = task;
-                                        if (!mappedTask.isDeleted) {
-                                            let taskId = mappedTask.id;
-                                            return (
-                                                <div key={idx}>
-                                                    {
-                                                        (<Row>
-                                                            <div className='border-box text-task'>
-                                                                <Col md={6} className='d-flex justify-content-center'>{mappedTask.taskInstructions}</Col>
-                                                                <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedTask.taskReward} <FontAwesomeIcon icon={faStar} /></Col>
-                                                                <Col md={2}>
-                                                                    <Row>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(taskId))} /></Col>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(taskId))} /></Col>
-                                                                    </Row>
-                                                                </Col>
-                                                            </div>
-                                                        </Row>)
-                                                    }
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: {
+                                        childId?: number,
+                                        id?: number,
+                                        isCompleted?: boolean,
+                                        isDeleted?: boolean,
+                                        parentId?: number,
+                                        taskInstructions?: string,
+                                        taskReward?: number
+                                    } = {};
+                                    mappedTask = task;
+                                    if (!mappedTask.isDeleted) {
+                                        let taskId = mappedTask.id;
+                                        return (
+                                            <div key={idx} className='border-box text-task'>
+                                                <div className='d-flex justify-content-start'>
+                                                    <div>{mappedTask.taskInstructions}</div>
                                                 </div>
-                                            )
-                                        }
-                                    })
-                                }
+                                                <div className='d-flex justify-content-end align-items-center'>
+                                                    <span>{mappedTask.taskReward}</span>
+                                                    <FontAwesomeIcon icon={faStar} />
+                                                    <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={async () => handleShowEdit(Number(taskId))} />
+                                                    <FontAwesomeIcon icon={faTrash} className='trash-icon' onClick={async () => handleDelete(Number(taskId))} />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </Col>
                         </Row>
 
@@ -213,17 +222,16 @@ export default function TaskAssigner() {
                             </Col>
                         </Row>
 
-
                     </Col>
                 </Row>
             </Container>
-            <Modal show={showEdit} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Task</Modal.Title>
+            <Modal className={failedEdit ? 'failedEdit' : ''} show={showEdit} onHide={handleEditClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>{failedEdit ? 'Could Not Edit Task' : 'Edit Task'}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={taskInstructionsEdit} onChange={({ target: { value } }) => setTaskInstructionsEdit(value)} />
-                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardEdit(Number(value))} >
+                    <Form.Select className='rounded-pill w-75 mx-auto mt-2' aria-label="Default select example " onChange={({ target: { value } }) => setTaskRewardEdit(Number(value))} >
                         <option className='text-center' defaultValue={taskRewardEdit}>{taskRewardEdit} Star(s)</option>
                         <option className='text-center' value="1">1 Star</option>
                         <option className='text-center' value="2">2 Stars</option>
@@ -232,12 +240,23 @@ export default function TaskAssigner() {
                         <option className='text-center' value="5">5 Stars</option>
                     </Form.Select>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleEditClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleEdit}>
+                    <Button variant="dark rounded-pill" onClick={handleEdit}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Task</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
                     </Button>
                 </Modal.Footer>
             </Modal>

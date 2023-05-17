@@ -7,11 +7,20 @@ import { CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import MyNavBar from './MyNavBar';
 
 export default function RewardCreator() {
+    const [showModal, setShowModal] = useState(false);
+    const handleClose = () => setShowModal(false);
+    const handleShow = () => setShowModal(true);
+
     const [showEdit, setShowEdit] = useState(false);
-    const handleClose = () => setShowEdit(false);
-    const handleShow = () => setShowEdit(true);
+    const [failedEdit, setFailedEdit] = useState(false);
+    const handleEditShow = () => setShowEdit(true);
+    const handleEditClose = () => {
+        setShowEdit(false)
+        setFailedEdit(false);
+    };
 
     const [rewardTextCreate, setRewardTextCreate] = useState<string>('');
     const [rewardCostCreate, setRewardCostCreate] = useState<number>(0);
@@ -27,7 +36,7 @@ export default function RewardCreator() {
 
     const handleSubmit = async () => {
         if (!rewardTextCreate || !rewardCostCreate) {
-            alert('Could Not Create Reward');
+            handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
@@ -53,12 +62,13 @@ export default function RewardCreator() {
         editReward = JSON.parse(sessionStorage.RewardToEdit)
         setRewardTextEdit(String(editReward.reward));
         setRewardCostEdit(Number(editReward.rewardCost));
-        handleShow();
+        handleEditShow();
+        console.log(editReward);
     }
 
     const handleEdit = async () => {
         if (!rewardTextEdit || !rewardCostEdit) {
-            alert('Could Not Update Reward');
+            setFailedEdit(true);
         } else {
             let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
             editReward = JSON.parse(sessionStorage.RewardToEdit)
@@ -66,15 +76,14 @@ export default function RewardCreator() {
                 id: editReward.id,
                 parentId: editReward.parentId,
                 childId: editReward.childId,
-                taskInstructions: rewardTextEdit,
-                taskReward: rewardCostEdit,
-                isCompleted: false,
+                reward: rewardTextEdit,
+                rewardCost: rewardCostEdit,
                 isDeleted: false
             }
             await UpdateReward(reward);
             reloadRewards();
             sessionStorage.removeItem("RewardToEdit");
-            handleClose();
+            handleEditClose();
         }
         setUpdateRewardList(updateRewardList + 1);
     }
@@ -87,15 +96,14 @@ export default function RewardCreator() {
             id: deleteReward.id,
             parentId: deleteReward.parentId,
             childId: deleteReward.childId,
-            taskInstructions: deleteReward.reward,
-            taskReward: deleteReward.rewardCost,
-            isCompleted: false,
+            reward: deleteReward.reward,
+            rewardCost: deleteReward.rewardCost,
             isDeleted: false
         }
         await DeleteReward(reward);
         reloadRewards();
         sessionStorage.removeItem("RewardToDelete");
-        handleClose();
+        handleEditClose();
         setUpdateRewardList(updateRewardList + 1);
     }
 
@@ -114,6 +122,7 @@ export default function RewardCreator() {
 
     return (
         <div className='bgColor'>
+            <MyNavBar />
             <Container>
 
                 {/* Left-Side */}
@@ -172,34 +181,33 @@ export default function RewardCreator() {
 
                         <Row>
                             <Col>
-                                {
-                                    rewards.map((reward: object, idx: number) => {
-                                        let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
-                                        mappedReward = reward;
-                                        if (!mappedReward.isDeleted) {
-                                            let rewardId = mappedReward.id;
-                                            return (
-                                                <div key={idx}>
-                                                    {
-                                                        (<Row>
-                                                            <div className='border-box text-task'>
-                                                                <Col md={6} className='d-flex justify-content-center '>{mappedReward.reward}</Col>
-                                                                <Col md={4} className='d-flex justify-content-center align-items-center'>{mappedReward.rewardCost} <FontAwesomeIcon icon={faStar} />
-                                                                </Col>
-                                                                <Col md={2}>
-                                                                    <Row>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faEdit} onClick={async () => handleShowEdit(Number(rewardId))} /></Col>
-                                                                        <Col md={6}><FontAwesomeIcon icon={faTrash} onClick={async () => handleDelete(Number(rewardId))} /></Col>
-                                                                    </Row>
-                                                                </Col>
-                                                            </div>
-                                                        </Row>)
-                                                    }
+                                {rewards.map((reward: object, idx: number) => {
+                                    let mappedReward: {
+                                        id?: number,
+                                        parentId?: number,
+                                        childId?: number,
+                                        reward?: string,
+                                        rewardCost?: number,
+                                        isDeleted?: boolean
+                                    } = {};
+                                    mappedReward = reward;
+                                    if (!mappedReward.isDeleted) {
+                                        let rewardId = mappedReward.id;
+                                        return (
+                                            <div key={idx} className='border-box text-task'>
+                                                <div className='d-flex justify-content-start'>
+                                                    <div>{mappedReward.reward}</div>
                                                 </div>
-                                            )
-                                        }
-                                    })
-                                }
+                                                <div className='d-flex justify-content-end align-items-center'>
+                                                    <span>{mappedReward.rewardCost}</span>
+                                                    <FontAwesomeIcon icon={faStar} />
+                                                    <FontAwesomeIcon icon={faEdit} className='edit-icon' onClick={async () => handleShowEdit(Number(rewardId))} />
+                                                    <FontAwesomeIcon icon={faTrash} className='trash-icon' onClick={async () => handleDelete(Number(rewardId))} />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                })}
                             </Col>
                         </Row>
 
@@ -211,17 +219,16 @@ export default function RewardCreator() {
                             </Col>
                         </Row>
 
-
                     </Col>
                 </Row>
             </Container>
-            <Modal show={showEdit} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Edit Task</Modal.Title>
+            <Modal className={failedEdit ? 'failedEdit' : ''} show={showEdit} onHide={handleEditClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>{failedEdit ? 'Could Not Edit Reward' : 'Edit Reward'}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body>
+                <Modal.Body className='bgColormodal'>
                     <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" defaultValue={rewardTextEdit} onChange={({ target: { value } }) => setRewardTextEdit(value)} />
-                    <Form.Select aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostEdit(Number(value))} >
+                    <Form.Select className='rounded-pill w-75 mx-auto mt-2' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostEdit(Number(value))} >
                         <option className='text-center' defaultValue={rewardCostEdit}>{rewardCostEdit} Star(s)</option>
                         <option className='text-center' value="1">1 Star</option>
                         <option className='text-center' value="2">2 Stars</option>
@@ -230,12 +237,23 @@ export default function RewardCreator() {
                         <option className='text-center' value="5">5 Stars</option>
                     </Form.Select>
                 </Modal.Body>
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={handleClose}>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleEditClose}>
                         Close
                     </Button>
-                    <Button variant="primary" onClick={handleEdit}>
+                    <Button variant="dark rounded-pill" onClick={handleEdit}>
                         Save Changes
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showModal} onHide={handleClose}>
+                <Modal.Header closeButton className='bgColormodal'>
+                    <Modal.Title>Could Not Create Reward</Modal.Title>
+                </Modal.Header>
+                <Modal.Footer className='bgColormodal'>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
+                        Okay
                     </Button>
                 </Modal.Footer>
             </Modal>
