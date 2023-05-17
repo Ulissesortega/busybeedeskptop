@@ -145,15 +145,20 @@ a:active {
 
 .ty{
   color: #FFC300 !important;
+  stroke: #FFC300 !important;
 }
 
 .navbar-toggler{
   border: 1px solid #FFC300 !important;
 }
 
-.navbar-toggler-icon{
+navbar-toggler-icon{
+  stroke: #FFC300 !important;
   color: #FFC300 !important;
+  background-color: red !important;
 }
+
+
 
 
 

@@ -11,7 +11,7 @@ export default function MyNavBar() {
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
                     <Navbar.Brand href="#home" className='ty'>Busy Bee!</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav ty" />
+                    <Navbar.Toggle aria-controls="responsive-navbar-nav " className='ty' />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mx-auto">
                             <Nav.Link className='ty' as={Link} to='/UsersDashboard'>DASHBOARD</Nav.Link>
