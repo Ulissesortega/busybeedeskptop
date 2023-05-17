@@ -43,7 +43,6 @@ export default function TaskAssigner() {
                 isDeleted: false
             }
             await CreateTask(task);
-            handleClose();
             reloadTasks();
         }
         setUpdateTaskList(updateTaskList + 1);

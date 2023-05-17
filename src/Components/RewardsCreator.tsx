@@ -54,6 +54,7 @@ export default function RewardCreator() {
         setRewardTextEdit(String(editReward.reward));
         setRewardCostEdit(Number(editReward.rewardCost));
         handleShow();
+        console.log(editReward);
     }
 
     const handleEdit = async () => {
@@ -66,9 +67,8 @@ export default function RewardCreator() {
                 id: editReward.id,
                 parentId: editReward.parentId,
                 childId: editReward.childId,
-                taskInstructions: rewardTextEdit,
-                taskReward: rewardCostEdit,
-                isCompleted: false,
+                reward: rewardTextEdit,
+                rewardCost: rewardCostEdit,
                 isDeleted: false
             }
             await UpdateReward(reward);
@@ -87,9 +87,8 @@ export default function RewardCreator() {
             id: deleteReward.id,
             parentId: deleteReward.parentId,
             childId: deleteReward.childId,
-            taskInstructions: deleteReward.reward,
-            taskReward: deleteReward.rewardCost,
-            isCompleted: false,
+            reward: deleteReward.reward,
+            rewardCost: deleteReward.rewardCost,
             isDeleted: false
         }
         await DeleteReward(reward);
