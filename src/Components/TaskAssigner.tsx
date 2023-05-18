@@ -3,10 +3,10 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask } from '../Services/DataService';
+import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, UpdateChildUserStarCount, GetChildUserData } from '../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import MyNavBar from './MyNavBar';
 
 export default function TaskAssigner() {
@@ -66,6 +66,20 @@ export default function TaskAssigner() {
         handleEditShow();
     }
 
+    const handleComplete = async (task: object) => {
+        let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
+        completeTask.isDeleted = true;
+        let childUserData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = JSON.parse(sessionStorage.UserData);
+        childUserData.currentStarCount = Number(childUserData.currentStarCount) + Number(completeTask.taskReward);
+        childUserData.totalStarCount = Number(childUserData.totalStarCount) + Number(completeTask.taskReward);
+        await UpdateChildUserStarCount(Number(childUserData.userId), true, Number(completeTask.taskReward));
+        sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(String(childUserData.userUsername))));
+        await DeleteTask(completeTask);
+        reloadTasks();
+        handleEditClose();
+        setUpdateTaskList(updateTaskList + 1);
+    }
+
     const handleEdit = async () => {
         if (!taskInstructionsEdit || !taskRewardEdit) {
             setFailedEdit(true);
@@ -86,6 +100,15 @@ export default function TaskAssigner() {
             sessionStorage.removeItem("TaskToEdit");
             handleEditClose();
         }
+        setUpdateTaskList(updateTaskList + 1);
+    }
+
+    const handleIncomplete = async (task: object) => {
+        let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
+        completeTask.isCompleted = false;
+        await UpdateTask(completeTask);
+        reloadTasks();
+        handleEditClose();
         setUpdateTaskList(updateTaskList + 1);
     }
 
@@ -183,6 +206,7 @@ export default function TaskAssigner() {
                         <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
                         <Row>
                             <Col>
+                                <p className='btn-title text-center'>Completed Tasks</p>
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: {
                                         childId?: number,
@@ -194,7 +218,40 @@ export default function TaskAssigner() {
                                         taskReward?: number
                                     } = {};
                                     mappedTask = task;
-                                    if (!mappedTask.isDeleted) {
+                                    if (!mappedTask.isDeleted && mappedTask.isCompleted) {
+                                        let taskId = mappedTask.id;
+                                        return (
+                                            <div key={idx} className='border-box text-task'>
+                                                <div className='d-flex justify-content-start'>
+                                                    <div>{mappedTask.taskInstructions}</div>
+                                                </div>
+                                                <div className='d-flex justify-content-end align-items-center'>
+                                                    <span>{mappedTask.taskReward}</span>
+                                                    <FontAwesomeIcon icon={faStar} />
+                                                    <FontAwesomeIcon icon={faCheck} className='edit-icon' onClick={async () => handleComplete(mappedTask)} />
+                                                    <FontAwesomeIcon icon={faX} className='trash-icon' onClick={async () => handleIncomplete(mappedTask)} />
+                                                </div>
+                                            </div>
+                                        );
+                                    }
+                                })}
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col>
+                                <p className='btn-title text-center'>Assigned Tasks</p>
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: {
+                                        childId?: number,
+                                        id?: number,
+                                        isCompleted?: boolean,
+                                        isDeleted?: boolean,
+                                        parentId?: number,
+                                        taskInstructions?: string,
+                                        taskReward?: number
+                                    } = {};
+                                    mappedTask = task;
+                                    if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
                                         let taskId = mappedTask.id;
                                         return (
                                             <div key={idx} className='border-box text-task'>
