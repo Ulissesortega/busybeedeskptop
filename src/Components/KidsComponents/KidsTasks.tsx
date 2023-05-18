@@ -100,13 +100,13 @@ export default function KidsTasks() {
                 }
               })}
               {!taskNum ? (<p className='btn-title text-center d-none d-sm-block'>Let Your BeeKeeper Know Youve Done All Your Tasks!</p>) : (null)}
-          </Col>
-        </Row>
         <Row>
           <Col className='right-title mt-2'>
             <Link to="/KidsRewards">
               <button className='btn-format rounded-pill mt-3'>Check Rewards</button>
             </Link>
+          </Col>
+        </Row>
           </Col>
         </Row>
       </Container>
