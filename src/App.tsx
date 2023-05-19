@@ -21,6 +21,7 @@ import KidsRewards from './Components/KidsComponents/KidsRewards';
 import BeeInfo from './Components/UserComponents/BeeInfo'
 import AllTasks from './Components/AllTasks';
 import AllRewards from './Components/AllRewards';
+import KidsNavBar from './Components/KidsNavBar'
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});
@@ -58,6 +59,7 @@ function App() {
           <Route path='/BeeInfo' element={<BeeInfo/>} />  
           <Route path='/AllTasks' element={<AllTasks/>} />  
           <Route path='/AllRewards' element={<AllRewards/>} />  
+          <Route path='/KidsNavBar' element={<KidsNavBar />} />
         </Routes>
       </BrowserRouter>
     </MyContext.Provider>

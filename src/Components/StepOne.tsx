@@ -64,30 +64,35 @@ export default function StepOne() {
 
 
                         <Row>
-                            <Col className='d-flex justify-content-center mt-xl-44'>
+                            <Col xs={4} className='d-flex justify-content-center mt-xl-3'>
                                 <img className='img-fluid' src={require('../Assets/BeeGirl.png')} alt="Logo" width={175} />
                             </Col>
 
-                            <Col className='d-flex justify-content-center mt-xl-3'>
+                            <Col xs={4} className='d-flex justify-content-center mt-xl-3'>
                                 <img className='img-fluid' src={require('../Assets/BeeBoy.png')} alt="Logo" width={175} />
                             </Col>
-                            <Col className='d-flex justify-content-center mt-xl-3'>
-                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} alt="Logo" width={175} />
+                            <Col xs={4} className='image-container'>
+                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} alt="Logo" />
                             </Col>
                         </Row>
 
-                        <Row>
-                            <Col className='d-flex justify-content-center'>
+                        <Row clas>
+                            <Col xs={4} className='d-flex justify-content-center'>
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowBee}>Bow Bee!</button>
                             </Col>
 
-                            <Col className='d-flex justify-content-center'>
+                            <Col xs={4} className='d-flex justify-content-center'>
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowTieBee}>Tie Bee!</button>
                             </Col>
-                            <Col className='d-flex justify-content-center'>
-                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Honey Comb!</button>
+
+                            <Col xs={4} className='d-flex justify-content-center'>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Comb!</button>
                             </Col>
                         </Row>
+
+
+
+
 
                     </Col>
                 </Row>

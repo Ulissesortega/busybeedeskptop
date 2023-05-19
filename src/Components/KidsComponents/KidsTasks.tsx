@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import { GetTasksByParentAndChildId, UpdateTask, GetChildUserData } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import KidsNavBar from '../KidsNavBar'
 
 export default function KidsTasks() {
   let userData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -46,8 +47,8 @@ export default function KidsTasks() {
   }, [updateTaskList])
   return (
     <div className='bgColor'>
+      <KidsNavBar/>
       <Container>
-
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
@@ -55,7 +56,7 @@ export default function KidsTasks() {
             <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
             <p className='btn-title text-center'>Welcome, please check<br /> Today's tasks.<br /></p>
             <Row>
-              <Col className='text-center'>
+              <Col className='d-flex justify-content-center'>
                 <img className='image-radius img-fluid d-none d-sm-block' src={require('../../Assets/Beetasks.png')} alt="Logo" width={350} />
               </Col>
             </Row>
@@ -70,6 +71,9 @@ export default function KidsTasks() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>
+            <div  className='d-flex justify-content-center'>
+            <img className='img-fluid-lg-none d-xl-block d-xl-none' src={require('../../Assets/Medal.png')} alt="Logo" width={100} />     
+            </div>
             <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
             <p className='btn-title text-center d-none d-sm-block'>Looking forward to complete these tasks:</p>
             {

@@ -165,6 +165,11 @@ export default function TaskAssigner() {
                                     <option className='text-center' value="3">3 Stars</option>
                                     <option className='text-center' value="4">4 Stars</option>
                                     <option className='text-center' value="5">5 Stars</option>
+                                    <option className='text-center' value="6">6 Stars</option>
+                                    <option className='text-center' value="7">7 Stars</option>
+                                    <option className='text-center' value="8">8 Stars</option>
+                                    <option className='text-center' value="9">9 Stars</option>
+                                    <option className='text-center' value="10">10 Stars</option>
                                 </Form.Select>
                             </Col>
                         </Row>
@@ -186,11 +191,9 @@ export default function TaskAssigner() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>
-                        <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
+                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>                        
                         <Row>
-                            <Col>
-                                <p className='btn-title text-center'>Completed Tasks</p>
+                            <Col>                                
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: {
                                         childId?: number,

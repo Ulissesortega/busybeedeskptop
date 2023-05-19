@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { GetRewardsByParentAndChildId, UpdateTask, UpdateChildUserStarCount, GetChildUserData } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import KidsNavBar from '../KidsNavBar'
+
 
 export default function KidsRewards() {
     let userData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -34,7 +36,7 @@ export default function KidsRewards() {
             await reloadRewards();
             setUpdateRewardList(updateRewardList + 1);
         } else {
-            alert('Cannot Claim Reward');   
+            alert('Cannot Claim Reward');
         }
         handleClose();
     }
@@ -51,8 +53,8 @@ export default function KidsRewards() {
     }, [updateRewardList])
     return (
         <div className='bgColor'>
+            <KidsNavBar />
             <Container>
-
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
@@ -60,7 +62,7 @@ export default function KidsRewards() {
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <p className='btn-title text-center'>Welcome, here are<br /> your Rewards!<br /></p>
                         <Row>
-                            <Col className='text-center'>
+                            <Col className='d-flex justify-content-center'>
                                 <img className='image-radius img-fluid d-none d-sm-block' src={require('../../Assets/Beetasks.png')} alt="Logo" width={350} />
                             </Col>
                         </Row>
@@ -75,6 +77,9 @@ export default function KidsRewards() {
                     {/* Right Side */}
                     <Col xl={5}>
                         <h1 className='right-title d-none d-sm-block'>Rewards!</h1>
+                        <div className='d-flex justify-content-center'>
+                            <img className='img-fluid-lg-none d-xl-block d-xl-none' src={require('../../Assets/Medal.png')} alt="Logo" width={100} />
+                        </div>
                         <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
                         <p className='btn-title text-center d-none d-sm-block'>Looking forward to claim these:</p>
                         {
@@ -104,13 +109,13 @@ export default function KidsRewards() {
                                 }
                             })
                         }
-                <Row>
-                    <Col className='right-title mt-2'>
-                        <Link to="/KidsTasks">
-                            <button className='btn-format rounded-pill mt-3'>Check Tasks</button>
-                        </Link>
-                    </Col>
-                </Row>
+                        <Row>
+                            <Col className='right-title mt-2'>
+                                <Link to="/KidsTasks">
+                                    <button className='btn-format rounded-pill mt-3'>Check Tasks</button>
+                                </Link>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>
