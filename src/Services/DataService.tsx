@@ -235,7 +235,7 @@ async function DeleteReward(reward: object) {
 }
 
 async function GetRewardsByParentId(parentId?: number) {
-    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardssByParentId/${parentId}`)
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardsByParentId/${parentId}`)
     let data = await res.json();
     return data;
 }
