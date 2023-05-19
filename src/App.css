@@ -197,3 +197,14 @@ navbar-toggler-icon{
     transform: translateX(2px);
   }
 }
+
+@media screen and (min-width: 390px) {
+  .btn-format {
+    font-size: 30px;
+    font-style: italic;
+    width: 65%;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
+  }
+}
