@@ -191,22 +191,13 @@ export default function TaskAssigner() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>                        
+                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>
                         <Row>
-                            <Col>                                
+                            <Col>
                                 {tasks.map((task: object, idx: number) => {
-                                    let mappedTask: {
-                                        childId?: number,
-                                        id?: number,
-                                        isCompleted?: boolean,
-                                        isDeleted?: boolean,
-                                        parentId?: number,
-                                        taskInstructions?: string,
-                                        taskReward?: number
-                                    } = {};
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
                                     if (!mappedTask.isDeleted && mappedTask.isCompleted) {
-                                        let taskId = mappedTask.id;
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
@@ -282,6 +273,11 @@ export default function TaskAssigner() {
                         <option className='text-center' value="3">3 Stars</option>
                         <option className='text-center' value="4">4 Stars</option>
                         <option className='text-center' value="5">5 Stars</option>
+                        <option className='text-center' value="6">6 Stars</option>
+                        <option className='text-center' value="7">7 Stars</option>
+                        <option className='text-center' value="8">8 Stars</option>
+                        <option className='text-center' value="9">9 Stars</option>
+                        <option className='text-center' value="10">10 Stars</option>
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer className='bgColormodal'>

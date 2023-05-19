@@ -186,14 +186,7 @@ export default function RewardCreator() {
                         <Row>
                             <Col>
                                 {rewards.map((reward: object, idx: number) => {
-                                    let mappedReward: {
-                                        id?: number,
-                                        parentId?: number,
-                                        childId?: number,
-                                        reward?: string,
-                                        rewardCost?: number,
-                                        isDeleted?: boolean
-                                    } = {};
+                                    let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
                                     mappedReward = reward;
                                     if (!mappedReward.isDeleted) {
                                         let rewardId = mappedReward.id;
