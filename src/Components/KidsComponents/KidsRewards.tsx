@@ -36,7 +36,7 @@ export default function KidsRewards() {
             await reloadRewards();
             setUpdateRewardList(updateRewardList + 1);
         } else {
-            alert('Cannot Claim Reward');   
+            alert('Cannot Claim Reward');
         }
         handleClose();
     }
@@ -53,7 +53,7 @@ export default function KidsRewards() {
     }, [updateRewardList])
     return (
         <div className='bgColor'>
-            <KidsNavBar/>
+            <KidsNavBar />
             <Container>
                 {/* Left-Side */}
                 <Row>
@@ -76,7 +76,10 @@ export default function KidsRewards() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='right-title d-none d-sm-block'>Rewards!</h1>                        
+                        <h1 className='right-title d-none d-sm-block'>Rewards!</h1>
+                        <div className='d-flex justify-content-center'>
+                            <img className='img-fluid-lg-none d-xl-block d-xl-none' src={require('../../Assets/Medal.png')} alt="Logo" width={100} />
+                        </div>
                         <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
                         <p className='btn-title text-center d-none d-sm-block'>Looking forward to claim these:</p>
                         {
@@ -106,13 +109,13 @@ export default function KidsRewards() {
                                 }
                             })
                         }
-                <Row>
-                    <Col className='right-title mt-2'>
-                        <Link to="/KidsTasks">
-                            <button className='btn-format rounded-pill mt-3'>Check Tasks</button>
-                        </Link>
-                    </Col>
-                </Row>
+                        <Row>
+                            <Col className='right-title mt-2'>
+                                <Link to="/KidsTasks">
+                                    <button className='btn-format rounded-pill mt-3'>Check Tasks</button>
+                                </Link>
+                            </Col>
+                        </Row>
                     </Col>
                 </Row>
             </Container>

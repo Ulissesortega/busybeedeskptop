@@ -70,7 +70,10 @@ export default function KidsTasks() {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>     
+            <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>
+            <div  className='d-flex justify-content-center'>
+            <img className='img-fluid-lg-none d-xl-block d-xl-none' src={require('../../Assets/Medal.png')} alt="Logo" width={100} />     
+            </div>
             <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
             <p className='btn-title text-center d-none d-sm-block'>Looking forward to complete these tasks:</p>
             {
