@@ -181,6 +181,11 @@ export default function TaskAssigner() {
                                     <option className='text-center' value="3">3 Stars</option>
                                     <option className='text-center' value="4">4 Stars</option>
                                     <option className='text-center' value="5">5 Stars</option>
+                                    <option className='text-center' value="6">6 Stars</option>
+                                    <option className='text-center' value="7">7 Stars</option>
+                                    <option className='text-center' value="8">8 Stars</option>
+                                    <option className='text-center' value="9">9 Stars</option>
+                                    <option className='text-center' value="10">10 Stars</option>
                                 </Form.Select>
                             </Col>
                         </Row>
