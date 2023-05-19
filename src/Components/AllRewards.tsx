@@ -3,13 +3,13 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward } from '../Services/DataService';
+import { CreateReward, GetRewardsByParentId, UpdateReward, GetRewardById, DeleteReward, GetChildUserDataById } from '../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
-import { faTrash, faStar } from '@fortawesome/free-solid-svg-icons';
+import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import MyNavBar from './MyNavBar';
 
-export default function RewardCreator() {
+export default function AllRewards() {
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -22,6 +22,9 @@ export default function RewardCreator() {
         setFailedEdit(false);
     };
 
+    const [bees, setBees] = useState<object[]>([]);
+
+    const [childIdCreate, setChildIdCreate] = useState<number>(0);
     const [rewardTextCreate, setRewardTextCreate] = useState<string>('');
     const [rewardCostCreate, setRewardCostCreate] = useState<number>(0);
     const [rewards, setRewards] = useState<object[]>([]);
@@ -31,25 +34,13 @@ export default function RewardCreator() {
 
     const [updateRewardList, setUpdateRewardList] = useState<number>(0);
 
-    let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-    childData = JSON.parse(sessionStorage.UserData);
-
     const handleSubmit = async () => {
-        if (!rewardTextCreate || !rewardCostCreate) {
+        if (!rewardTextCreate || !rewardCostCreate || !childIdCreate) {
             handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
-            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-            childData = JSON.parse(sessionStorage.UserData);
-            let reward = {
-                id: 0,
-                parentId: parentData.adultUserId,
-                childId: childData.userId,
-                Reward: rewardTextCreate,
-                RewardCost: rewardCostCreate,
-                isDeleted: false
-            }
+            let reward = { id: 0, parentId: parentData.adultUserId, childId: childIdCreate, Reward: rewardTextCreate, RewardCost: rewardCostCreate, isDeleted: false }
             await CreateReward(reward);
             reloadRewards();
         }
@@ -60,10 +51,9 @@ export default function RewardCreator() {
         sessionStorage.setItem("RewardToEdit", JSON.stringify(await GetRewardById(rewardId)));
         let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
         editReward = JSON.parse(sessionStorage.RewardToEdit)
-        setRewardTextEdit(String(editReward.reward));
-        setRewardCostEdit(Number(editReward.rewardCost));
+        setRewardTextCreate(String(editReward.reward));
+        setRewardCostCreate(Number(editReward.rewardCost));
         handleEditShow();
-        console.log(editReward);
     }
 
     const handleEdit = async () => {
@@ -72,14 +62,7 @@ export default function RewardCreator() {
         } else {
             let editReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
             editReward = JSON.parse(sessionStorage.RewardToEdit)
-            let reward = {
-                id: editReward.id,
-                parentId: editReward.parentId,
-                childId: editReward.childId,
-                reward: rewardTextEdit,
-                rewardCost: rewardCostEdit,
-                isDeleted: false
-            }
+            let reward = { id: editReward.id, parentId: editReward.parentId, childId: editReward.childId, reward: editReward.reward, rewardCost: editReward.rewardCost, isDeleted: editReward.isDeleted }
             await UpdateReward(reward);
             reloadRewards();
             sessionStorage.removeItem("RewardToEdit");
@@ -92,14 +75,7 @@ export default function RewardCreator() {
         sessionStorage.setItem("RewardToDelete", JSON.stringify(await GetRewardById(rewardId)));
         let deleteReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
         deleteReward = JSON.parse(sessionStorage.RewardToDelete)
-        let reward = {
-            id: deleteReward.id,
-            parentId: deleteReward.parentId,
-            childId: deleteReward.childId,
-            reward: deleteReward.reward,
-            rewardCost: deleteReward.rewardCost,
-            isDeleted: false
-        }
+        let reward = { id: deleteReward.id, parentId: deleteReward.parentId, childId: deleteReward.childId, reward: deleteReward.reward, rewardCost: deleteReward.rewardCost, isDeleted: deleteReward.isDeleted }
         await DeleteReward(reward);
         reloadRewards();
         sessionStorage.removeItem("RewardToDelete");
@@ -110,15 +86,17 @@ export default function RewardCreator() {
     const reloadRewards = async () => {
         let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
         parentData = JSON.parse(sessionStorage.AdminData);
-        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-        childData = JSON.parse(sessionStorage.UserData);
-        sessionStorage.setItem("Rewards", JSON.stringify(await GetRewardsByParentAndChildId(parentData.adultUserId, childData.userId)));
-        setRewards(JSON.parse(sessionStorage.Rewards));
+        sessionStorage.setItem("AllRewards", JSON.stringify(await GetRewardsByParentId(parentData.adultUserId)));
+        setRewards(JSON.parse(sessionStorage.AllRewards));
     }
 
     useEffect(() => {
         reloadRewards();
     }, [updateRewardList])
+
+    useEffect(() => {
+        setBees(JSON.parse(sessionStorage.ChildUsers))
+    }, [])
 
     return (
         <div className='bgColor'>
@@ -128,11 +106,26 @@ export default function RewardCreator() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername}!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
                                 <h1 className='btn-title text-center'>Step 3</h1>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Form.Label className='btn-title'>Select a Bee!</Form.Label>
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
+                                    <option className='text-center'>Options</option>
+                                    {bees.map((bee: object, idx: number) => {
+                                        let mappedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+                                        mappedBee = bee;
+                                        return (
+                                            <option key={idx} className='text-center' value={mappedBee.id}>{mappedBee.username}</option>
+                                        );
+                                    })}
+                                </Form.Select>
                             </Col>
                         </Row>
 
@@ -159,7 +152,7 @@ export default function RewardCreator() {
                                     <option className='text-center' value="7">7 Stars</option>
                                     <option className='text-center' value="8">8 Stars</option>
                                     <option className='text-center' value="9">9 Stars</option>
-                                    <option className='text-center' value="10">10 Stars</option>                                    
+                                    <option className='text-center' value="10">10 Stars</option>
                                 </Form.Select>
                             </Col>
                         </Row>
@@ -181,7 +174,7 @@ export default function RewardCreator() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Available Rewards Rewards</h1>
+                        <h1 className='left-title d-none d-sm-block'>All Available Rewards Rewards</h1>
 
                         <Row>
                             <Col>
@@ -236,7 +229,7 @@ export default function RewardCreator() {
                         <option className='text-center' value="7">7 Stars</option>
                         <option className='text-center' value="8">8 Stars</option>
                         <option className='text-center' value="9">9 Stars</option>
-                        <option className='text-center' value="10">10 Stars</option>                        
+                        <option className='text-center' value="10">10 Stars</option>
                     </Form.Select>
                 </Modal.Body>
                 <Modal.Footer className='bgColormodal'>
