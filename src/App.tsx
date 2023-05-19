@@ -19,6 +19,8 @@ import TempPassword from './Components/PasswordRecovery/TempPassword'
 import KidsTasks from './Components/KidsComponents/KidsTasks';
 import KidsRewards from './Components/KidsComponents/KidsRewards';
 import BeeInfo from './Components/UserComponents/BeeInfo'
+import AllTasks from './Components/AllTasks';
+import AllRewards from './Components/AllRewards';
 
 function App() {
   const [adminData, setAdminData] = useState<object>({});
@@ -54,6 +56,8 @@ function App() {
           <Route path='/KidsTasks' element={<KidsTasks/>}/>  
           <Route path='/KidsRewards' element={<KidsRewards />} />
           <Route path='/BeeInfo' element={<BeeInfo/>} />  
+          <Route path='/AllTasks' element={<AllTasks/>} />  
+          <Route path='/AllRewards' element={<AllRewards/>} />  
         </Routes>
       </BrowserRouter>
     </MyContext.Provider>
