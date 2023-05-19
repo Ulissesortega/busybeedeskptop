@@ -154,7 +154,7 @@ export default function TaskAssigner() {
                 <Row>
                     <Col sm={12} md={12} xl={5}>
                         <h1 className='left-title d-none d-sm-block'>{childData.userUsername}!</h1>
-                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
                         <Row>
                             <Col>
                                 <h1 className='btn-title text-center'>Step 2</h1>
@@ -207,11 +207,10 @@ export default function TaskAssigner() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>
-                        <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
+                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>                        
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Completed Tasks</p>
+                                
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: {
                                         childId?: number,
