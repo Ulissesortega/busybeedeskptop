@@ -86,7 +86,7 @@ export default function StepOne() {
                             </Col>
 
                             <Col xs={4} className='d-flex justify-content-center'>
-                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>comb!</button>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Comb!</button>
                             </Col>
                         </Row>
 
