@@ -156,6 +156,11 @@ export default function RewardCreator() {
                                     <option className='text-center' value="3">3 Stars</option>
                                     <option className='text-center' value="4">4 Stars</option>
                                     <option className='text-center' value="5">5 Stars</option>
+                                    <option className='text-center' value="6">6 Stars</option>
+                                    <option className='text-center' value="7">6 Stars</option>
+                                    <option className='text-center' value="8">6 Stars</option>
+                                    <option className='text-center' value="9">6 Stars</option>
+                                    <option className='text-center' value="10">6 Stars</option>                                    
                                 </Form.Select>
                             </Col>
                         </Row>

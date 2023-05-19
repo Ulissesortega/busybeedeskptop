@@ -62,7 +62,7 @@ export default function KidsRewards() {
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <p className='btn-title text-center'>Welcome, here are<br /> your Rewards!<br /></p>
                         <Row>
-                            <Col className='text-center'>
+                            <Col className='d-flex justify-content-center'>
                                 <img className='image-radius img-fluid d-none d-sm-block' src={require('../../Assets/Beetasks.png')} alt="Logo" width={350} />
                             </Col>
                         </Row>
