@@ -45,7 +45,7 @@
 }
 
 .btn-format {
-  font-size: 25px;
+  font-size: 35px;
   font-style: italic;
   width: 50%;
   background-color: black;
@@ -69,7 +69,7 @@
 .small-btn-format {
   font-size: 25px;
   font-style: italic;
-  width: 135px;
+  width: 115px;
   background-color: black;
   color: white;
   border-radius: 15px;
@@ -102,6 +102,20 @@ a:active {
   text-decoration: none;
   color: black;
 }
+
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.image-container img {
+  width: 150%;
+  max-width: 400px;
+  height: auto;
+}
+
 
 .border-box {
   border-top: 2px solid black;

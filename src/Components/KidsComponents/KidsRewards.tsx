@@ -76,7 +76,7 @@ export default function KidsRewards() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='right-title d-none d-sm-block'>Rewards!</h1>
+                        <h1 className='right-title d-none d-sm-block'>Rewards!</h1>                        
                         <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
                         <p className='btn-title text-center d-none d-sm-block'>Looking forward to claim these:</p>
                         {

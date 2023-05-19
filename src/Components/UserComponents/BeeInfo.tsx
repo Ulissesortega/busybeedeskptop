@@ -65,8 +65,8 @@ export default function Template() {
                         <Row>
                             <Col className='mt-1 mt-sm-1 mt-xl-3 text-center'>
                                 <p className='btn-title text-center '><span className='text-bold'>BeeKeeper in duty!</span></p>
-                                <img className='img-fluid d-none d-sm-block mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={200} />
-                                <img className='img-fluid d-block d-sm-none mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={200} />
+                                <img className='img-fluid d-none d-sm-block mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={100} />
+                                <img className='img-fluid d-block d-sm-none mx-auto' src={ parentData.avatarLook === 'Masc' ? beeKeeperMImg : parentData.avatarLook === 'Fem' ? beeKeeperFImg : honeyComb } alt="Logo" width={150} />
                             </Col>
                         </Row>
                     </Col>
@@ -89,7 +89,7 @@ export default function Template() {
                         <Row>
                             <Col className='d-flex justify-content-center'>
                             <img className='img-fluid d-none d-sm-block' src={createBee === 'BowBee' ? BowBee : createBee === 'BowTieBee' ? BowTieBee : HoneyComb} alt="Logo" width={200} />
-                                <img className='img-fluid d-block d-sm-none' src={createBee === 'BowBee' ? BowBee : createBee === 'BowTieBee' ? BowTieBee : HoneyComb} alt="Logo" width={200} />
+                                <img className='img-fluid d-block d-sm-none' src={createBee === 'BowBee' ? BowBee : createBee === 'BowTieBee' ? BowTieBee : HoneyComb} alt="Logo" width={150} />
                             </Col>
                         </Row>
 
