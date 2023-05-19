@@ -77,16 +77,16 @@ export default function StepOne() {
                         </Row>
 
                         <Row clas>
-                            <Col xs={4}>
+                            <Col xs={4} className='d-flex justify-content-center'>
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowBee}>Bow Bee!</button>
                             </Col>
 
-                            <Col xs={4} >
+                            <Col xs={4} className='d-flex justify-content-center'>
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildBowTieBee}>Tie Bee!</button>
                             </Col>
 
-                            <Col xs={4} >
-                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Honey Comb!</button>
+                            <Col xs={4} className='d-flex justify-content-center'>
+                                <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>comb!</button>
                             </Col>
                         </Row>
 

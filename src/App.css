@@ -31,6 +31,9 @@
   margin-top: 25%;
   text-align: center;
   font-style: italic;
+  font-size: 55px;
+  font-weight: bold;
+  color: #901d1c;
 }
 
 .right-title {
@@ -45,7 +48,7 @@
 }
 
 .btn-format {
-  font-size: 35px;
+  font-size: 30px;
   font-style: italic;
   width: 50%;
   background-color: black;
