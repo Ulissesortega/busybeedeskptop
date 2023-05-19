@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom'
 import { GetRewardsByParentAndChildId, UpdateTask, UpdateChildUserStarCount, GetChildUserData } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import KidsNavBar from '../KidsNavBar'
+
 
 export default function KidsRewards() {
     let userData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -51,8 +53,8 @@ export default function KidsRewards() {
     }, [updateRewardList])
     return (
         <div className='bgColor'>
+            <KidsNavBar/>
             <Container>
-
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>

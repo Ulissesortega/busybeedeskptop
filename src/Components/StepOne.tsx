@@ -72,7 +72,7 @@ export default function StepOne() {
                                 <img className='img-fluid' src={require('../Assets/BeeBoy.png')} alt="Logo" width={175} />
                             </Col>
                             <Col className='d-flex justify-content-center mt-xl-3'>
-                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} alt="Logo" width={175} />
+                                <img className='img-fluid' src={require('../Assets/CartoonHoneyComb.png')} width={200}alt="Logo"  />
                             </Col>
                         </Row>
 

@@ -2,13 +2,16 @@ import { useState, useEffect } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Button, Form, Modal } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-import { GetTasksByParentAndChildId, UpdateTask, UpdateChildUserStarCount, GetChildUserData } from '../../Services/DataService';
+import { GetTasksByParentAndChildId, UpdateTask, GetChildUserData } from '../../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar, faCheck } from '@fortawesome/free-solid-svg-icons';
+import KidsNavBar from '../KidsNavBar'
 
 export default function KidsTasks() {
   let userData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
   userData = JSON.parse(sessionStorage.UserData);
+
+  let taskNum: number = 0;
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -27,13 +30,6 @@ export default function KidsTasks() {
     let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
     completeTask.isCompleted = true;
     await UpdateTask(completeTask);
-    let childUserData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-    childUserData = JSON.parse(sessionStorage.UserData);
-    childUserData.currentStarCount = Number(childUserData.currentStarCount) + Number(completeTask.taskReward);
-    childUserData.totalStarCount = Number(childUserData.totalStarCount) + Number(completeTask.taskReward);
-    await UpdateChildUserStarCount(Number(childUserData.userId), true, Number(completeTask.taskReward));
-    sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(String(userData.userUsername))));
-    await GetChildUserData(String(userData.userUsername));
     await reloadTasks();
     setUpdateTaskList(updateTaskList + 1);
     handleClose();
@@ -51,8 +47,8 @@ export default function KidsTasks() {
   }, [updateTaskList])
   return (
     <div className='bgColor'>
+      <KidsNavBar/>
       <Container>
-
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>
@@ -82,6 +78,7 @@ export default function KidsTasks() {
                 let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                 mappedTask = task;
                 if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
+                  taskNum++;
                   return (
                     <div key={idx}>
                       {
@@ -102,8 +99,8 @@ export default function KidsTasks() {
                     </div>
                   )
                 }
-              })
-            }
+              })}
+              {!taskNum ? (<p className='btn-title text-center d-none d-sm-block'>Let Your BeeKeeper Know Youve Done All Your Tasks!</p>) : (null)}
         <Row>
           <Col className='right-title mt-2'>
             <Link to="/KidsRewards">
