@@ -117,14 +117,14 @@ export default function KidsTasks() {
         </Row>
       </Container>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className='bgColormodal' closeButton>
           <Modal.Title>Complete Task?</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
             No
           </Button>
-          <Button variant="primary" onClick={() => handleComplete(completeTask)}>
+          <Button variant="dark rounded-pill" onClick={() => handleComplete(completeTask)}>
             Yes
           </Button>
         </Modal.Footer>

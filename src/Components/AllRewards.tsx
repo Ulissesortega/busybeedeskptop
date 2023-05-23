@@ -178,6 +178,7 @@ export default function AllRewards() {
 
                         <Row>
                             <Col>
+                            <p className='btn-title text-center'></p>
                                 {rewards.map((reward: object, idx: number) => {
                                     let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
                                     mappedReward = reward;
