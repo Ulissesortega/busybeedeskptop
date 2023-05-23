@@ -15,8 +15,8 @@ export default function MyNavBar() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="mx-auto">
                             <Nav.Link className='ty' as={Link} to='/UsersDashboard'>DASHBOARD</Nav.Link>
-                            <Nav.Link className='ty' as={Link} to='/TaskAssigner'>TASKS</Nav.Link>
-                            <Nav.Link className='ty' as={Link} to='/RewardsCreator'>REWARDS</Nav.Link>
+                            <Nav.Link className='ty' as={Link} to='/AllTasks'>TASKS</Nav.Link>
+                            <Nav.Link className='ty' as={Link} to='/AllRewards'>REWARDS</Nav.Link>
                             <Nav.Link className='ty' as={Link} to='/'>LOGOUT</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>

@@ -100,6 +100,12 @@ async function UpdateChildUserStarCount(userId: number, task: boolean, stars: nu
     return data;
 }
 
+async function GetChildUserDataById(id: number) {
+    const result = await fetch(`https://busybeeapi.azurewebsites.net/ChildUser/ChildUserById/${id}`);
+    let data = await result.json();
+    return data;
+}
+
 // Task Fetches
 async function CreateTask(task: object) {
     const result = await fetch('https://busybeeapi.azurewebsites.net/Task/CreateTask', {
@@ -158,6 +164,12 @@ async function DeleteTask(task: object) {
         throw new Error(message);
     }
     let data = await result.json();
+    return data;
+}
+
+async function GetTasksByParentId(parentId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Task/GetTasksByParentId/${parentId}`)
+    let data = await res.json();
     return data;
 }
 
@@ -222,4 +234,10 @@ async function DeleteReward(reward: object) {
     return data;
 }
 
-export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, UpdateChildUserStarCount, CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward }
+async function GetRewardsByParentId(parentId?: number) {
+    let res = await fetch(`https://busybeeapi.azurewebsites.net/Reward/GetRewardsByParentId/${parentId}`)
+    let data = await res.json();
+    return data;
+}
+
+export { CreateAdultAccount, AdultLogin, GetAdultUserData, CreateChildAccount, ChildLogin, GetChildUserData, GetChildrenUsersByParentId, UpdateChildUserStarCount, GetChildUserDataById, CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, GetTasksByParentId, CreateReward, GetRewardsByParentAndChildId, UpdateReward, GetRewardById, DeleteReward, GetRewardsByParentId }

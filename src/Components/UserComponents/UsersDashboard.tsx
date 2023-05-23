@@ -44,7 +44,7 @@ export default function UsersDashboard() {
             <h1 className='left-title d-none d-sm-block'>Hi {parentData.fullName}!</h1>
             <h1 className='Mobile-Title-format d-block d-sm-none mt-3 d-none d-sm-block'>Busy Bee!</h1>
             <p className='btn-title text-center d-none d-sm-block'>From here You'll be able to<br /> manage your Busy Bee(s)</p>
-            <Col className='text-center'>
+            <Col className='d-flex justify-content-center'>
               <img className='image-radius img-fluid d-none d-sm-block' src={require('../../Assets/bees.png')} alt="Logo" width={350} />
             </Col>
           </Col>

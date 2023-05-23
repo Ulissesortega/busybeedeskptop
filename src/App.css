@@ -31,6 +31,9 @@
   margin-top: 25%;
   text-align: center;
   font-style: italic;
+  font-size: 55px;
+  font-weight: bold;
+  color: #901d1c;
 }
 
 .right-title {
@@ -45,7 +48,7 @@
 }
 
 .btn-format {
-  font-size: 25px;
+  font-size: 30px;
   font-style: italic;
   width: 50%;
   background-color: black;
@@ -69,7 +72,7 @@
 .small-btn-format {
   font-size: 25px;
   font-style: italic;
-  width: 135px;
+  width: 115px;
   background-color: black;
   color: white;
   border-radius: 15px;
@@ -102,6 +105,20 @@ a:active {
   text-decoration: none;
   color: black;
 }
+
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
+
+.image-container img {
+  width: 150%;
+  max-width: 400px;
+  height: auto;
+}
+
 
 .border-box {
   border-top: 2px solid black;
@@ -178,5 +195,16 @@ a:active {
   transform: translateX(-4px);
   } 100% {
     transform: translateX(2px);
+  }
+}
+
+@media screen and (min-width: 390px) {
+  .btn-format {
+    font-size: 30px;
+    font-style: italic;
+    width: 65%;
+    background-color: black;
+    color: white;
+    border-radius: 15px;
   }
 }

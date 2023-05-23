@@ -42,6 +42,8 @@ export default function KidsTasks() {
     setTasks(JSON.parse(sessionStorage.Tasks));
   }
 
+  
+
   useEffect(() => {
     reloadTasks();
   }, [updateTaskList])
@@ -56,7 +58,7 @@ export default function KidsTasks() {
             <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
             <p className='btn-title text-center'>Welcome, please check<br /> Today's tasks.<br /></p>
             <Row>
-              <Col className='text-center'>
+              <Col className='d-flex justify-content-center'>
                 <img className='image-radius img-fluid d-none d-sm-block' src={require('../../Assets/Beetasks.png')} alt="Logo" width={350} />
               </Col>
             </Row>
@@ -71,6 +73,9 @@ export default function KidsTasks() {
           {/* Right Side */}
           <Col xl={5}>
             <h1 className='right-title d-none d-sm-block'>Today's Tasks!</h1>
+            <div  className='d-flex justify-content-center'>
+            <img className='img-fluid-lg-none d-xl-block d-xl-none' src={require('../../Assets/BeeTaskList.png')} alt="Logo" width={100} />     
+            </div>
             <h1 className='text-task d-sm-block'>Total Stars: {userData.currentStarCount}<FontAwesomeIcon icon={faStar} /></h1>
             <p className='btn-title text-center d-none d-sm-block'>Looking forward to complete these tasks:</p>
             {
@@ -112,14 +117,14 @@ export default function KidsTasks() {
         </Row>
       </Container>
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
+        <Modal.Header className='bgColormodal' closeButton>
           <Modal.Title>Complete Task?</Modal.Title>
         </Modal.Header>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
+        <Modal.Footer className='bgColormodal'>
+          <Button variant="dark rounded-pill" onClick={handleClose}>
             No
           </Button>
-          <Button variant="primary" onClick={() => handleComplete(completeTask)}>
+          <Button variant="dark rounded-pill" onClick={() => handleComplete(completeTask)}>
             Yes
           </Button>
         </Modal.Footer>

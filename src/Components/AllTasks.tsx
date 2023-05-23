@@ -3,13 +3,13 @@ import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Container, Row, Col, Form, Modal, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import { CreateTask, GetTasksByParentAndChildId, UpdateTask, GetTaskById, DeleteTask, UpdateChildUserStarCount, GetChildUserData } from '../Services/DataService';
+import { CreateTask, GetTasksByParentId, UpdateTask, GetTaskById, DeleteTask, UpdateChildUserStarCount, GetChildUserDataById } from '../Services/DataService';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-solid-svg-icons';
 import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons';
 import MyNavBar from './MyNavBar';
 
-export default function TaskAssigner() {
+export default function AllTasks() {
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -22,6 +22,9 @@ export default function TaskAssigner() {
         setFailedEdit(false);
     };
 
+    const [bees, setBees] = useState<object[]>([]);
+
+    const [childIdCreate, setChildIdCreate] = useState<number>(0);
     const [taskInstructionsCreate, setTaskInstructionsCreate] = useState<string>('');
     const [taskRewardCreate, setTaskRewardCreate] = useState<number>(0);
     const [tasks, setTasks] = useState<object[]>([]);
@@ -31,26 +34,13 @@ export default function TaskAssigner() {
 
     const [updateTaskList, setUpdateTaskList] = useState<number>(0);
 
-    let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-    childData = JSON.parse(sessionStorage.UserData);
-
     const handleSubmit = async () => {
-        if (!taskInstructionsCreate || !taskRewardCreate) {
+        if (!taskInstructionsCreate || !taskRewardCreate || !childIdCreate) {
             handleShow();
         } else {
             let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
             parentData = JSON.parse(sessionStorage.AdminData);
-            let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-            childData = JSON.parse(sessionStorage.UserData);
-            let task = {
-                id: 0,
-                parentId: parentData.adultUserId,
-                childId: childData.userId,
-                taskInstructions: taskInstructionsCreate,
-                taskReward: taskRewardCreate,
-                isCompleted: false,
-                isDeleted: false
-            }
+            let task = { id: 0, parentId: parentData.adultUserId, childId: childIdCreate, taskInstructions: taskInstructionsCreate, taskReward: taskRewardCreate, isCompleted: false, isDeleted: false }
             await CreateTask(task);
             reloadTasks();
         }
@@ -69,11 +59,10 @@ export default function TaskAssigner() {
     const handleComplete = async (task: object) => {
         let completeTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = task;
         completeTask.isDeleted = true;
-        let childUserData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = JSON.parse(sessionStorage.UserData);
+        let childUserData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = await GetChildUserDataById(Number(completeTask.childId));
         childUserData.currentStarCount = Number(childUserData.currentStarCount) + Number(completeTask.taskReward);
         childUserData.totalStarCount = Number(childUserData.totalStarCount) + Number(completeTask.taskReward);
         await UpdateChildUserStarCount(Number(childUserData.userId), true, Number(completeTask.taskReward));
-        sessionStorage.setItem("UserData", JSON.stringify(await GetChildUserData(String(childUserData.userUsername))));
         await DeleteTask(completeTask);
         reloadTasks();
         handleEditClose();
@@ -86,7 +75,7 @@ export default function TaskAssigner() {
         } else {
             let editTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
             editTask = JSON.parse(sessionStorage.TaskToEdit)
-            let task = { id: editTask.id, parentId: editTask.parentId, childId: editTask.childId, taskInstructions: taskInstructionsEdit, taskReward: taskRewardEdit, isCompleted: editTask.isCompleted, isDeleted: editTask.isDeleted }
+            let task = { id: editTask.id, parentId: editTask.parentId, childId: editTask.childId, taskInstructions: taskInstructionsEdit, taskReward: taskRewardEdit, isCompleted: false, isDeleted: false }
             await UpdateTask(task);
             reloadTasks();
             sessionStorage.removeItem("TaskToEdit");
@@ -119,15 +108,17 @@ export default function TaskAssigner() {
     const reloadTasks = async () => {
         let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
         parentData = JSON.parse(sessionStorage.AdminData);
-        let childData: { userId?: number, parentId?: number, userUsername?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
-        childData = JSON.parse(sessionStorage.UserData);
-        sessionStorage.setItem("Tasks", JSON.stringify(await GetTasksByParentAndChildId(parentData.adultUserId, childData.userId)));
-        setTasks(JSON.parse(sessionStorage.Tasks));
+        sessionStorage.setItem("AllTasks", JSON.stringify(await GetTasksByParentId(parentData.adultUserId)));
+        setTasks(JSON.parse(sessionStorage.AllTasks));
     }
 
     useEffect(() => {
         reloadTasks();
     }, [updateTaskList])
+
+    useEffect(() => {
+        setBees(JSON.parse(sessionStorage.ChildUsers))
+    }, [])
 
     return (
         <div className='bgColor'>
@@ -137,12 +128,27 @@ export default function TaskAssigner() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername}!</h1>
-                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>                        
+                        <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
                                 <h1 className='btn-title text-center'>Step 2</h1>
-                                <p className='btn-title text-center'>Let's create Tasks for our bee!</p>
+                                <p className='btn-title text-center'>Let's create Tasks for our bees!</p>
+                            </Col>
+                        </Row>
+
+                        <Row>
+                            <Col className='text-center'>
+                                <Form.Label className='btn-title'>Select a Bee!</Form.Label>
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
+                                    <option className='text-center'>Options</option>
+                                    {bees.map((bee: object, idx: number) => {
+                                        let mappedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+                                        mappedBee = bee;
+                                        return (
+                                            <option key={idx} className='text-center' value={mappedBee.id}>{mappedBee.username}</option>
+                                        );
+                                    })}
+                                </Form.Select>
                             </Col>
                         </Row>
 
@@ -191,7 +197,7 @@ export default function TaskAssigner() {
 
                     {/* Right Side */}
                     <Col xl={5}>
-                        <h1 className='left-title d-none d-sm-block'>{childData.userUsername} Active Tasks</h1>
+                        <h1 className='left-title d-none d-sm-block'>All Active Tasks</h1>
                         <Row>
                             <Col>
                                 {tasks.map((task: object, idx: number) => {
@@ -219,15 +225,7 @@ export default function TaskAssigner() {
                             <Col>
                                 <p className='btn-title text-center'></p>
                                 {tasks.map((task: object, idx: number) => {
-                                    let mappedTask: {
-                                        childId?: number,
-                                        id?: number,
-                                        isCompleted?: boolean,
-                                        isDeleted?: boolean,
-                                        parentId?: number,
-                                        taskInstructions?: string,
-                                        taskReward?: number
-                                    } = {};
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
                                     if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
                                         let taskId = mappedTask.id;
@@ -251,7 +249,7 @@ export default function TaskAssigner() {
 
                         <Row>
                             <Col className='right-title mt-2'>
-                                <Link to="/RewardsCreator">
+                                <Link to="/AllRewards">
                                     <button className='btn-format rounded-pill mt-3'>Add Rewards</button>
                                 </Link>
                             </Col>
