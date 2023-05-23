@@ -198,10 +198,8 @@ export default function AllTasks() {
                     {/* Right Side */}
                     <Col xl={5}>
                         <h1 className='left-title d-none d-sm-block'>All Active Tasks</h1>
-                        <p className='btn-title text-center'>This is the reserved spot for the tasks</p>
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Completed Tasks</p>
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
@@ -225,7 +223,7 @@ export default function AllTasks() {
                         </Row>
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Assigned Tasks</p>
+                                <p className='btn-title text-center'></p>
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;

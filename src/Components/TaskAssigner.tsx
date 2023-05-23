@@ -217,7 +217,7 @@ export default function TaskAssigner() {
                         </Row>
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'>Assigned Tasks</p>
+                                <p className='btn-title text-center'></p>
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: {
                                         childId?: number,
