@@ -34,6 +34,13 @@ export default function AllRewards() {
 
     const [updateRewardList, setUpdateRewardList] = useState<number>(0);
 
+
+    const getChildUsername = async (id: number) => {
+        let beeData: { username?: string } = {};
+        await GetChildUserDataById(id);
+        return beeData.username;
+    }
+
     const handleSubmit = async () => {
         if (!rewardTextCreate || !rewardCostCreate || !childIdCreate) {
             handleShow();
@@ -106,6 +113,7 @@ export default function AllRewards() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
+                        <h1 className='left-title d-none d-sm-block'>All Rewards!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
