@@ -10,6 +10,9 @@ import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons
 import MyNavBar from './MyNavBar';
 
 export default function AllTasks() {
+    let compTask: number = 0;
+    let assignedTask: number = 0;
+
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -128,6 +131,7 @@ export default function AllTasks() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
+                        <h1 className='left-title d-none d-sm-block'>All Tasks!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
@@ -203,6 +207,16 @@ export default function AllTasks() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    if (!mappedTask.isDeleted && mappedTask.isCompleted && compTask == 0) {
+                                        compTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Did Your Bees Complete These Tasks?</p>
+                                        );
+                                    }
+                                })}
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
                                     if (!mappedTask.isDeleted && mappedTask.isCompleted) {
                                         return (
                                             <div key={idx} className='border-box text-task'>
@@ -224,6 +238,16 @@ export default function AllTasks() {
                         <Row>
                             <Col>
                                 <p className='btn-title text-center'></p>
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
+                                    if (!mappedTask.isDeleted && !mappedTask.isCompleted && assignedTask == 0) {
+                                        assignedTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Assigned Tasks</p>
+                                        );
+                                    }
+                                })}
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;

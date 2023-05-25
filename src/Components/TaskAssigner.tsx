@@ -10,6 +10,9 @@ import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons
 import MyNavBar from './MyNavBar';
 
 export default function TaskAssigner() {
+    let compTask: number = 0;
+    let assignedTask: number = 0;
+
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -53,7 +56,10 @@ export default function TaskAssigner() {
             }
             await CreateTask(task);
             reloadTasks();
+            console.log(task);
         }
+        setTaskInstructionsCreate('');
+        setTaskRewardCreate(0);
         setUpdateTaskList(updateTaskList + 1);
     }
 
@@ -150,7 +156,7 @@ export default function TaskAssigner() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Enter a Task</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" onChange={({ target: { value } }) => setTaskInstructionsCreate(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" value={taskInstructionsCreate} onChange={({ target: { value } }) => setTaskInstructionsCreate(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -158,7 +164,7 @@ export default function TaskAssigner() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Assign Start Rewards!</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardCreate(Number(value))} >
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" value={taskRewardCreate} onChange={({ target: { value } }) => setTaskRewardCreate(Number(value))} >
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>
@@ -197,6 +203,16 @@ export default function TaskAssigner() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    if (!mappedTask.isDeleted && mappedTask.isCompleted && compTask == 0) {
+                                        compTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Did Your Bee Complete These Tasks?</p>
+                                        );
+                                    }
+                                })}
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
                                     if (!mappedTask.isDeleted && mappedTask.isCompleted) {
                                         return (
                                             <div key={idx} className='border-box text-task'>
@@ -217,7 +233,16 @@ export default function TaskAssigner() {
                         </Row>
                         <Row>
                             <Col>
-                                <p className='btn-title text-center'></p>
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
+                                    if (!mappedTask.isDeleted && !mappedTask.isCompleted && assignedTask == 0) {
+                                        assignedTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Assigned Tasks</p>
+                                        );
+                                    }
+                                })}
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: {
                                         childId?: number,
