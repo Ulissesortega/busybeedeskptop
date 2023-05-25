@@ -60,6 +60,9 @@ export default function AllTasks() {
             await CreateTask(task);
             reloadTasks();
         }
+        setChildIdCreate(0);
+        setTaskInstructionsCreate('');
+        setTaskRewardCreate(0);
         setUpdateTaskList(updateTaskList + 1);
     }
 
@@ -156,7 +159,7 @@ export default function AllTasks() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Select a Bee!</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" value={childIdCreate} onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
                                     <option className='text-center'>Options</option>
                                     {bees.map((bee: object, idx: number) => {
                                         let mappedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -173,7 +176,7 @@ export default function AllTasks() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Enter a Task</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" onChange={({ target: { value } }) => setTaskInstructionsCreate(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="Get Ready For School" value={taskInstructionsCreate} onChange={({ target: { value } }) => setTaskInstructionsCreate(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -181,7 +184,7 @@ export default function AllTasks() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Assign Start Rewards!</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setTaskRewardCreate(Number(value))} >
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" value={taskRewardCreate} onChange={({ target: { value } }) => setTaskRewardCreate(Number(value))} >
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>

@@ -58,6 +58,9 @@ export default function AllRewards() {
             await CreateReward(reward);
             reloadRewards();
         }
+        setChildIdCreate(0);
+        setRewardTextCreate('');
+        setRewardCostCreate(0);
         setUpdateRewardList(updateRewardList + 1);
     }
 
@@ -131,7 +134,7 @@ export default function AllRewards() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Select a Bee!</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" value={childIdCreate} onChange={({ target: { value } }) => setChildIdCreate(Number(value))} >
                                     <option className='text-center'>Options</option>
                                     {bees.map((bee: object, idx: number) => {
                                         let mappedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
@@ -148,7 +151,7 @@ export default function AllRewards() {
                             <Col className='right-title mt-2'>
                                 <Form.Group className="mb-2" controlId="formBasic Task">
                                     <Form.Label className='btn-title'>Create Rewards</Form.Label>
-                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" onChange={({ target: { value } }) => setRewardTextCreate(value)} />
+                                    <Form.Control className='text-center rounded-pill w-75 mx-auto' type="text" placeholder="1 hour Nintendo Switch" value={rewardTextCreate} onChange={({ target: { value } }) => setRewardTextCreate(value)} />
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -156,7 +159,7 @@ export default function AllRewards() {
                         <Row>
                             <Col className='text-center'>
                                 <Form.Label className='btn-title'>Start Reward Price</Form.Label>
-                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" onChange={({ target: { value } }) => setRewardCostCreate(Number(value))}>
+                                <Form.Select className='rounded-pill w-75 mx-auto' aria-label="Default select example" value={rewardCostCreate} onChange={({ target: { value } }) => setRewardCostCreate(Number(value))}>
                                     <option className='text-center'>Options</option>
                                     <option className='text-center' value="1">1 Star</option>
                                     <option className='text-center' value="2">2 Stars</option>

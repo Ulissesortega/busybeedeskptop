@@ -56,7 +56,6 @@ export default function TaskAssigner() {
             }
             await CreateTask(task);
             reloadTasks();
-            console.log(task);
         }
         setTaskInstructionsCreate('');
         setTaskRewardCreate(0);
