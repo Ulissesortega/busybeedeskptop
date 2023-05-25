@@ -16,6 +16,8 @@ export default function UsersDashboard() {
   let parentData: { adultUserId?: number, fullName?: string, adultUserEmail?: string, avatarLook?: string } = {};
   parentData = JSON.parse(sessionStorage.AdminData);
 
+  let beeName:string = '';
+
   const [childrenUsers, setChildrenUsers] = useState<object[]>([]);
   const [username, setUsername] = useState<any>('');
 

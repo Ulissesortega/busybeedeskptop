@@ -34,6 +34,20 @@ export default function AllRewards() {
 
     const [updateRewardList, setUpdateRewardList] = useState<number>(0);
 
+
+    const getChildUsername = (id: number) => {
+        let beeName: string = '';
+        for (let i = 0; i < bees.length; i++) {
+            let loopedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+            loopedBee = bees[i];
+            if(id == loopedBee.id) {
+                beeName = loopedBee.username!;
+                break;
+            }
+        }
+        return beeName;
+    }
+
     const handleSubmit = async () => {
         if (!rewardTextCreate || !rewardCostCreate || !childIdCreate) {
             handleShow();
@@ -106,6 +120,7 @@ export default function AllRewards() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
+                        <h1 className='left-title d-none d-sm-block'>All Rewards!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
@@ -178,15 +193,17 @@ export default function AllRewards() {
 
                         <Row>
                             <Col>
-                            <p className='btn-title text-center'></p>
+                                <p className='btn-title text-center'></p>
                                 {rewards.map((reward: object, idx: number) => {
                                     let mappedReward: { id?: number, parentId?: number, childId?: number, reward?: string, rewardCost?: number, isDeleted?: boolean } = {};
                                     mappedReward = reward;
+                                    let beeName:string = getChildUsername(mappedReward.childId!);
                                     if (!mappedReward.isDeleted) {
                                         let rewardId = mappedReward.id;
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
+                                                    <div>{beeName}:</div>
                                                     <div>{mappedReward.reward}</div>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-center'>

@@ -10,6 +10,9 @@ import { faTrash, faStar, faCheck, faX } from '@fortawesome/free-solid-svg-icons
 import MyNavBar from './MyNavBar';
 
 export default function AllTasks() {
+    let compTask: number = 0;
+    let assignedTask: number = 0;
+
     const [showModal, setShowModal] = useState(false);
     const handleClose = () => setShowModal(false);
     const handleShow = () => setShowModal(true);
@@ -33,6 +36,19 @@ export default function AllTasks() {
     const [taskRewardEdit, setTaskRewardEdit] = useState<number>(0);
 
     const [updateTaskList, setUpdateTaskList] = useState<number>(0);
+
+    const getChildUsername = (id: number) => {
+        let beeName: string = '';
+        for (let i = 0; i < bees.length; i++) {
+            let loopedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+            loopedBee = bees[i];
+            if(id == loopedBee.id) {
+                beeName = loopedBee.username!;
+                break;
+            }
+        }
+        return beeName;
+    }
 
     const handleSubmit = async () => {
         if (!taskInstructionsCreate || !taskRewardCreate || !childIdCreate) {
@@ -128,6 +144,7 @@ export default function AllTasks() {
                 {/* Left-Side */}
                 <Row>
                     <Col sm={12} md={12} xl={5}>
+                        <h1 className='left-title d-none d-sm-block'>All Tasks!</h1>
                         <h1 className='Mobile-Title-format d-block d-sm-none mt-3'>Busy Bee!</h1>
                         <Row>
                             <Col>
@@ -203,10 +220,22 @@ export default function AllTasks() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    if (!mappedTask.isDeleted && mappedTask.isCompleted && compTask == 0) {
+                                        compTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Did Your Bees Complete These Tasks?</p>
+                                        );
+                                    }
+                                })}
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
+                                    let beeName: string = getChildUsername(mappedTask.childId!);
                                     if (!mappedTask.isDeleted && mappedTask.isCompleted) {
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
+                                                    <div>{beeName}:</div>
                                                     <div>{mappedTask.taskInstructions}</div>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-center'>
@@ -227,11 +256,23 @@ export default function AllTasks() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    if (!mappedTask.isDeleted && !mappedTask.isCompleted && assignedTask == 0) {
+                                        assignedTask++;
+                                        return (
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Assigned Tasks</p>
+                                        );
+                                    }
+                                })}
+                                {tasks.map((task: object, idx: number) => {
+                                    let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
+                                    mappedTask = task;
+                                    let beeName: string = getChildUsername(mappedTask.childId!);
                                     if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
                                         let taskId = mappedTask.id;
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
+                                                    <div>{beeName}:</div>
                                                     <div>{mappedTask.taskInstructions}</div>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-center'>

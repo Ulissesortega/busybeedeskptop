@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import '../App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Container, Row, Col, Form } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { MyContext } from '../Context/UserContext';
 
@@ -89,10 +89,6 @@ export default function StepOne() {
                                 <button className='small-btn-format rounded-pill mt-3' onClick={setChildHoneyComb}>Comb!</button>
                             </Col>
                         </Row>
-
-
-
-
 
                     </Col>
                 </Row>
