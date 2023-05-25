@@ -35,7 +35,7 @@ export default function TempPassword() {
 
           {/* Right Side */}
           <Col xl={5}>
-            <h1 className='left-title d-none d-sm-block d-sm-none d-md-none'>Soon to be Back!</h1>
+            <h1 className='left-title'>Soon to be Back!</h1>
             <p className='btn-title text-center'>Please click the button<br/>bellow to go back home</p>
             <Row>
               <Col className='mt-1 mt-sm-1 mt-xl-3 text-center'>                
