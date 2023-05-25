@@ -37,6 +37,19 @@ export default function AllTasks() {
 
     const [updateTaskList, setUpdateTaskList] = useState<number>(0);
 
+    const getChildUsername = (id: number) => {
+        let beeName: string = '';
+        for (let i = 0; i < bees.length; i++) {
+            let loopedBee: { id?: number, parentId?: number, username?: string, currentStarCount?: number, totalStarCount?: number, avatarLook?: string } = {};
+            loopedBee = bees[i];
+            if(id == loopedBee.id) {
+                beeName = loopedBee.username!;
+                break;
+            }
+        }
+        return beeName;
+    }
+
     const handleSubmit = async () => {
         if (!taskInstructionsCreate || !taskRewardCreate || !childIdCreate) {
             handleShow();
@@ -217,10 +230,12 @@ export default function AllTasks() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    let beeName: string = getChildUsername(mappedTask.childId!);
                                     if (!mappedTask.isDeleted && mappedTask.isCompleted) {
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
+                                                    <div>{beeName}:</div>
                                                     <div>{mappedTask.taskInstructions}</div>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-center'>
@@ -251,11 +266,13 @@ export default function AllTasks() {
                                 {tasks.map((task: object, idx: number) => {
                                     let mappedTask: { childId?: number, id?: number, isCompleted?: boolean, isDeleted?: boolean, parentId?: number, taskInstructions?: string, taskReward?: number } = {};
                                     mappedTask = task;
+                                    let beeName: string = getChildUsername(mappedTask.childId!);
                                     if (!mappedTask.isDeleted && !mappedTask.isCompleted) {
                                         let taskId = mappedTask.id;
                                         return (
                                             <div key={idx} className='border-box text-task'>
                                                 <div className='d-flex justify-content-start'>
+                                                    <div>{beeName}:</div>
                                                     <div>{mappedTask.taskInstructions}</div>
                                                 </div>
                                                 <div className='d-flex justify-content-end align-items-center'>
