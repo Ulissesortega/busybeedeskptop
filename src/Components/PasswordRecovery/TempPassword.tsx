@@ -45,7 +45,7 @@ export default function TempPassword() {
             </Row>
             <Row>
               <Col className='right-title mt-2'>
-                <Link to="/AdminLogin">
+                <Link to="/">
                   <button className='btn-format rounded-pill mt-3'>Home</button>
                 </Link>
               </Col>
