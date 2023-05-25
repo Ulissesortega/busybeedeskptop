@@ -239,7 +239,7 @@ export default function TaskAssigner() {
                                     if (!mappedTask.isDeleted && !mappedTask.isCompleted && assignedTask == 0) {
                                         assignedTask++;
                                         return (
-                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'>Assigned Tasks</p>
+                                            <p key={idx} className='btn-title text-center d-sm-block pt-4'></p>
                                         );
                                     }
                                 })}
