@@ -4,11 +4,9 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function Login() {
-  
   return (
     <div className='bgColor' id='Login'>
       <Container>
-
         {/* Left-Side */}
         <Row>
           <Col sm={12} md={12} xl={5}>

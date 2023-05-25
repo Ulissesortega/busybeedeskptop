@@ -23,6 +23,7 @@ import AllTasks from './Components/AllTasks';
 import AllRewards from './Components/AllRewards';
 import KidsNavBar from './Components/KidsNavBar'
 
+
 function App() {
   const [adminData, setAdminData] = useState<object>({});
   const [userData, setUserData] = useState<object>({});
