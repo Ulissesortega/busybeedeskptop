@@ -124,7 +124,7 @@ export default function KidsRewards() {
                     <Modal.Title>Claim Reward?</Modal.Title>
                 </Modal.Header>
                 <Modal.Footer className='bgColormodal'>
-                    <Button variant="dark rouded-pill" onClick={handleClose}>
+                    <Button variant="dark rounded-pill" onClick={handleClose}>
                         No
                     </Button>
                     <Button variant="dark rounded-pill" onClick={() => handleClaim(claimReward)}>
