@@ -1,3 +1,10 @@
+# Busy Bee Frontend
+This was a Fullstack group project with Ulisses Ortega and Jacob Dekok.
+It's a web app designed to help parents assign tasks to their kids and rewards to incentivize completing them.
+It was build out with React TypeScript.
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
